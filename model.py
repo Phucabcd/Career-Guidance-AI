@@ -10,7 +10,10 @@ import pandas as pd
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
-jobs = pd.read_csv("csv\\Career_Dataset.csv").head(20)
+jobs = pd.read_csv("csv/Career_Dataset.csv").head(30)
+# Missing value 
+jobs = jobs.dropna(subset=["Career", "Skill"])
+# jobs = jobs.drop_duplicates(subset=["Career", "Skill"])
 
 # add model.
 _model = None
@@ -43,15 +46,18 @@ def prediction_career(text: str):
     result = []
     for i, similarity in enumerate(similarities):
         name = jobs["Career"].iloc[i]
+        decsription = jobs["Skill"].iloc[i]
         result.append(
             {
-                "Ngành nghề": name,
-                "Mức độ phù hợp": round(float(similarity) * 100, 1),
+                "career_name": name,
+                "des": decsription,
+                "match": round(float(similarity) * 100, 1),
             }
         )
 
-    result.sort(key=lambda x: -x["Mức độ phù hợp"])
+    result.sort(key=lambda x: -x["match"])
     return result
+
 
 
   # Demo test ("notebook/log" không cần UI)
