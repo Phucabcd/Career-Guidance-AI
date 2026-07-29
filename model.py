@@ -12,7 +12,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 jobs = pd.read_csv("csv\\Career_Dataset.csv").head(20)
 
-# có thể thêm model.
+# add model.
 _model = None
 
 
@@ -54,8 +54,8 @@ def prediction_career(text: str):
     return result
 
 
-if __name__ == "__main__":
-    # Chạy thử nhanh để test logic (giai đoạn "chỉ cần notebook/log" mà không cần UI)
-    vi_du = "Em thích sáng tạo, giải toán, tìm hiểu cách máy tính hoạt động và thích làm việc với dữ liệu. nhưng không thích làm Software engineer"
-    for r in prediction_career(vi_du):
-        print(r)
+  # Demo test ("notebook/log" không cần UI)
+# if __name__ == "__main__":
+#     Example = "Em thích sáng tạo, giải toán, tìm hiểu cách máy tính hoạt động và thích làm việc với dữ liệu. nhưng không thích làm Software engineer"
+#     for r in prediction_career(Example):
+#         print(r)
