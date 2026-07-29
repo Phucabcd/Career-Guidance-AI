@@ -58,10 +58,21 @@ SKILL_UI_LABELS = {
 # Độ dài tối thiểu của đoạn tự giới thiệu (ký tự, sau strip)
 MIN_TEXT_LENGTH = 40
 
-# System prompt chặt cho Gemini — JSON + Deep Reasoning
-SYSTEM_PROMPT = """
+
+def build_extractor_prompt(user_text: str, list_of_all_careers: list[str]) -> str:
+    """
+    Prompt Gemini lần 1: chấm điểm kỹ năng + deep reasoning + Excluded_Careers.
+    list_of_all_careers lấy từ career_encoder.classes_ để Gemini dùng đúng tên class.
+    """
+    careers_json = json.dumps(list_of_all_careers, ensure_ascii=False)
+
+    return f"""
 Bạn là bộ trích xuất đặc trưng hướng nghiệp (NLP Feature Extractor) kèm phân tích sâu (Deep Reasoning).
-Nhiệm vụ: Đọc đoạn văn tự giới thiệu của người dùng, chấm điểm kỹ năng và phân tích lý do thật chi tiết.
+Nhiệm vụ: Đọc đoạn văn tự giới thiệu của người dùng, chấm điểm kỹ năng, phân tích lý do thật chi tiết,
+VÀ phát hiện các ngành nghề bị HẠN CHẾ / KHÔNG THÍCH / TỪ CHỐI.
+
+Danh sách ngành nghề hợp lệ trong hệ thống (phải dùng ĐÚNG tên này khi điền Excluded_Careers):
+{careers_json}
 
 QUY TẮC BẮT BUỘC:
 1. Chỉ trả về JSON thuần túy — KHÔNG bọc trong markdown, KHÔNG thêm giải thích ngoài JSON, KHÔNG dùng ```json.
@@ -77,6 +88,7 @@ QUY TẮC BẮT BUỘC:
    - "Problem_Solving_Reason": string (phân tích lý do điểm Problem Solving Skills)
    - "Teamwork Skills": integer từ 0 đến 4
    - "Teamwork_Reason": string (phân tích lý do điểm Teamwork Skills)
+   - "Excluded_Careers": array of string — các ngành bị hạn chế/không thích/từ chối
 3. Thang điểm kỹ năng 0-4:
    0 = không đề cập / rất yếu
    1 = cơ bản
@@ -84,10 +96,13 @@ QUY TẮC BẮT BUỘC:
    3 = khá
    4 = thành thạo / nổi bật trong văn bản
 4. Đối với mỗi kỹ năng, hãy viết phần phân tích lý do (Reasoning) THẬT CHI TIẾT (khoảng 3-4 câu dài). Phải phân tích sâu sắc dựa trên câu chữ của ứng viên, trích dẫn lại ý của ứng viên để chứng minh, và đưa ra nhận xét ngắn về việc kỹ năng này ảnh hưởng thế nào đến thái độ làm việc của họ.
-5. Mỗi trường *_Reason phải dựa trên bằng chứng trong đoạn văn (trích ý, không bịa số liệu).
-6. Nếu thông tin thiếu, suy luận hợp lý từ ngữ cảnh; không để null; điểm và lý do phải nhất quán.
+5. Ngoài việc chấm điểm kỹ năng, hãy phân tích xem người dùng có HẠN CHẾ, KHÔNG THÍCH, hoặc TỪ CHỐI ngành nghề nào không. Nếu có, hãy đối chiếu với danh sách các ngành nghề hợp lệ sau đây: {careers_json} và trả về một danh sách (mảng) tên các ngành đó trong "Excluded_Careers". Chỉ dùng đúng tên trong danh sách hợp lệ. Nếu không ghét ngành nào thì trả về mảng rỗng [].
+6. Mỗi trường *_Reason phải dựa trên bằng chứng trong đoạn văn (trích ý, không bịa số liệu).
+7. Nếu thông tin thiếu, suy luận hợp lý từ ngữ cảnh; không để null; điểm và lý do phải nhất quán.
 
 Đoạn văn tự giới thiệu:
+
+{user_text}
 """.strip()
 
 
@@ -148,10 +163,10 @@ def extract_json_text(raw_text: str) -> str:
     return text
 
 
-def call_gemini_extractor(user_text: str) -> dict:
+def call_gemini_extractor(user_text: str, list_of_all_careers: list[str]) -> dict:
     """
-    Gọi Gemini để trích xuất features + reasoning dưới dạng dict JSON.
-    Ném exception nếu API lỗi / timeout / response không hợp lệ.
+    Gọi Gemini lần 1: trích xuất features + reasoning + Excluded_Careers.
+    list_of_all_careers = list(career_encoder.classes_).
     """
     if not API_KEY or API_KEY == "your_api_key_here":
         raise RuntimeError(
@@ -159,7 +174,7 @@ def call_gemini_extractor(user_text: str) -> dict:
             "Hãy mở file .env và điền API key hợp lệ."
         )
 
-    prompt = f"{SYSTEM_PROMPT}\n\n{user_text}"
+    prompt = build_extractor_prompt(user_text, list_of_all_careers)
     llm = genai.GenerativeModel(GEMINI_MODEL)
 
     # max_output_tokens tăng vì Deep Reasoning (3-4 câu / kỹ năng)
@@ -223,11 +238,51 @@ def call_gemini_extractor(user_text: str) -> dict:
     return data
 
 
-def validate_features(data: dict) -> dict:
+def normalize_excluded_careers(
+    raw_excluded: object,
+    valid_careers: list[str],
+) -> list[str]:
+    """
+    Chuẩn hóa Excluded_Careers từ Gemini về đúng tên class trong career_encoder.
+    So khớp không phân biệt hoa/thường; hỗ trợ khớp gần (vd: 'DevOps' → 'DevOps Engineer').
+    """
+    if raw_excluded is None:
+        return []
+    if not isinstance(raw_excluded, list):
+        raw_excluded = [raw_excluded]
+
+    lower_to_official = {c.strip().lower(): c for c in valid_careers}
+    matched: list[str] = []
+    seen: set[str] = set()
+
+    for item in raw_excluded:
+        name = str(item).strip()
+        if not name:
+            continue
+
+        key = name.lower()
+        official = lower_to_official.get(key)
+
+        # Khớp gần: chuỗi Gemini nằm trong tên class hoặc ngược lại
+        if official is None:
+            for valid_lower, valid_name in lower_to_official.items():
+                if key in valid_lower or valid_lower in key:
+                    official = valid_name
+                    break
+
+        if official and official not in seen:
+            matched.append(official)
+            seen.add(official)
+
+    return matched
+
+
+def validate_features(data: dict, valid_careers: list[str]) -> dict:
     """
     Chuẩn hóa kiểu dữ liệu:
     - Giá trị số cho Random Forest (Field, skills, Projects, Internships)
-    - Chuỗi lý do *_Reason chỉ dùng cho UI (không đưa vào model)
+    - Chuỗi lý do *_Reason chỉ dùng cho UI
+    - Excluded_Careers: danh sách ngành cần loại khỏi Top kết quả
     """
     required_score_keys = [
         "Field",
@@ -249,7 +304,7 @@ def validate_features(data: dict) -> dict:
         "Teamwork Skills",
     ]
 
-    # Phần số — đưa vào model.predict()
+    # Phần số — đưa vào model.predict_proba()
     normalized = {
         "Field": str(data["Field"]).strip(),
         "Projects": max(0, int(data["Projects"])),
@@ -270,6 +325,12 @@ def validate_features(data: dict) -> dict:
                 f"điểm được ghi nhận là {normalized[skill_key]}/4."
             )
         normalized[reason_key] = str(reason_text).strip()
+
+    # Ngành bị loại trừ theo ý người dùng (phủ định / không thích)
+    normalized["Excluded_Careers"] = normalize_excluded_careers(
+        data.get("Excluded_Careers", []),
+        valid_careers,
+    )
 
     return normalized
 
@@ -321,35 +382,49 @@ def predict_top_careers(
     feature_vector: np.ndarray,
     model,
     career_encoder,
+    excluded_careers: list[str] | None = None,
     top_k: int = 5,
 ) -> list[dict]:
     """
-    Dự đoán Top-K ngành nghề bằng predict_proba (không chỉ lấy 1 class).
+    Dự đoán Top-K ngành nghề bằng predict_proba, sau đó lọc Excluded_Careers.
 
-    Trả về list dict dạng:
-        [{"career": "Data Scientist", "match_percent": 85.5}, ...]
-    sắp xếp theo match_percent giảm dần.
+    1) Lấy probabilities cho mọi class
+    2) Ép probability = 0.0 với ngành nằm trong excluded_careers
+    3) Sort giảm dần và lấy Top-K (bỏ qua ngành có % = 0)
     """
     # Lấy xác suất cho TẤT CẢ các class nghề nghiệp (hàng đầu tiên)
     # probabilities[i] tương ứng với career_encoder.classes_[i]
-    probabilities = model.predict_proba(feature_vector)[0]
+    probabilities = model.predict_proba(feature_vector)[0].astype(float).copy()
 
     # Danh sách tên ngành nghề (đã decode sẵn từ LabelEncoder)
     career_names = list(career_encoder.classes_)
+
+    # Tập ngành bị loại — so sánh không phân biệt hoa/thường / khoảng trắng
+    excluded = excluded_careers or []
+    excluded_lower = {str(c).strip().lower() for c in excluded}
+
+    # Ép xác suất về 0.0 cho các ngành bị loại trừ TRƯỚC khi sort
+    for idx, career_name in enumerate(career_names):
+        if str(career_name).strip().lower() in excluded_lower:
+            probabilities[idx] = 0.0
 
     # Ghép (tên nghề, xác suất) rồi sắp xếp giảm dần theo xác suất
     paired = list(zip(career_names, probabilities))
     paired.sort(key=lambda item: item[1], reverse=True)
 
-    # Chỉ lấy Top-K; nhân 100 và làm tròn 1 chữ số thập phân
+    # Chỉ lấy Top-K; bỏ qua ngành đã bị ép về 0
     top_results: list[dict] = []
-    for career_name, prob in paired[:top_k]:
+    for career_name, prob in paired:
+        if float(prob) <= 0.0:
+            continue
         top_results.append(
             {
                 "career": str(career_name),
                 "match_percent": round(float(prob) * 100, 1),
             }
         )
+        if len(top_results) >= top_k:
+            break
 
     return top_results
 
@@ -494,11 +569,20 @@ def render_profile_dashboard(features: dict) -> None:
 def render_top_careers(
     top_careers: list[dict],
     career_explanations: dict[str, str] | None = None,
+    excluded_careers: list[str] | None = None,
 ) -> None:
     """Hiển thị Top 5 ngành nghề + thanh progress + đoạn giải thích Gemini lần 2."""
     st.subheader("🎯 Top 5 Ngành Nghề Phù Hợp Nhất")
+
+    # Thông báo ngành đã loại trừ theo yêu cầu người dùng
+    if excluded_careers:
+        st.warning(
+            "🚫 Hệ thống đã loại trừ các ngành nghề theo yêu cầu của bạn: "
+            f"{', '.join(excluded_careers)}"
+        )
+
     st.caption(
-        "Tỷ lệ % lấy từ `predict_proba` của Random Forest. "
+        "Tỷ lệ % lấy từ `predict_proba` của Random Forest (đã lọc ngành bị loại trừ). "
         "Đoạn giải thích dưới mỗi thanh do Gemini phân tích dựa trên hồ sơ kỹ năng."
     )
 
@@ -586,10 +670,16 @@ if analyze_clicked:
         st.error(f"Không load được model/encoder: {exc}")
         st.stop()
 
-    # Bước 1 — Gemini lần 1: trích xuất features + deep reasoning kỹ năng
+    # Danh sách class nghề hợp lệ — truyền vào Prompt Gemini lần 1
+    list_of_all_careers = list(career_encoder.classes_)
+
+    # Bước 1 — Gemini lần 1: skills + reasoning + Excluded_Careers
     with st.spinner("Đang phân tích hồ sơ bằng Gemini..."):
         try:
-            raw_features = call_gemini_extractor(cleaned_bio)
+            raw_features = call_gemini_extractor(
+                cleaned_bio,
+                list_of_all_careers,
+            )
         except json.JSONDecodeError:
             st.error(
                 "Không parse được JSON từ Gemini "
@@ -601,25 +691,27 @@ if analyze_clicked:
             st.error(f"Lỗi khi gọi Gemini API: {exc}")
             st.stop()
 
-    # Bước 2 — Validate / chuẩn hóa JSON (số cho ML + reason cho UI)
+    # Bước 2 — Validate / chuẩn hóa JSON (số cho ML + reason + excluded)
     try:
-        features = validate_features(raw_features)
+        features = validate_features(raw_features, list_of_all_careers)
     except (KeyError, TypeError, ValueError) as exc:
         st.error(f"JSON trích xuất không hợp lệ: {exc}")
         st.json(raw_features)
         st.stop()
 
-    # Bước 3 — Transform + predict_proba → Top 5 ngành nghề (KHÔNG đụng Gemini)
+    excluded_careers = features.get("Excluded_Careers", [])
+
+    # Bước 3 — predict_proba → ép excluded về 0 → sort → Top 5
     try:
         vector = build_feature_vector(features, field_encoder)
         # Giữ tên cột khi predict để tránh warning của sklearn
         vector_df = pd.DataFrame(vector, columns=FEATURE_COLUMNS)
 
-        # Dùng predict_proba thay vì predict để lấy xác suất mọi class
         top_careers = predict_top_careers(
             vector_df,
             model,
             career_encoder,
+            excluded_careers=excluded_careers,
             top_k=5,
         )
     except Exception as exc:  # noqa: BLE001
@@ -630,7 +722,11 @@ if analyze_clicked:
     with st.spinner("AI đang phân tích độ phù hợp của bạn với từng ngành nghề..."):
         career_explanations = explain_top_careers_with_gemini(features, top_careers)
 
-    # Bước 5 — Render UI: phân tích kỹ năng → Top 5 + giải thích
+    # Bước 5 — Render UI: phân tích kỹ năng → Top 5 (có warning excluded)
     render_profile_dashboard(features)
     st.markdown("---")
-    render_top_careers(top_careers, career_explanations)
+    render_top_careers(
+        top_careers,
+        career_explanations,
+        excluded_careers=excluded_careers,
+    )
