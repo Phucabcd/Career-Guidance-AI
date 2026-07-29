@@ -24,3 +24,11 @@ py -m streamlit run app.py
 ## Công nghệ sử dụng & các syntax
 streamlit  --> UI  
 sentence-transformers --> 
+
+# (khuyến nghị) tạo venv
+python3 -m venv .venv
+source .venv/bin/activate
+# dependencies
+pip install streamlit pandas sentence-transformers scikit-learn
+# chạy app
+streamlit run app.py
