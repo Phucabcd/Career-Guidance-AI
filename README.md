@@ -1,9 +1,9 @@
 # Career Guidance AI - demo app
 
 ## Cấu trúc
-- `model.py` — logic gợi ý ngành nghề (embedding + cosine similarity + trích từ khóa khớp)
-- `app.py` — giao diện Streamlit gọi vào `model.py`
-- `csv` - https://data.mendeley.com/datasets/4spj4mbpjr/2
+- `model.py` — 
+- `app.py` — 
+- `csv` - 
 
 ## Cách chạy
 
