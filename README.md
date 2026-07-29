@@ -1,4 +1,4 @@
-# Career Guidance AI - demo app
+# Career Recommendation AI - demo app
 
 ## Cấu trúc
 - `model.py` — logic gợi ý ngành nghề (embedding + cosine similarity + trích từ khóa khớp)

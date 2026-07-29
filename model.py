@@ -60,7 +60,7 @@ def prediction_career(text: str):
 
 
 
-  # Demo test ("notebook/log" không cần UI)
+# Demo test ("notebook/log" không cần UI)
 # if __name__ == "__main__":
 #     Example = "Em thích sáng tạo, giải toán, tìm hiểu cách máy tính hoạt động và thích làm việc với dữ liệu. nhưng không thích làm Software engineer"
 #     for r in prediction_career(Example):
