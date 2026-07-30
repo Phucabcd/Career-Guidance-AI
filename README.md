@@ -14,11 +14,12 @@ career_ai_project/
 ├── model.py                # Logic xử lý: gọi Gemini, chuẩn hóa dữ liệu, dự đoán nghề nghiệp
 ├── train_model.py          # Huấn luyện mô hình Random Forest và lưu artifact
 ├── data/
-│   └── career_prediction.csv
+│   └── career_prediction_IT_900rows.csv   # Dataset train (có cột Skills)
 ├── models/
 │   ├── rf_model.pkl
 │   ├── field_encoder.pkl
-│   └── career_encoder.pkl
+│   ├── career_encoder.pkl
+│   └── skills_encoder.pkl                # MultiLabelBinarizer cho cột Skills
 ├── .env                    # Chứa GEMINI_API_KEY và GEMINI_MODEL (nếu dùng)
 └── requirements.txt        # Danh sách dependency
 ```
@@ -40,11 +41,12 @@ career_ai_project/
   - Huấn luyện mô hình Random Forest từ dữ liệu trong `data/career_prediction.csv`.
   - Lưu các file `.pkl` vào thư mục `models/` để dùng cho inference.
 
-- `data/career_prediction.csv`
-  - Tập dữ liệu dùng để huấn luyện mô hình.
+- `data/career_prediction_IT_900rows.csv`
+  - Tập dữ liệu train (~900 dòng, ~30 nghề IT-oriented).
+  - Có cột `Skills` (công nghệ cụ thể, dùng MultiLabelBinarizer).
 
 - `models/`
-  - Chứa các artifact đã được train: model và encoder.
+  - Artifact đã train: `rf_model`, `field_encoder`, `career_encoder`, `skills_encoder`.
 
 ## Luồng hoạt động
 
@@ -66,18 +68,29 @@ career_ai_project/
 
 ```bash
 cd career_ai_project
-py -m streamlit run app.py
-```
 
-# (khuyến nghị) tạo venv
-
+# (khuyến nghị) tạo và kích hoạt virtual environment
 python3 -m venv .venv
 source .venv/bin/activate
 
-# dependencies
+# cài dependencies
+pip install -r requirements.txt
 
-pip install: streamlit, pandas, scikit-learn, google.generativeai,...
+# 1. Điền Gemini API key vào .env
+# GEMINI_API_KEY=...
+# GEMINI_MODEL=gemini-3.5-flash-lite   # tùy chọn
 
+# 2. Train (đã chạy sẵn; chạy lại nếu đổi CSV)
+python train_model.py
+# hoặc: python3 train_model.py
+
+# 3. Mở app
+streamlit run app.py
+```
+
+### Dependencies (`requirements.txt`)
+
+```text
 pandas==2.2.3
 scikit-learn==1.6.1
 joblib==1.4.2
@@ -85,10 +98,7 @@ streamlit==1.42.2
 google-generativeai==0.8.4
 python-dotenv==1.0.1
 numpy==2.2.3
-
-# chạy app
-
-streamlit run app.py
+```
 
 ## Tính năng đang phát triển 
 

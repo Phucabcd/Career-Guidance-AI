@@ -24,6 +24,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent
 MODELS_DIR = BASE_DIR / "models"
 
+# Features số — phải khớp train_model.py
 FEATURE_COLUMNS = [
     "Field",
     "Coding Skills",
@@ -33,6 +34,8 @@ FEATURE_COLUMNS = [
     "Projects",
     "Internships",
 ]
+# Alias tương thích
+NUMERIC_FEATURE_COLUMNS = FEATURE_COLUMNS
 
 SKILL_REASON_KEYS = {
     "Coding Skills": "Coding_Reason",
@@ -50,49 +53,67 @@ SKILL_UI_LABELS = {
 
 MIN_TEXT_LENGTH = 40
 FALLBACK_CAREER_EXPLAIN = "Không thể tải phần giải thích lúc này."
+# Thang điểm trong dataset mới: 0–5
+MAX_SKILL_SCORE = 5
 
 
-def build_extractor_prompt(user_text: str, list_of_all_careers: list[str]) -> str:
-    """Tạo prompt Gemini lần 1 để trích xuất features và reasoning."""
+def build_extractor_prompt(
+    user_input: str,
+    list_of_all_careers: list[str],
+    list_of_all_fields: list[str],
+    list_of_all_skills: list[str],
+) -> str:
+    """Tạo prompt Gemini lần 1: điểm số + Skills + Preferred/Excluded."""
     careers_json = json.dumps(list_of_all_careers, ensure_ascii=False)
+    fields_json = json.dumps(list_of_all_fields, ensure_ascii=False)
+    skills_json = json.dumps(list_of_all_skills, ensure_ascii=False)
 
-    return f"""
-Bạn là bộ trích xuất đặc trưng hướng nghiệp (NLP Feature Extractor) kèm phân tích sâu (Deep Reasoning).
-Nhiệm vụ: Đọc đoạn văn tự giới thiệu của người dùng, chấm điểm kỹ năng, phân tích lý do thật chi tiết,
-VÀ phát hiện các ngành nghề bị HẠN CHẾ / KHÔNG THÍCH / TỪ CHỐI.
+    return f"""Bạn là bộ trích xuất đặc trưng hướng nghiệp (NLP Feature Extractor) kèm phân tích sâu (Deep Reasoning).
+Nhiệm vụ: Đọc đoạn văn tự giới thiệu của người dùng, chấm điểm kỹ năng, trích xuất công nghệ/kỹ năng cụ thể (Skills),
+phân tích lý do thật chi tiết, VÀ phát hiện các ngành nghề được ƯU TIÊN/YÊU THÍCH cũng như các ngành nghề bị HẠN CHẾ/KHÔNG THÍCH/TỪ CHỐI.
 
-Danh sách ngành nghề hợp lệ trong hệ thống (phải dùng ĐÚNG tên này khi điền Excluded_Careers):
+Danh sách ngành nghề hợp lệ (Preferred_Careers / Excluded_Careers phải dùng ĐÚNG tên này):
 {careers_json}
+
+Danh sách Field hợp lệ (chọn 1 giá trị gần nhất):
+{fields_json}
+
+Danh sách Skills/công nghệ hợp lệ trong hệ thống (chỉ chọn từ danh sách này khi điền "Skills"):
+{skills_json}
 
 QUY TẮC BẮT BUỘC:
 1. Chỉ trả về JSON thuần túy — KHÔNG bọc trong markdown, KHÔNG thêm giải thích ngoài JSON, KHÔNG dùng ```json.
 2. JSON phải có ĐÚNG các keys sau (không thiếu, không đổi tên):
-   - "Field": string (một trong: IT, Business, Engineering, Design, Science; nếu không rõ hãy chọn gần nhất)
+   - "Field": string (phải thuộc danh sách Field hợp lệ; nếu không rõ hãy chọn gần nhất)
    - "Projects": integer (>= 0) — ước lượng số dự án đã làm
    - "Internships": integer (>= 0) — ước lượng số kỳ thực tập
-   - "Coding Skills": integer từ 0 đến 4
+   - "Coding Skills": integer từ 0 đến 5
    - "Coding_Reason": string (phân tích lý do điểm Coding Skills)
-   - "Communication Skills": integer từ 0 đến 4
+   - "Communication Skills": integer từ 0 đến 5
    - "Communication_Reason": string (phân tích lý do điểm Communication Skills)
-   - "Problem Solving Skills": integer từ 0 đến 4
+   - "Problem Solving Skills": integer từ 0 đến 5
    - "Problem_Solving_Reason": string (phân tích lý do điểm Problem Solving Skills)
-   - "Teamwork Skills": integer từ 0 đến 4
+   - "Teamwork Skills": integer từ 0 đến 5
    - "Teamwork_Reason": string (phân tích lý do điểm Teamwork Skills)
-   - "Excluded_Careers": array of string — các ngành bị hạn chế/không thích/từ chối
-3. Thang điểm kỹ năng 0-4:
+   - "Skills": array of string — các công nghệ/kỹ năng cụ thể người dùng đề cập hoặc suy ra hợp lý; CHỈ dùng tên trong danh sách Skills hợp lệ
+   - "Preferred_Careers": array of string — ngành yêu thích / ưu tiên / muốn theo đuổi
+   - "Excluded_Careers": array of string — ngành không thích / chán / từ chối
+3. Thang điểm kỹ năng 0-5:
    0 = không đề cập / rất yếu
-   1 = cơ bản
-   2 = trung bình
-   3 = khá
-   4 = thành thạo / nổi bật trong văn bản
-4. Đối với mỗi kỹ năng, hãy viết phần phân tích lý do (Reasoning) THẬT CHI TIẾT (khoảng 3-4 câu dài). Phải phân tích sâu sắc dựa trên câu chữ của ứng viên, trích dẫn lại ý của ứng viên để chứng minh, và đưa ra nhận xét ngắn về việc kỹ năng này ảnh hưởng thế nào đến thái độ làm việc của họ.
-5. Ngoài việc chấm điểm kỹ năng, hãy phân tích xem người dùng có HẠN CHẾ, KHÔNG THÍCH, hoặc TỪ CHỐI ngành nghề nào không. Nếu có, hãy đối chiếu với danh sách các ngành nghề hợp lệ sau đây: {careers_json} và trả về một danh sách (mảng) tên các ngành đó trong "Excluded_Careers". Chỉ dùng đúng tên trong danh sách hợp lệ. Nếu không ghét ngành nào thì trả về mảng rỗng [].
-6. Mỗi trường *_Reason phải dựa trên bằng chứng trong đoạn văn (trích ý, không bịa số liệu).
-7. Nếu thông tin thiếu, suy luận hợp lý từ ngữ cảnh; không để null; điểm và lý do phải nhất quán.
+   1 = rất cơ bản
+   2 = cơ bản
+   3 = trung bình
+   4 = khá
+   5 = thành thạo / nổi bật trong văn bản
+4. Đối với mỗi kỹ năng điểm số, hãy viết phần phân tích lý do (Reasoning) THẬT CHI TIẾT (khoảng 3-4 câu dài). Phải phân tích sâu sắc dựa trên câu chữ của ứng viên, trích dẫn lại ý của ứng viên để chứng minh, và đưa ra nhận xét ngắn về việc kỹ năng này ảnh hưởng thế nào đến thái độ làm việc của họ.
+5. Phân tích thái độ nghề nghiệp:
+   - Đối chiếu các ý ưu tiên/chán ghét với danh sách nghề {careers_json}.
+   - Phân loại vào "Preferred_Careers" và "Excluded_Careers". Chỉ dùng đúng tên hợp lệ. Nếu không có, trả về [].
+6. "Skills": chỉ lấy từ danh sách Skills hợp lệ; nếu người dùng nhắc công nghệ gần nghĩa (vd: "học máy" → "Machine Learning"), hãy map sang tên trong danh sách. Nếu không có skill nào rõ → [].
+7. Mỗi trường *_Reason phải dựa trên bằng chứng trong đoạn văn (trích ý, không bịa số liệu).
+8. Nếu thông tin thiếu, suy luận hợp lý từ ngữ cảnh; không để null; điểm và lý do phải nhất quán.
 
-Đoạn văn tự giới thiệu:
-
-{user_text}
+Đoạn văn tự giới thiệu: "{user_input}"
 """.strip()
 
 
@@ -105,12 +126,17 @@ if API_KEY and API_KEY != "your_api_key_here":
 
 @lru_cache(maxsize=1)
 def load_ml_artifacts() -> tuple:
-    """Load mô hình Random Forest và hai LabelEncoder đã train offline."""
+    """Load Random Forest + field/career/skills encoders đã train offline."""
     model_path = MODELS_DIR / "rf_model.pkl"
     field_path = MODELS_DIR / "field_encoder.pkl"
     career_path = MODELS_DIR / "career_encoder.pkl"
+    skills_path = MODELS_DIR / "skills_encoder.pkl"
 
-    missing = [p.name for p in (model_path, field_path, career_path) if not p.exists()]
+    missing = [
+        p.name
+        for p in (model_path, field_path, career_path, skills_path)
+        if not p.exists()
+    ]
     if missing:
         raise FileNotFoundError(
             "Thiếu file model: "
@@ -121,7 +147,8 @@ def load_ml_artifacts() -> tuple:
     model = joblib.load(model_path)
     field_encoder = joblib.load(field_path)
     career_encoder = joblib.load(career_path)
-    return model, field_encoder, career_encoder
+    skills_encoder = joblib.load(skills_path)
+    return model, field_encoder, career_encoder, skills_encoder
 
 
 def extract_json_text(raw_text: str) -> str:
@@ -140,20 +167,30 @@ def extract_json_text(raw_text: str) -> str:
     return text
 
 
-def call_gemini_extractor(user_text: str, list_of_all_careers: list[str]) -> dict:
-    """Gọi Gemini lần 1 để trích xuất features + reasoning + Excluded_Careers."""
+def call_gemini_extractor(
+    user_text: str,
+    list_of_all_careers: list[str],
+    list_of_all_fields: list[str],
+    list_of_all_skills: list[str],
+) -> dict:
+    """Gọi Gemini lần 1: điểm số + Skills + Preferred/Excluded."""
     if not API_KEY or API_KEY == "your_api_key_here":
         raise RuntimeError(
             "Chưa cấu hình GEMINI_API_KEY. "
             "Hãy mở file .env và điền API key hợp lệ."
         )
 
-    prompt = build_extractor_prompt(user_text, list_of_all_careers)
+    prompt = build_extractor_prompt(
+        user_text,
+        list_of_all_careers,
+        list_of_all_fields,
+        list_of_all_skills,
+    )
     llm = genai.GenerativeModel(GEMINI_MODEL)
 
     generation_config = {
         "temperature": 0.3,
-        "max_output_tokens": 2048,
+        "max_output_tokens": 3072,
     }
 
     try:
@@ -208,18 +245,21 @@ def call_gemini_extractor(user_text: str, list_of_all_careers: list[str]) -> dic
     return data
 
 
-def normalize_excluded_careers(raw_excluded: object, valid_careers: list[str]) -> list[str]:
-    """Chuẩn hóa Excluded_Careers về đúng tên class trong career_encoder."""
-    if raw_excluded is None:
+def normalize_career_list(raw_list: object, valid_items: list[str]) -> list[str]:
+    """
+    Chuẩn hóa list tên (Career / Skills / Field-like) về đúng vocabulary.
+    So khớp .strip().lower(); hỗ trợ khớp gần.
+    """
+    if raw_list is None:
         return []
-    if not isinstance(raw_excluded, list):
-        raw_excluded = [raw_excluded]
+    if not isinstance(raw_list, list):
+        raw_list = [raw_list]
 
-    lower_to_official = {c.strip().lower(): c for c in valid_careers}
+    lower_to_official = {c.strip().lower(): c for c in valid_items}
     matched: list[str] = []
     seen: set[str] = set()
 
-    for item in raw_excluded:
+    for item in raw_list:
         name = str(item).strip()
         if not name:
             continue
@@ -240,7 +280,16 @@ def normalize_excluded_careers(raw_excluded: object, valid_careers: list[str]) -
     return matched
 
 
-def validate_features(data: dict, valid_careers: list[str]) -> dict:
+def normalize_excluded_careers(raw_excluded: object, valid_careers: list[str]) -> list[str]:
+    """Alias tương thích."""
+    return normalize_career_list(raw_excluded, valid_careers)
+
+
+def validate_features(
+    data: dict,
+    valid_careers: list[str],
+    valid_skills: list[str] | None = None,
+) -> dict:
     """Chuẩn hóa kiểu dữ liệu để dùng cho mô hình và UI."""
     required_score_keys = [
         "Field",
@@ -255,7 +304,7 @@ def validate_features(data: dict, valid_careers: list[str]) -> dict:
     if missing:
         raise KeyError(f"JSON thiếu keys: {missing}")
 
-    skill_keys = [
+    score_keys = [
         "Coding Skills",
         "Communication Skills",
         "Problem Solving Skills",
@@ -268,23 +317,32 @@ def validate_features(data: dict, valid_careers: list[str]) -> dict:
         "Internships": max(0, int(data["Internships"])),
     }
 
-    for key in skill_keys:
+    for key in score_keys:
         value = int(data[key])
-        normalized[key] = min(4, max(0, value))
+        normalized[key] = min(MAX_SKILL_SCORE, max(0, value))
 
     for skill_key, reason_key in SKILL_REASON_KEYS.items():
         reason_text = data.get(reason_key, "")
         if reason_text is None or str(reason_text).strip() == "":
             reason_text = (
                 f"Gemini không cung cấp lý do chi tiết cho {skill_key}; "
-                f"điểm được ghi nhận là {normalized[skill_key]}/4."
+                f"điểm được ghi nhận là {normalized[skill_key]}/{MAX_SKILL_SCORE}."
             )
         normalized[reason_key] = str(reason_text).strip()
 
-    normalized["Excluded_Careers"] = normalize_excluded_careers(
-        data.get("Excluded_Careers", []),
-        valid_careers,
-    )
+    # Skills công nghệ (cột Skills trong CSV)
+    vocabulary = valid_skills or []
+    normalized["Skills"] = normalize_career_list(data.get("Skills", []), vocabulary)
+
+    preferred = normalize_career_list(data.get("Preferred_Careers", []), valid_careers)
+    excluded = normalize_career_list(data.get("Excluded_Careers", []), valid_careers)
+
+    # Nếu một ngành vừa preferred vừa excluded → ưu tiên loại trừ
+    excluded_lower = {c.lower() for c in excluded}
+    preferred = [c for c in preferred if c.lower() not in excluded_lower]
+
+    normalized["Preferred_Careers"] = preferred
+    normalized["Excluded_Careers"] = excluded
 
     return normalized
 
@@ -294,15 +352,22 @@ def encode_field(
     field_encoder,
     warning_callback: Callable[[str], None] | None = None,
 ) -> int:
-    """Encode Field bằng LabelEncoder đã lưu."""
+    """Encode Field bằng LabelEncoder đã lưu (kèm khớp gần)."""
     classes = list(field_encoder.classes_)
-    if field_value in classes:
-        return int(field_encoder.transform([field_value])[0])
+    value = str(field_value).strip()
+
+    if value in classes:
+        return int(field_encoder.transform([value])[0])
 
     lower_map = {c.lower(): c for c in classes}
-    if field_value.lower() in lower_map:
-        matched = lower_map[field_value.lower()]
+    if value.lower() in lower_map:
+        matched = lower_map[value.lower()]
         return int(field_encoder.transform([matched])[0])
+
+    # Khớp gần: "Computer Science" chứa "science", v.v.
+    for c in classes:
+        if value.lower() in c.lower() or c.lower() in value.lower():
+            return int(field_encoder.transform([c])[0])
 
     default_field = classes[0]
     if warning_callback:
@@ -316,12 +381,16 @@ def encode_field(
 def build_feature_vector(
     features: dict,
     field_encoder,
+    skills_encoder,
     warning_callback: Callable[[str], None] | None = None,
 ) -> np.ndarray:
-    """Tạo numpy array 1 hàng theo đúng thứ tự FEATURE_COLUMNS."""
+    """
+    Tạo numpy array 1 hàng:
+    [Field, Coding, Comm, Problem, Team, Projects, Internships] + skill binary vector
+    """
     field_code = encode_field(features["Field"], field_encoder, warning_callback)
 
-    row = [
+    numeric_row = [
         field_code,
         features["Coding Skills"],
         features["Communication Skills"],
@@ -330,7 +399,17 @@ def build_feature_vector(
         features["Projects"],
         features["Internships"],
     ]
-    return np.array([row], dtype=float)
+
+    skill_list = features.get("Skills", []) or []
+    # MultiLabelBinarizer.transform cần list-of-lists
+    skill_vector = skills_encoder.transform([skill_list]).astype(float)[0]
+
+    return np.hstack([np.array(numeric_row, dtype=float), skill_vector]).reshape(1, -1)
+
+
+# Hệ số tăng trọng số cho ngành được ưu tiên (Preferred_Careers)
+PREFERRED_BOOST_MULTIPLIER = 1.5
+PREFERRED_BOOST_ADD = 0.2
 
 
 def predict_top_careers(
@@ -338,34 +417,64 @@ def predict_top_careers(
     model,
     career_encoder,
     excluded_careers: list[str] | None = None,
+    preferred_careers: list[str] | None = None,
     top_k: int = 5,
 ) -> list[dict]:
-    """Dự đoán Top-K ngành nghề và loại bỏ các ngành bị người dùng chặn."""
+    """
+    Dự đoán Top-K bằng predict_proba, sau đó:
+    - Excluded_Careers → prob = 0.0
+    - Preferred_Careers → boost (nhân + cộng, clamp tối đa 1.0)
+    - Sort giảm dần, lấy Top-K (bỏ qua prob = 0)
+    - Chuẩn hóa lại % trên Top-K về tổng ~100% để hiển thị
+    """
     probabilities = model.predict_proba(feature_vector)[0].astype(float).copy()
     career_names = list(career_encoder.classes_)
 
-    excluded = excluded_careers or []
-    excluded_lower = {str(c).strip().lower() for c in excluded}
+    # results = [{"career": class_name, "prob": prob}, ...]
+    results = [
+        {"career": str(name), "prob": float(prob)}
+        for name, prob in zip(career_names, probabilities)
+    ]
 
-    for idx, career_name in enumerate(career_names):
-        if str(career_name).strip().lower() in excluded_lower:
-            probabilities[idx] = 0.0
+    excluded_lower = {str(c).strip().lower() for c in (excluded_careers or [])}
+    preferred_lower = {str(c).strip().lower() for c in (preferred_careers or [])}
 
-    paired = list(zip(career_names, probabilities))
-    paired.sort(key=lambda item: item[1], reverse=True)
+    for item in results:
+        career_key = item["career"].strip().lower()
 
-    top_results: list[dict] = []
-    for career_name, prob in paired:
-        if float(prob) <= 0.0:
+        # 1) Loại trừ trước (ưu tiên hơn boost)
+        if career_key in excluded_lower:
+            item["prob"] = 0.0
             continue
+
+        # 2) Tăng trọng số ngành được ưu tiên
+        if career_key in preferred_lower:
+            boosted = item["prob"] * PREFERRED_BOOST_MULTIPLIER + PREFERRED_BOOST_ADD
+            item["prob"] = min(1.0, boosted)
+
+    # Sort theo prob giảm dần
+    results.sort(key=lambda x: x["prob"], reverse=True)
+
+    # Lấy Top-K, bỏ ngành prob = 0
+    top_raw = [r for r in results if r["prob"] > 0.0][:top_k]
+
+    if not top_raw:
+        return []
+
+    # Chuẩn hóa % hiển thị về tổng 100% trong Top-K
+    total_prob = sum(r["prob"] for r in top_raw)
+    top_results: list[dict] = []
+    for item in top_raw:
+        if total_prob > 0:
+            match_percent = round((item["prob"] / total_prob) * 100, 1)
+        else:
+            match_percent = 0.0
         top_results.append(
             {
-                "career": str(career_name),
-                "match_percent": round(float(prob) * 100, 1),
+                "career": item["career"],
+                "match_percent": match_percent,
             }
         )
-        if len(top_results) >= top_k:
-            break
 
     return top_results
 
@@ -380,6 +489,7 @@ def _build_career_explain_prompt(features: dict, top_careers: list[dict]) -> str
         "Teamwork Skills": features["Teamwork Skills"],
         "Projects": features["Projects"],
         "Internships": features["Internships"],
+        "Skills": features.get("Skills", []),
     }
     careers_payload = [
         {"career": item["career"], "match_percent": item["match_percent"]}
@@ -389,21 +499,21 @@ def _build_career_explain_prompt(features: dict, top_careers: list[dict]) -> str
 
     return f"""
 Bạn là chuyên gia hướng nghiệp.
-Dựa vào hồ sơ kỹ năng của ứng viên và danh sách 5 ngành nghề phù hợp nhất (do mô hình Machine Learning xếp hạng),
+Dựa vào hồ sơ kỹ năng của ứng viên và danh sách ngành nghề phù hợp nhất (do mô hình Machine Learning xếp hạng),
 hãy viết cho MỖI ngành nghề một đoạn phân tích thật chi tiết (khoảng 3-4 câu dài) giải thích tại sao hồ sơ của ứng viên
-lại cực kỳ phù hợp với đặc thù của ngành đó. Hãy trích dẫn điểm mạnh của họ để thuyết phục.
+lại cực kỳ phù hợp với đặc thù của ngành đó. Hãy trích dẫn điểm mạnh và các Skills/công nghệ cụ thể của họ để thuyết phục.
 
-Hồ sơ kỹ năng (điểm số):
+Hồ sơ kỹ năng (điểm số + Skills):
 {json.dumps(skill_profile, ensure_ascii=False, indent=2)}
 
-Top 5 ngành nghề (tên tiếng Anh + % phù hợp từ model):
+Top ngành nghề (tên tiếng Anh + % phù hợp từ model):
 {json.dumps(careers_payload, ensure_ascii=False, indent=2)}
 
 QUY TẮC BẮT BUỘC:
 1. Chỉ trả về JSON thuần túy — KHÔNG markdown, KHÔNG ```json, KHÔNG giải thích ngoài JSON.
 2. Các key PHẢI khớp CHÍNH XÁC tên ngành sau (tiếng Anh): {json.dumps(career_keys, ensure_ascii=False)}
 3. Value của mỗi key là đoạn văn giải thích bằng tiếng Việt (3-4 câu dài).
-4. Không thêm key khác ngoài 5 ngành trên.
+4. Không thêm key khác ngoài các ngành trên.
 """.strip()
 
 
