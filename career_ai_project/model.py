@@ -16,7 +16,6 @@ from typing import Callable
 import google.generativeai as genai
 import joblib
 import numpy as np
-import pandas as pd
 from dotenv import load_dotenv
 
 # ---------------------------------------------------------------------------

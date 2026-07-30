@@ -84,7 +84,7 @@ def train_random_forest(
     x_train, x_test, y_train, y_test = train_test_split(
         x,
         y,
-        test_size=0.2,
+        test_size=0.2, #20% test
         random_state=42,
         stratify=y if y.nunique() > 1 else None,
     )

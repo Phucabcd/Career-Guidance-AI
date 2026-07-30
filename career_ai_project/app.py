@@ -50,7 +50,7 @@ def render_profile_dashboard(features: dict) -> None:
     for skill_key, reason_key in SKILL_REASON_KEYS.items():
         score = features[skill_key]
         label = SKILL_UI_LABELS[skill_key]
-        with st.expander(f"{label}: {score}/4", expanded=True):
+        with st.expander(f"{label}: {score}/4", expanded=False):
             st.info(features[reason_key])
 
 
@@ -109,7 +109,7 @@ st.markdown(
 Hệ thống gợi ý hướng nghiệp kết hợp **Gemini LLM** (trích xuất kỹ năng + giải thích)
 và **Random Forest** (dự đoán ngành nghề phù hợp).
 
-Hãy kể về bản thân: ngành học, sở thích, kỹ năng lập trình / giao tiếp / giải quyết vấn đề,
+Hãy kể về bản thân: ngành học, sở thích, kỹ năng, giao tiếp, giải quyết vấn đề,
 kinh nghiệm dự án và thực tập.
 """
 )
@@ -151,7 +151,7 @@ if analyze_clicked:
 
     list_of_all_careers = list(career_encoder.classes_)
 
-    with st.spinner("Đang phân tích hồ sơ bằng Gemini..."):
+    with st.spinner("Đang phân tích hồ sơ..."):
         try:
             raw_features = call_gemini_extractor(cleaned_bio, list_of_all_careers)
         except json.JSONDecodeError:
