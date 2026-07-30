@@ -1,9 +1,9 @@
 # Career Recommendation AI - demo app
 
 ## Cấu trúc
-- `model.py` — logic gợi ý ngành nghề (embedding + cosine similarity + trích từ khóa khớp)
+- `model.py` — logic gợi ý ngành nghề 
 - `app.py` — giao diện Streamlit gọi vào `model.py`
-- `csv` - https://data.mendeley.com/datasets/4spj4mbpjr/2
+- `csv` - https://www.kaggle.com/datasets/ministerjohn/career-path-prediction-for-different-fields
 
 ## Cách chạy
 
