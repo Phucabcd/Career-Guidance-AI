@@ -108,4 +108,4 @@ numpy==2.2.3
    - Robustness: thử thay đổi nhẹ câu chữ (từ đồng nghĩa, lỗi chính tả nhẹ) xem kết quả có ổn định không
    - Explainability: đã có sẵn phần "Vì sao gợi ý" trong app, có thể mở rộng thêm
    - Social Impact: đánh giá định tính về tác động của việc gợi ý sai ngành nghề
-2. Sử dụng OCR cho phép sinh viên upload bảng điểm dự đoán
+

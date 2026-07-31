@@ -30,22 +30,15 @@ from model import (
 
 def render_profile_dashboard(features: dict) -> None:
     """Hiển thị dashboard phân tích hồ sơ trên Streamlit."""
-    st.subheader("📊 Phân tích Chi tiết Hồ sơ của bạn")
+    st.subheader("Kết quả phân tích chi tiết hồ sơ của bạn")
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns([5, 2, 2])
     with col1:
-        st.metric("Ngành học (Field)", features["Field"])
+        st.metric("Chuyên ngành", features["Field"])
     with col2:
         st.metric("Số lượng Dự án", features["Projects"])
     with col3:
         st.metric("Số kỳ Thực tập", features["Internships"])
-
-    skills = features.get("Skills", []) or []
-    if skills:
-        st.markdown("**🛠️ Skills / Công nghệ đã nhận diện**")
-        st.write(", ".join(skills))
-    else:
-        st.caption("Chưa nhận diện được Skills cụ thể từ mô tả.")
 
     st.markdown("---")
     st.caption(
@@ -69,16 +62,16 @@ def render_top_careers(
     """Hiển thị Top 5 ngành nghề với progress bar và giải thích."""
     st.subheader("🎯 Top 5 Ngành Nghề Phù Hợp Nhất")
 
-    if preferred_careers:
-        st.success(
-            "🌟 Đã tăng cường độ ưu tiên cho các ngành theo sở thích của bạn: "
-            f"{', '.join(preferred_careers)}"
-        )
-    if excluded_careers:
-        st.warning(
-            "🚫 Hệ thống đã loại trừ các ngành nghề bạn không hứng thú: "
-            f"{', '.join(excluded_careers)}"
-        )
+    # if preferred_careers:
+    #     st.success(
+    #         "🌟 Đã tăng cường độ ưu tiên cho các ngành theo sở thích của bạn: "
+    #         f"{', '.join(preferred_careers)}"
+    #     )
+    # if excluded_careers:
+    #     st.warning(
+    #         "🚫 Hệ thống đã loại trừ các ngành nghề bạn không hứng thú: "
+    #         f"{', '.join(excluded_careers)}"
+    #     )
 
     st.caption(
         "Tỷ lệ % từ Random Forest sau khi lọc (Excluded) và tăng trọng số (Preferred), "
@@ -121,8 +114,8 @@ st.markdown(
 Hệ thống gợi ý hướng nghiệp kết hợp **Gemini LLM** (trích xuất kỹ năng + Skills công nghệ)
 và **Random Forest** (dự đoán ngành nghề phù hợp từ dataset IT mở rộng).
 
-Hãy kể về bản thân: ngành học, sở thích, công nghệ (Python, React, Docker...),
-điểm mạnh, dự án / thực tập. Có thể nêu rõ ngành **thích** / **không thích**.
+Hãy kể về bản thân: ngành học, sở thích, công nghệ (Python, Java, Docker,...),
+dự án, thực tập. Có thể nêu rõ ngành **thích** / **không thích**.
 """
 )
 

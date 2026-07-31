@@ -42,16 +42,6 @@ TARGET_COLUMN = "Career"
 SKILLS_COLUMN = "Skills"
 
 
-def parse_skills_cell(value: object) -> list[str]:
-    """Tách chuỗi Skills 'Python, Docker, AWS' thành list token."""
-    if value is None or (isinstance(value, float) and np.isnan(value)):
-        return []
-    text = str(value).strip()
-    if not text or text.lower() == "nan":
-        return []
-    return [token.strip() for token in text.split(",") if token.strip()]
-
-
 def load_data(csv_path: Path) -> pd.DataFrame:
     """Đọc và kiểm tra dữ liệu đầu vào."""
     if not csv_path.exists():
@@ -131,6 +121,15 @@ def train_random_forest(
     print(classification_report(y_test, y_pred, zero_division=0))
 
     return model, acc
+
+def parse_skills_cell(value: object) -> list[str]:
+    """Tách chuỗi Skills 'Python, Docker, AWS' thành list token."""
+    if value is None or (isinstance(value, float) and np.isnan(value)):
+        return []
+    text = str(value).strip()
+    if not text or text.lower() == "nan":
+        return []
+    return [token.strip() for token in text.split(",") if token.strip()]
 
 
 def save_artifacts(

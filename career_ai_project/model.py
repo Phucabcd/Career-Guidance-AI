@@ -499,9 +499,12 @@ def _build_career_explain_prompt(features: dict, top_careers: list[dict]) -> str
 
     return f"""
 Bạn là chuyên gia hướng nghiệp.
-Dựa vào hồ sơ kỹ năng của ứng viên và danh sách ngành nghề phù hợp nhất (do mô hình Machine Learning xếp hạng),
-hãy viết cho MỖI ngành nghề một đoạn phân tích thật chi tiết (khoảng 3-4 câu dài) giải thích tại sao hồ sơ của ứng viên
-lại cực kỳ phù hợp với đặc thù của ngành đó. Hãy trích dẫn điểm mạnh và các Skills/công nghệ cụ thể của họ để thuyết phục.
+Dựa vào hồ sơ kỹ năng của ứng viên và danh sách ngành nghề phù hợp nhất,
+hãy viết mỗi ngành nghề 1 đoạn ngắn, tự nhiên, bằng tiếng Việt, khoảng 1-2 câu.
+Nội dung phải:
+- thân thiện, dễ hiểu
+- nêu rõ lý do chính khiến ứng viên phù hợp
+- không quá giống máy, không dùng quá nhiều cấu trúc câu văn bản cứng nhắc
 
 Hồ sơ kỹ năng (điểm số + Skills):
 {json.dumps(skill_profile, ensure_ascii=False, indent=2)}

@@ -1,0 +1,41 @@
+Prompt: Khoa học dữ liệu (Data Science)
+Em là sinh viên năm cuối ngành Khoa học dữ liệu với GPA 3.5.
+Em sử dụng thành thạo Python, Pandas, NumPy và SQL.
+Em đã thực hiện nhiều bài toán phân tích dữ liệu và xây dựng mô hình dự đoán bằng scikit-learn.
+Em thích khám phá dữ liệu, trực quan hóa bằng Power BI và Tableau.
+Em có tư duy phân tích tốt, cẩn thận và yêu thích giải quyết các bài toán thực tế từ dữ liệu.
+
+Prompt: Kỹ thuật phần mềm
+Em là sinh viên năm cuối ngành Kỹ thuật phần mềm với GPA 3.4.
+Em thành thạo Java, Spring Boot, MySQL và Git.
+Em đã phát triển nhiều ứng dụng web theo mô hình MVC và REST API.
+Em yêu thích thiết kế hệ thống và tối ưu hiệu năng ứng dụng.
+Em có kỹ năng làm việc nhóm tốt, giao tiếp hiệu quả và luôn chủ động học hỏi công nghệ mới.
+
+Prompt: An toàn thông tin
+Em là sinh viên ngành An toàn thông tin với GPA 3.6.
+Em có kinh nghiệm sử dụng Kali Linux, Wireshark, Burp Suite và Metasploit.
+Em từng tham gia các cuộc thi CTF và thực hiện kiểm thử bảo mật cho website.
+Em quan tâm đến Ethical Hacking và phòng chống tấn công mạng.
+Em có tư duy phản biện tốt, kiên trì và thích tìm hiểu các lỗ hổng bảo mật.
+
+Prompt: Digital Marketing
+Em là sinh viên ngành Marketing với GPA 3.4.
+Em có kinh nghiệm chạy Facebook Ads, Google Ads và SEO.
+Em từng xây dựng chiến dịch truyền thông cho các dự án sinh viên.
+Em yêu thích phân tích hành vi khách hàng và xây dựng thương hiệu.
+Em có khả năng sáng tạo nội dung và giao tiếp tốt.
+
+Prompt: Thiết kế đồ họa
+Em là sinh viên ngành Thiết kế đồ họa với GPA 3.4.
+Em thành thạo Photoshop, Illustrator và After Effects.
+Em đã thiết kế bộ nhận diện thương hiệu và nhiều sản phẩm truyền thông.
+Em yêu thích sáng tạo hình ảnh và kể chuyện bằng thiết kế.
+Em có óc thẩm mỹ tốt và luôn cập nhật xu hướng mới.
+
+Prompt: Điện - Điện tử
+Em là sinh viên ngành Điện - Điện tử với GPA 3.6.
+Em thành thạo Arduino, PLC và Proteus.
+Em đã thực hiện nhiều dự án điều khiển tự động.
+Em yêu thích thiết kế mạch điện và hệ thống nhúng.
+Em có khả năng phân tích kỹ thuật và làm việc nhóm hiệu quả.
