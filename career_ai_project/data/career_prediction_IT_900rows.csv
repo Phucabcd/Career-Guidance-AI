@@ -1,0 +1,901 @@
+Field,Coding Skills,Communication Skills,Problem Solving Skills,Teamwork Skills,Projects,Internships,Career,Skills
+IT,4,0,2,1,6,1,Software Engineer,
+IT,2,4,3,0,6,0,Software Engineer,
+IT,4,0,4,1,8,3,Software Engineer,
+IT,2,0,2,3,5,2,Software Engineer,
+IT,4,0,3,0,5,2,Software Engineer,
+IT,4,4,4,3,4,2,Software Engineer,
+IT,4,1,2,0,3,2,Software Engineer,
+IT,3,2,3,2,4,2,Software Engineer,
+IT,3,4,3,4,4,1,Software Engineer,
+IT,4,1,3,0,4,0,Software Engineer,
+IT,3,1,4,2,5,3,Software Engineer,
+IT,4,2,4,1,8,2,Software Engineer,
+IT,4,3,2,1,2,3,Data Scientist,
+IT,4,1,3,3,1,3,Data Scientist,
+IT,4,2,4,0,1,2,Data Scientist,
+IT,3,2,4,1,7,0,Data Scientist,
+IT,4,1,4,0,4,1,Data Scientist,
+IT,1,4,4,0,5,3,Data Scientist,
+IT,4,2,2,0,3,0,Data Scientist,
+IT,4,4,3,1,7,1,Data Scientist,
+IT,4,4,3,2,6,2,Data Scientist,
+IT,2,1,4,0,5,0,Data Scientist,
+IT,4,1,2,0,0,1,Data Scientist,
+IT,2,0,4,1,4,3,Data Scientist,
+IT,4,4,4,1,7,3,Cybersecurity Analyst,
+IT,2,3,3,3,4,0,Cybersecurity Analyst,
+IT,2,1,4,3,5,3,Cybersecurity Analyst,
+IT,4,4,3,0,8,0,Cybersecurity Analyst,
+IT,3,1,3,0,4,3,Cybersecurity Analyst,
+IT,3,4,4,1,6,2,Cybersecurity Analyst,
+IT,2,0,4,4,7,1,Cybersecurity Analyst,
+IT,4,0,4,3,2,1,Cybersecurity Analyst,
+IT,3,4,4,4,5,2,Cybersecurity Analyst,
+IT,3,1,4,3,6,0,Cybersecurity Analyst,
+IT,3,4,3,4,4,1,Cybersecurity Analyst,
+IT,4,3,4,2,8,0,Cybersecurity Analyst,
+IT,3,2,3,0,8,1,DevOps Engineer,
+IT,3,2,2,2,8,3,DevOps Engineer,
+IT,4,2,3,0,5,1,DevOps Engineer,
+IT,3,4,4,4,3,0,DevOps Engineer,
+IT,4,0,2,4,8,1,DevOps Engineer,
+IT,4,2,2,2,4,1,DevOps Engineer,
+IT,4,3,4,1,3,1,DevOps Engineer,
+IT,4,2,3,1,5,1,DevOps Engineer,
+IT,3,3,2,1,7,2,DevOps Engineer,
+IT,3,1,3,2,6,0,DevOps Engineer,
+IT,3,4,4,0,4,2,DevOps Engineer,
+IT,3,0,4,3,6,2,DevOps Engineer,
+Business,4,3,4,4,4,0,Business Analyst,
+Business,4,4,4,3,1,2,Business Analyst,
+Business,3,4,4,3,5,3,Business Analyst,
+Business,1,3,4,3,4,3,Business Analyst,
+Business,4,4,4,4,5,3,Business Analyst,
+Business,4,4,2,3,4,2,Business Analyst,
+Business,1,3,3,3,0,1,Business Analyst,
+Business,4,2,3,3,6,1,Business Analyst,
+Business,4,2,4,3,0,1,Business Analyst,
+Business,4,4,4,4,7,3,Business Analyst,
+Business,3,3,4,3,4,3,Business Analyst,
+Business,1,2,4,2,5,2,Business Analyst,
+Business,1,3,1,3,1,3,Marketing Specialist,
+Business,4,3,3,4,3,3,Marketing Specialist,
+Business,0,4,3,3,0,2,Marketing Specialist,
+Business,3,4,4,4,3,3,Marketing Specialist,
+Business,3,4,0,3,5,3,Marketing Specialist,
+Business,3,4,4,4,0,3,Marketing Specialist,
+Business,0,2,3,3,7,1,Marketing Specialist,
+Business,3,3,1,3,5,2,Marketing Specialist,
+Business,3,3,0,3,0,0,Marketing Specialist,
+Business,0,4,0,2,3,0,Marketing Specialist,
+Business,1,4,3,3,3,3,Marketing Specialist,
+Business,2,3,4,4,1,1,Marketing Specialist,
+Business,4,4,2,4,6,3,Project Manager,
+Business,0,4,1,2,4,0,Project Manager,
+Business,2,4,3,3,1,2,Project Manager,
+Business,3,3,3,2,7,1,Project Manager,
+Business,4,3,4,4,7,3,Project Manager,
+Business,4,3,2,2,1,2,Project Manager,
+Business,3,4,4,3,5,0,Project Manager,
+Business,1,3,1,4,4,2,Project Manager,
+Business,2,4,0,4,3,0,Project Manager,
+Business,3,3,4,2,7,3,Project Manager,
+Business,0,4,1,4,3,2,Project Manager,
+Business,2,4,4,4,5,3,Project Manager,
+Business,2,2,3,2,4,2,Financial Analyst,
+Business,4,2,2,4,2,1,Financial Analyst,
+Business,3,4,4,4,4,0,Financial Analyst,
+Business,1,2,3,2,0,1,Financial Analyst,
+Business,3,4,2,1,7,0,Financial Analyst,
+Business,4,3,3,2,2,0,Financial Analyst,
+Business,2,0,3,3,1,0,Financial Analyst,
+Business,4,2,4,1,1,3,Financial Analyst,
+Business,4,3,3,3,4,3,Financial Analyst,
+Business,4,0,2,1,4,0,Financial Analyst,
+Business,4,4,3,1,0,3,Financial Analyst,
+Business,2,0,2,2,4,3,Financial Analyst,
+Engineering,2,4,4,3,2,1,Mechanical Engineer,
+Engineering,2,1,4,0,5,2,Mechanical Engineer,
+Engineering,2,3,3,3,5,3,Mechanical Engineer,
+Engineering,4,3,4,0,3,3,Mechanical Engineer,
+Engineering,4,2,4,0,3,0,Mechanical Engineer,
+Engineering,4,0,3,3,8,3,Mechanical Engineer,
+Engineering,4,3,3,0,7,2,Mechanical Engineer,
+Engineering,2,0,3,2,6,3,Mechanical Engineer,
+Engineering,4,0,3,0,5,2,Mechanical Engineer,
+Engineering,3,4,2,4,7,3,Mechanical Engineer,
+Engineering,4,2,4,3,7,0,Mechanical Engineer,
+Engineering,4,1,2,3,7,0,Mechanical Engineer,
+Engineering,1,1,2,4,2,3,Electrical Engineer,
+Engineering,0,3,4,1,7,2,Electrical Engineer,
+Engineering,3,3,3,1,7,1,Electrical Engineer,
+Engineering,4,4,3,0,5,3,Electrical Engineer,
+Engineering,2,0,3,2,7,1,Electrical Engineer,
+Engineering,3,2,3,4,8,3,Electrical Engineer,
+Engineering,1,1,4,3,3,3,Electrical Engineer,
+Engineering,3,3,3,1,7,0,Electrical Engineer,
+Engineering,4,2,2,3,2,3,Electrical Engineer,
+Engineering,3,1,4,3,4,2,Electrical Engineer,
+Engineering,0,2,4,3,5,3,Electrical Engineer,
+Engineering,4,0,3,2,3,0,Electrical Engineer,
+Engineering,0,3,3,2,1,0,Civil Engineer,
+Engineering,2,2,4,3,4,1,Civil Engineer,
+Engineering,4,1,4,1,2,3,Civil Engineer,
+Engineering,3,4,3,1,7,2,Civil Engineer,
+Engineering,0,3,3,4,3,0,Civil Engineer,
+Engineering,4,2,3,2,7,2,Civil Engineer,
+Engineering,3,0,4,3,5,2,Civil Engineer,
+Engineering,0,3,3,0,2,3,Civil Engineer,
+Engineering,4,2,4,1,4,1,Civil Engineer,
+Engineering,0,2,3,0,5,1,Civil Engineer,
+Engineering,2,3,4,1,5,2,Civil Engineer,
+Engineering,2,1,2,3,4,2,Civil Engineer,
+Engineering,0,1,2,3,8,2,Industrial Engineer,
+Engineering,0,2,4,0,7,2,Industrial Engineer,
+Engineering,4,3,2,0,5,3,Industrial Engineer,
+Engineering,4,2,4,1,3,3,Industrial Engineer,
+Engineering,3,0,3,0,1,2,Industrial Engineer,
+Engineering,0,1,4,1,6,3,Industrial Engineer,
+Engineering,3,4,4,3,4,3,Industrial Engineer,
+Engineering,2,0,2,1,7,3,Industrial Engineer,
+Engineering,0,2,4,2,2,3,Industrial Engineer,
+Engineering,0,3,3,1,2,0,Industrial Engineer,
+Engineering,1,4,4,0,8,1,Industrial Engineer,
+Engineering,1,2,2,4,2,2,Industrial Engineer,
+Design,4,2,1,0,4,1,UI/UX Designer,
+Design,1,4,2,0,3,2,UI/UX Designer,
+Design,3,4,0,0,7,3,UI/UX Designer,
+Design,4,3,3,4,5,0,UI/UX Designer,
+Design,0,4,3,3,6,0,UI/UX Designer,
+Design,0,2,2,4,4,0,UI/UX Designer,
+Design,4,4,4,2,6,2,UI/UX Designer,
+Design,4,4,0,0,8,1,UI/UX Designer,
+Design,1,3,2,3,6,3,UI/UX Designer,
+Design,3,2,2,2,2,3,UI/UX Designer,
+Design,0,1,3,0,6,1,UI/UX Designer,
+Design,4,4,2,0,6,2,UI/UX Designer,
+Design,2,4,2,2,5,1,Graphic Designer,
+Design,1,3,2,4,6,0,Graphic Designer,
+Design,1,3,4,4,8,0,Graphic Designer,
+Design,1,2,2,2,5,0,Graphic Designer,
+Design,4,3,0,1,5,0,Graphic Designer,
+Design,3,3,2,1,6,2,Graphic Designer,
+Design,4,1,0,1,4,0,Graphic Designer,
+Design,3,3,3,4,7,3,Graphic Designer,
+Design,4,4,2,3,6,2,Graphic Designer,
+Design,2,2,1,3,4,0,Graphic Designer,
+Design,1,1,2,2,5,0,Graphic Designer,
+Design,3,3,1,3,8,1,Graphic Designer,
+Design,3,3,3,0,7,0,Product Designer,
+Design,3,4,3,3,4,0,Product Designer,
+Design,2,4,4,3,5,0,Product Designer,
+Design,1,4,4,3,8,0,Product Designer,
+Design,2,2,2,1,4,0,Product Designer,
+Design,2,2,1,0,3,2,Product Designer,
+Design,4,4,0,1,7,3,Product Designer,
+Design,4,4,2,1,7,0,Product Designer,
+Design,2,3,4,0,5,0,Product Designer,
+Design,3,1,0,2,6,0,Product Designer,
+Design,4,4,3,3,8,0,Product Designer,
+Design,1,2,4,3,8,1,Product Designer,
+Design,0,2,0,4,5,0,Motion Designer,
+Design,3,4,4,4,4,2,Motion Designer,
+Design,3,3,2,4,4,2,Motion Designer,
+Design,0,4,3,2,4,1,Motion Designer,
+Design,4,1,2,2,6,1,Motion Designer,
+Design,4,4,2,1,8,0,Motion Designer,
+Design,2,3,2,2,5,1,Motion Designer,
+Design,1,1,1,1,6,2,Motion Designer,
+Design,4,4,0,2,3,3,Motion Designer,
+Design,1,4,1,3,3,3,Motion Designer,
+Design,3,4,2,3,5,1,Motion Designer,
+Design,1,4,4,3,7,2,Motion Designer,
+Science,4,3,2,1,2,2,Research Scientist,
+Science,2,4,2,4,1,2,Research Scientist,
+Science,4,3,4,1,6,0,Research Scientist,
+Science,4,0,3,0,6,2,Research Scientist,
+Science,3,2,4,0,5,0,Research Scientist,
+Science,4,1,4,2,7,1,Research Scientist,
+Science,3,4,2,0,0,2,Research Scientist,
+Science,4,4,4,3,1,2,Research Scientist,
+Science,4,0,2,3,7,0,Research Scientist,
+Science,4,4,3,4,3,1,Research Scientist,
+Science,1,4,4,1,6,1,Research Scientist,
+Science,4,2,3,4,8,0,Research Scientist,
+Science,0,3,2,2,0,2,Biotechnologist,
+Science,0,2,1,0,5,1,Biotechnologist,
+Science,0,2,4,2,2,3,Biotechnologist,
+Science,3,1,1,0,7,0,Biotechnologist,
+Science,2,1,0,1,0,2,Biotechnologist,
+Science,2,4,3,4,7,2,Biotechnologist,
+Science,0,1,2,2,0,2,Biotechnologist,
+Science,2,0,2,3,6,3,Biotechnologist,
+Science,3,2,1,3,7,2,Biotechnologist,
+Science,4,2,0,3,1,3,Biotechnologist,
+Science,4,1,4,2,5,0,Biotechnologist,
+Science,0,2,2,2,7,3,Biotechnologist,
+Science,4,3,4,3,0,2,Data Analyst,
+Science,2,0,2,3,5,1,Data Analyst,
+Science,4,3,4,1,1,1,Data Analyst,
+Science,3,3,4,0,2,3,Data Analyst,
+Science,3,0,4,1,8,2,Data Analyst,
+Science,4,1,4,0,2,3,Data Analyst,
+Science,4,0,4,2,7,1,Data Analyst,
+Science,4,1,2,1,1,3,Data Analyst,
+Science,2,2,3,0,8,2,Data Analyst,
+Science,2,2,4,1,1,1,Data Analyst,
+Science,3,0,4,4,5,3,Data Analyst,
+Science,4,0,4,2,6,3,Data Analyst,
+Science,3,4,0,1,5,0,Lab Technician,
+Science,3,3,4,2,2,1,Lab Technician,
+Science,1,3,4,0,1,1,Lab Technician,
+Science,2,1,1,2,3,2,Lab Technician,
+Science,4,2,0,2,3,2,Lab Technician,
+Science,1,2,4,4,1,1,Lab Technician,
+Science,4,4,1,1,5,0,Lab Technician,
+Science,0,0,0,4,4,1,Lab Technician,
+Science,4,3,4,0,7,2,Lab Technician,
+Science,2,3,1,3,4,3,Lab Technician,
+Science,0,0,1,3,6,3,Lab Technician,
+Science,3,1,2,4,2,2,Lab Technician,
+Network Engineering,5,5,4,3,5,3,AI Engineer,"Docker, scikit-learn, Python"
+Information Technology,4,3,2,2,5,1,Cloud Engineer,"AWS, Azure, Linux"
+Information Technology,3,4,3,3,5,2,ML Engineer,"Docker, Python, XGBoost"
+Embedded Systems,4,2,4,5,6,2,Full Stack Developer,"Docker, Java, Spring Boot"
+Computer Science,4,1,3,1,4,0,Network Engineer,"Linux, Python, TCP/IP"
+Information Systems,4,2,3,4,3,2,Full Stack Developer,"Java, Spring Boot, React"
+Software Engineering,2,2,2,4,5,2,Cyber Security Engineer,"Linux, Wireshark, Networking"
+Artificial Intelligence,2,4,2,2,6,1,UI/UX Designer,"Adobe XD, Wireframing, Figma"
+Computer Science,5,2,4,5,4,0,Business Analyst,"UML, SQL, Excel"
+Internet of Things,4,3,5,3,4,3,QA Engineer,"JUnit, Postman, Git"
+Software Engineering,2,4,5,1,4,0,ML Engineer,"Docker, SQL, Python"
+Network Engineering,4,2,3,2,4,3,AI Engineer,"Docker, Python, TensorFlow"
+Software Engineering,2,5,2,1,2,3,UI/UX Designer,"Adobe XD, UX Research, Wireframing"
+Network Engineering,2,4,2,2,1,3,Business Analyst,"SQL, Excel, Power BI"
+Robotics,3,5,4,5,5,1,Data Scientist,"Machine Learning, Python, Pandas"
+Robotics,4,2,4,2,3,1,UI/UX Designer,"UX Research, Wireframing, Figma"
+Data Science,4,4,3,4,4,3,Network Engineer,"Linux, Python, TCP/IP"
+Software Engineering,2,5,4,5,5,1,Cloud Engineer,"Terraform, Docker, AWS"
+Information Technology,2,2,5,2,3,1,DevOps Engineer,"Linux, AWS, Docker"
+Information Systems,5,1,3,3,0,2,Cloud Engineer,"Terraform, Linux, Azure"
+Computer Engineering,4,4,5,1,6,2,Frontend Developer,"Git, JavaScript, React"
+Computer Science,5,2,2,2,5,1,ML Engineer,"scikit-learn, Python, Docker"
+Computer Science,4,1,3,4,6,1,Network Engineer,"TCP/IP, Cisco, Linux"
+Network Engineering,4,2,5,5,3,2,Embedded Engineer,"FreeRTOS, Embedded C, STM32"
+Cyber Security,5,4,5,2,2,1,Backend Developer,"Docker, Spring Boot, Java"
+Embedded Systems,5,2,3,2,0,1,Data Scientist,"Python, NumPy, Pandas"
+Software Engineering,3,3,5,3,5,2,QA Engineer,"JUnit, Java, Selenium"
+Information Technology,2,5,4,2,3,0,Embedded Engineer,"STM32, FreeRTOS, Embedded C"
+Information Technology,3,1,2,3,5,3,Business Analyst,"Excel, SQL, UML"
+Information Systems,5,1,2,2,2,1,Business Analyst,"UML, SQL, Excel"
+Computer Science,5,5,5,5,1,1,UI/UX Designer,"UX Research, Figma, Prototyping"
+Computer Engineering,4,3,3,3,1,2,Cyber Security Engineer,"Linux, Wireshark, Metasploit"
+Computer Science,2,4,5,3,3,2,Business Analyst,"Excel, SQL, UML"
+Computer Science,5,5,2,3,0,0,DevOps Engineer,"Linux, GitHub Actions, AWS"
+Data Science,4,5,4,1,3,1,Embedded Engineer,"C++, FreeRTOS, STM32"
+Data Science,3,2,3,3,1,0,Network Engineer,"TCP/IP, Python, Cisco"
+Artificial Intelligence,4,1,3,1,2,1,ML Engineer,"Docker, scikit-learn, Python"
+Artificial Intelligence,3,2,4,5,3,3,Data Scientist,"Python, NumPy, SQL"
+Software Engineering,4,5,2,1,0,3,AI Engineer,"Docker, scikit-learn, Python"
+Artificial Intelligence,2,2,3,5,2,0,Full Stack Developer,"SQL, React, Java"
+Information Technology,4,2,4,5,4,1,UI/UX Designer,"UX Research, Adobe XD, Figma"
+Embedded Systems,5,5,5,5,2,0,Data Analyst,"Power BI, Tableau, Excel"
+Network Engineering,3,3,4,1,6,0,Embedded Engineer,"C++, Embedded C, STM32"
+Computer Science,5,5,4,2,4,2,Cyber Security Engineer,"Python, Networking, Metasploit"
+Information Systems,2,2,3,3,2,1,AI Engineer,"TensorFlow, PyTorch, scikit-learn"
+Software Engineering,5,5,2,4,0,0,Cyber Security Engineer,"Metasploit, Wireshark, Linux"
+Software Engineering,5,2,3,2,2,3,AI Engineer,"Python, scikit-learn, PyTorch"
+Information Technology,5,4,4,2,5,3,Embedded Engineer,"C++, FreeRTOS, STM32"
+Network Engineering,4,3,4,3,0,3,ML Engineer,"Docker, XGBoost, Python"
+Network Engineering,5,1,3,1,0,1,Embedded Engineer,"FreeRTOS, C++, STM32"
+Computer Engineering,2,5,4,3,5,0,Frontend Developer,"CSS, React, JavaScript"
+Information Technology,5,3,4,5,3,0,Cloud Engineer,"Docker, Linux, Terraform"
+Internet of Things,3,4,5,4,5,0,Embedded Engineer,"C, FreeRTOS, Embedded C"
+Robotics,4,4,2,2,0,2,Cyber Security Engineer,"Metasploit, Python, Linux"
+Information Technology,2,1,2,3,6,0,Data Analyst,"SQL, Tableau, Python"
+Internet of Things,4,3,4,1,2,0,Data Analyst,"SQL, Power BI, Python"
+Embedded Systems,4,3,5,1,6,3,QA Engineer,"Git, Selenium, Postman"
+Computer Science,3,2,4,5,0,3,Frontend Developer,"Git, HTML, React"
+Internet of Things,2,4,5,1,1,2,Business Analyst,"Power BI, SQL, Excel"
+Data Science,3,3,2,2,6,1,AI Engineer,"Docker, Python, PyTorch"
+Internet of Things,2,2,3,2,5,3,Data Scientist,"Python, SQL, Machine Learning"
+Robotics,2,1,4,3,6,1,Cyber Security Engineer,"Metasploit, Linux, Python"
+Data Science,5,1,4,3,3,3,Backend Developer,"SQL, Docker, Spring Boot"
+Cyber Security,4,3,3,1,5,0,ML Engineer,"Docker, Python, SQL"
+Artificial Intelligence,4,4,2,2,6,1,Data Scientist,"Python, SQL, NumPy"
+Information Systems,5,2,3,1,3,3,ML Engineer,"scikit-learn, Python, XGBoost"
+Network Engineering,4,2,5,3,4,3,Cyber Security Engineer,"Networking, Wireshark, Python"
+Information Technology,2,2,2,5,6,3,Data Scientist,"SQL, Pandas, Machine Learning"
+Software Engineering,5,3,3,5,3,0,AI Engineer,"Docker, Python, PyTorch"
+Information Technology,5,5,5,2,4,2,AI Engineer,"TensorFlow, PyTorch, Python"
+Data Science,5,4,3,3,6,1,Business Analyst,"UML, Excel, SQL"
+Computer Science,4,2,2,3,3,2,Cloud Engineer,"AWS, Linux, Docker"
+Robotics,2,3,4,2,6,1,UI/UX Designer,"Adobe XD, Wireframing, Prototyping"
+Internet of Things,3,4,4,3,1,3,Network Engineer,"Cisco, Networking, TCP/IP"
+Computer Science,4,5,4,4,2,2,ML Engineer,"Python, XGBoost, Docker"
+Software Engineering,3,3,5,1,6,3,QA Engineer,"Postman, Selenium, JUnit"
+Information Technology,3,3,4,1,6,2,QA Engineer,"Git, JUnit, Postman"
+Information Technology,2,5,5,1,1,3,Frontend Developer,"Git, CSS, JavaScript"
+Cyber Security,4,1,4,3,4,3,Data Analyst,"SQL, Tableau, Power BI"
+Information Systems,5,2,2,1,0,0,AI Engineer,"TensorFlow, scikit-learn, Python"
+Network Engineering,3,5,5,1,1,1,Frontend Developer,"JavaScript, React, CSS"
+Computer Science,3,1,5,3,5,0,Backend Developer,"Java, SQL, Git"
+Internet of Things,3,1,2,1,4,1,DevOps Engineer,"Docker, GitHub Actions, Kubernetes"
+Embedded Systems,5,4,5,2,2,1,AI Engineer,"scikit-learn, PyTorch, Python"
+Artificial Intelligence,5,2,2,4,5,1,Business Analyst,"Power BI, Communication, SQL"
+Embedded Systems,5,1,5,4,1,1,Data Analyst,"Power BI, Tableau, SQL"
+Internet of Things,2,1,2,1,0,3,Embedded Engineer,"C, C++, FreeRTOS"
+Information Technology,3,3,3,3,1,0,DevOps Engineer,"Kubernetes, Linux, AWS"
+Robotics,5,5,3,4,2,1,AI Engineer,"PyTorch, Python, scikit-learn"
+Data Science,4,3,3,5,6,0,Data Analyst,"Power BI, Excel, Tableau"
+Software Engineering,4,4,4,5,4,0,Data Analyst,"Power BI, Excel, Tableau"
+Information Systems,2,4,4,3,3,1,AI Engineer,"TensorFlow, PyTorch, scikit-learn"
+Embedded Systems,2,3,3,4,1,2,AI Engineer,"scikit-learn, Python, PyTorch"
+Information Technology,3,4,3,5,6,0,Data Scientist,"Machine Learning, Python, SQL"
+Robotics,5,4,5,2,4,0,Data Scientist,"Pandas, SQL, NumPy"
+Network Engineering,2,3,2,5,6,2,Backend Developer,"Docker, Java, Git"
+Internet of Things,3,3,4,5,1,0,Data Analyst,"SQL, Tableau, Python"
+Data Science,4,1,3,2,4,2,DevOps Engineer,"AWS, Kubernetes, Linux"
+Robotics,2,1,3,5,6,2,Cloud Engineer,"Terraform, Docker, AWS"
+Internet of Things,4,2,5,3,0,1,QA Engineer,"Selenium, JUnit, Java"
+Software Engineering,5,5,2,5,2,1,Frontend Developer,"Git, CSS, JavaScript"
+Internet of Things,2,1,5,2,2,3,Embedded Engineer,"C, FreeRTOS, STM32"
+Network Engineering,2,4,2,5,0,2,ML Engineer,"Python, SQL, scikit-learn"
+Computer Science,2,5,2,1,4,3,DevOps Engineer,"Kubernetes, GitHub Actions, Linux"
+Internet of Things,5,4,2,5,5,2,Cloud Engineer,"Docker, Terraform, Azure"
+Robotics,5,1,4,3,3,3,Business Analyst,"SQL, UML, Communication"
+Data Science,2,2,2,2,3,3,Cyber Security Engineer,"Wireshark, Python, Linux"
+Data Science,3,1,4,3,2,1,DevOps Engineer,"Docker, Linux, GitHub Actions"
+Network Engineering,3,5,2,2,4,0,QA Engineer,"Postman, Git, JUnit"
+Computer Science,2,1,5,4,1,3,ML Engineer,"Docker, Python, scikit-learn"
+Computer Engineering,3,1,2,5,5,3,ML Engineer,"Python, XGBoost, scikit-learn"
+Embedded Systems,4,1,3,5,2,3,Backend Developer,"Spring Boot, Docker, Git"
+Artificial Intelligence,2,4,2,4,3,3,AI Engineer,"Python, PyTorch, Docker"
+Software Engineering,4,3,5,2,3,1,Backend Developer,"Git, SQL, Spring Boot"
+Robotics,5,4,2,4,4,1,Data Analyst,"Tableau, Power BI, Excel"
+Computer Science,3,3,2,3,2,0,Cloud Engineer,"Azure, Terraform, Linux"
+Information Systems,3,2,5,1,4,2,Frontend Developer,"HTML, Git, CSS"
+Embedded Systems,5,4,2,2,0,3,AI Engineer,"Docker, scikit-learn, PyTorch"
+Cyber Security,3,2,3,4,0,1,UI/UX Designer,"Figma, Adobe XD, UX Research"
+Computer Science,5,2,4,5,6,0,Full Stack Developer,"SQL, React, Java"
+Cyber Security,5,3,4,5,5,0,QA Engineer,"Git, Selenium, JUnit"
+Information Technology,5,1,4,4,5,2,Cyber Security Engineer,"Linux, Wireshark, Python"
+Cyber Security,5,5,3,5,5,1,DevOps Engineer,"Kubernetes, GitHub Actions, Docker"
+Computer Engineering,2,3,4,2,5,0,Cyber Security Engineer,"Networking, Linux, Metasploit"
+Software Engineering,2,1,3,2,5,0,Business Analyst,"UML, Power BI, SQL"
+Information Technology,4,1,2,5,0,3,Data Analyst,"Python, SQL, Excel"
+Cyber Security,2,3,3,2,0,0,Data Scientist,"NumPy, Pandas, Machine Learning"
+Artificial Intelligence,4,3,2,2,3,0,Data Scientist,"NumPy, Python, Pandas"
+Artificial Intelligence,4,1,3,1,2,3,Cyber Security Engineer,"Wireshark, Networking, Metasploit"
+Embedded Systems,3,1,3,4,6,1,Embedded Engineer,"STM32, C++, Embedded C"
+Computer Engineering,5,2,4,2,4,2,QA Engineer,"Selenium, JUnit, Java"
+Software Engineering,2,4,2,3,6,1,Data Scientist,"NumPy, Pandas, Python"
+Network Engineering,5,3,3,3,1,2,Business Analyst,"Excel, SQL, Power BI"
+Data Science,3,4,4,3,4,2,Data Scientist,"Pandas, SQL, Python"
+Embedded Systems,5,1,4,2,6,0,Full Stack Developer,"React, Java, SQL"
+Network Engineering,2,1,4,1,5,2,Network Engineer,"TCP/IP, Networking, Linux"
+Computer Engineering,3,1,3,2,2,3,AI Engineer,"Python, scikit-learn, TensorFlow"
+Software Engineering,4,4,3,2,1,2,UI/UX Designer,"Adobe XD, Figma, UX Research"
+Computer Engineering,3,5,2,5,5,0,DevOps Engineer,"Kubernetes, AWS, GitHub Actions"
+Cyber Security,3,5,4,5,1,2,QA Engineer,"Postman, JUnit, Java"
+Cyber Security,5,4,2,1,5,2,Embedded Engineer,"C++, Embedded C, FreeRTOS"
+Robotics,4,5,4,2,1,3,Cyber Security Engineer,"Metasploit, Wireshark, Linux"
+Information Systems,4,1,4,5,2,0,Business Analyst,"Excel, Power BI, SQL"
+Data Science,4,2,3,1,1,3,DevOps Engineer,"AWS, Linux, GitHub Actions"
+Computer Engineering,4,5,5,5,4,2,Backend Developer,"SQL, Git, Spring Boot"
+Software Engineering,5,3,5,3,1,3,Data Scientist,"SQL, Python, Machine Learning"
+Information Technology,5,5,4,1,0,2,ML Engineer,"Python, XGBoost, SQL"
+Robotics,5,2,3,4,3,1,DevOps Engineer,"Kubernetes, Linux, GitHub Actions"
+Computer Science,2,5,5,2,3,1,ML Engineer,"SQL, Python, scikit-learn"
+Network Engineering,4,2,3,5,0,3,Cloud Engineer,"Docker, Terraform, Azure"
+Information Technology,4,1,3,5,0,1,QA Engineer,"Git, JUnit, Selenium"
+Computer Engineering,4,4,3,2,4,2,Embedded Engineer,"STM32, C, FreeRTOS"
+Computer Engineering,3,5,3,2,0,0,Frontend Developer,"CSS, HTML, React"
+Computer Engineering,4,2,2,3,0,2,Cloud Engineer,"Linux, Terraform, Azure"
+Information Technology,5,4,3,4,0,3,DevOps Engineer,"Docker, GitHub Actions, Kubernetes"
+Artificial Intelligence,4,2,5,2,1,1,AI Engineer,"Docker, Python, scikit-learn"
+Data Science,2,5,2,5,0,2,UI/UX Designer,"UX Research, Prototyping, Wireframing"
+Artificial Intelligence,2,5,4,3,2,1,DevOps Engineer,"Docker, Linux, GitHub Actions"
+Artificial Intelligence,2,5,5,5,5,1,Cyber Security Engineer,"Wireshark, Networking, Metasploit"
+Information Systems,3,3,2,1,2,2,Cloud Engineer,"Azure, AWS, Docker"
+Network Engineering,2,1,5,4,5,3,Cloud Engineer,"AWS, Docker, Linux"
+Robotics,5,1,2,5,2,1,UI/UX Designer,"Figma, Prototyping, Wireframing"
+Data Science,4,5,4,4,3,3,Frontend Developer,"CSS, JavaScript, HTML"
+Software Engineering,2,3,5,3,4,2,Frontend Developer,"JavaScript, HTML, Git"
+Cyber Security,4,2,3,5,2,3,Data Analyst,"Tableau, SQL, Power BI"
+Computer Engineering,2,4,3,3,1,0,ML Engineer,"Python, SQL, XGBoost"
+Software Engineering,5,3,3,2,6,0,Full Stack Developer,"SQL, React, Docker"
+Robotics,4,2,3,3,0,3,UI/UX Designer,"Figma, Prototyping, UX Research"
+Artificial Intelligence,5,5,3,3,1,0,DevOps Engineer,"Docker, GitHub Actions, Kubernetes"
+Artificial Intelligence,4,2,4,3,1,2,QA Engineer,"Java, Selenium, Git"
+Information Systems,4,4,5,1,6,3,Cloud Engineer,"AWS, Terraform, Docker"
+Software Engineering,2,3,3,3,5,2,ML Engineer,"Python, scikit-learn, XGBoost"
+Internet of Things,3,5,4,1,4,1,Network Engineer,"Linux, Cisco, TCP/IP"
+Robotics,5,2,4,5,4,2,AI Engineer,"scikit-learn, PyTorch, Python"
+Artificial Intelligence,4,3,5,2,1,2,Full Stack Developer,"SQL, React, Java"
+Cyber Security,4,2,2,1,6,2,Business Analyst,"Communication, Power BI, SQL"
+Artificial Intelligence,4,5,3,1,1,0,UI/UX Designer,"Prototyping, Wireframing, UX Research"
+Computer Engineering,3,4,5,1,4,0,Frontend Developer,"React, CSS, HTML"
+Computer Engineering,5,2,5,2,1,0,ML Engineer,"SQL, scikit-learn, XGBoost"
+Information Technology,4,3,3,1,3,2,Network Engineer,"Linux, Cisco, Python"
+Cyber Security,4,1,2,2,2,2,Data Scientist,"Machine Learning, NumPy, Pandas"
+Information Systems,3,5,2,2,2,2,Network Engineer,"Cisco, Python, Networking"
+Information Systems,4,1,4,2,3,2,QA Engineer,"Java, JUnit, Selenium"
+Cyber Security,4,2,5,5,1,1,Full Stack Developer,"SQL, Docker, Java"
+Data Science,5,5,5,2,5,3,Data Scientist,"Python, NumPy, SQL"
+Data Science,4,2,5,5,5,2,Data Analyst,"Tableau, Power BI, Python"
+Software Engineering,5,3,5,1,4,3,Backend Developer,"Java, Docker, Spring Boot"
+Data Science,3,5,2,5,4,3,AI Engineer,"Python, TensorFlow, Docker"
+Cyber Security,5,5,4,1,3,0,Backend Developer,"SQL, Spring Boot, Docker"
+Robotics,2,5,3,3,0,1,AI Engineer,"scikit-learn, Docker, Python"
+Cyber Security,2,1,3,4,1,1,Cloud Engineer,"Azure, Terraform, Linux"
+Internet of Things,5,2,3,3,1,3,Backend Developer,"Spring Boot, Java, SQL"
+Information Systems,5,2,4,5,0,3,Cyber Security Engineer,"Linux, Metasploit, Networking"
+Network Engineering,4,3,3,5,0,3,Full Stack Developer,"Java, Docker, Spring Boot"
+Internet of Things,5,1,3,3,0,0,DevOps Engineer,"Docker, Kubernetes, AWS"
+Robotics,5,2,5,3,5,0,Business Analyst,"Communication, Power BI, UML"
+Embedded Systems,3,3,2,1,2,3,DevOps Engineer,"Docker, GitHub Actions, Kubernetes"
+Software Engineering,4,3,3,5,4,1,Cloud Engineer,"Docker, AWS, Linux"
+Network Engineering,3,1,5,5,6,2,UI/UX Designer,"Figma, Wireframing, Adobe XD"
+Computer Engineering,3,1,2,1,3,1,Embedded Engineer,"C, C++, Embedded C"
+Data Science,3,1,5,1,0,1,UI/UX Designer,"Figma, Wireframing, Prototyping"
+Software Engineering,2,1,4,2,4,0,Embedded Engineer,"Embedded C, FreeRTOS, STM32"
+Artificial Intelligence,4,1,5,2,1,2,ML Engineer,"scikit-learn, Python, SQL"
+Robotics,5,4,4,1,5,2,Backend Developer,"Spring Boot, Docker, Java"
+Artificial Intelligence,3,5,4,4,3,0,ML Engineer,"SQL, scikit-learn, Docker"
+Network Engineering,2,3,3,2,4,0,Cyber Security Engineer,"Wireshark, Python, Linux"
+Computer Science,2,3,2,5,2,0,Data Scientist,"Machine Learning, SQL, NumPy"
+Artificial Intelligence,3,5,5,5,4,3,Data Scientist,"SQL, Python, NumPy"
+Artificial Intelligence,2,2,3,5,6,0,DevOps Engineer,"Docker, AWS, Kubernetes"
+Information Systems,3,5,4,1,3,0,Full Stack Developer,"Spring Boot, SQL, React"
+Computer Science,3,5,5,2,1,0,Embedded Engineer,"C, STM32, Embedded C"
+Information Technology,4,2,2,1,2,0,Embedded Engineer,"C++, FreeRTOS, Embedded C"
+Computer Science,3,5,3,2,6,2,AI Engineer,"Docker, TensorFlow, Python"
+Computer Engineering,5,3,3,3,0,3,Cyber Security Engineer,"Linux, Wireshark, Metasploit"
+Computer Engineering,3,3,5,2,6,1,DevOps Engineer,"Linux, GitHub Actions, Kubernetes"
+Computer Science,5,1,2,1,3,3,DevOps Engineer,"AWS, Linux, Kubernetes"
+Internet of Things,3,5,4,3,3,0,Network Engineer,"Cisco, Networking, Linux"
+Internet of Things,2,5,4,5,0,2,QA Engineer,"Postman, Selenium, Java"
+Robotics,3,5,4,3,2,2,Full Stack Developer,"Java, Docker, React"
+Computer Engineering,3,3,3,4,2,3,Cyber Security Engineer,"Networking, Metasploit, Linux"
+Robotics,5,5,5,5,4,3,Embedded Engineer,"Embedded C, C++, STM32"
+Embedded Systems,2,3,3,3,4,0,Network Engineer,"Networking, TCP/IP, Python"
+Artificial Intelligence,4,1,5,2,5,1,Data Scientist,"Pandas, Python, Machine Learning"
+Information Systems,3,5,2,3,2,0,Business Analyst,"Power BI, UML, SQL"
+Computer Engineering,4,4,5,2,4,2,Data Analyst,"Power BI, SQL, Python"
+Cyber Security,3,1,4,5,1,3,Cloud Engineer,"Linux, Azure, AWS"
+Computer Science,5,4,5,2,2,0,AI Engineer,"scikit-learn, Python, Docker"
+Software Engineering,5,1,3,2,2,0,Data Scientist,"NumPy, Python, SQL"
+Information Systems,5,1,2,2,5,0,Cloud Engineer,"Docker, Linux, Azure"
+Cyber Security,5,3,3,2,2,0,ML Engineer,"Docker, Python, XGBoost"
+Artificial Intelligence,3,4,4,2,0,3,Full Stack Developer,"Spring Boot, SQL, React"
+Artificial Intelligence,3,4,5,2,6,1,Cyber Security Engineer,"Networking, Linux, Wireshark"
+Cyber Security,5,1,5,5,2,3,Data Analyst,"SQL, Power BI, Excel"
+Cyber Security,3,3,4,1,6,3,Frontend Developer,"HTML, React, Git"
+Network Engineering,5,1,2,4,3,3,AI Engineer,"PyTorch, TensorFlow, scikit-learn"
+Robotics,5,2,4,4,5,0,Full Stack Developer,"Docker, Spring Boot, SQL"
+Computer Engineering,5,3,3,4,3,1,QA Engineer,"Git, Selenium, JUnit"
+Data Science,2,5,2,1,5,0,Embedded Engineer,"FreeRTOS, Embedded C, STM32"
+Artificial Intelligence,5,3,2,1,6,2,UI/UX Designer,"Prototyping, UX Research, Adobe XD"
+Robotics,2,4,5,1,3,3,Data Analyst,"SQL, Power BI, Excel"
+Computer Science,5,5,5,5,2,2,Frontend Developer,"JavaScript, React, Git"
+Artificial Intelligence,3,1,4,5,6,1,ML Engineer,"Docker, SQL, Python"
+Data Science,3,2,5,5,1,2,Cloud Engineer,"Docker, Azure, Terraform"
+Network Engineering,4,2,2,4,3,3,Data Scientist,"SQL, Machine Learning, Pandas"
+Data Science,5,1,4,4,4,0,Full Stack Developer,"Spring Boot, Docker, Java"
+Information Systems,4,5,5,4,1,3,Network Engineer,"TCP/IP, Cisco, Networking"
+Information Technology,3,3,2,5,6,3,UI/UX Designer,"Figma, Wireframing, Adobe XD"
+Information Systems,3,4,3,4,2,1,AI Engineer,"Docker, scikit-learn, TensorFlow"
+Network Engineering,5,4,2,4,3,2,Frontend Developer,"CSS, JavaScript, HTML"
+Artificial Intelligence,4,4,4,4,5,0,AI Engineer,"Docker, PyTorch, scikit-learn"
+Software Engineering,2,4,5,4,3,3,Cloud Engineer,"Docker, AWS, Azure"
+Data Science,5,2,2,3,1,2,Full Stack Developer,"React, Spring Boot, Docker"
+Software Engineering,5,2,4,5,4,3,AI Engineer,"TensorFlow, scikit-learn, PyTorch"
+Embedded Systems,4,1,4,2,5,0,Frontend Developer,"Git, CSS, JavaScript"
+Network Engineering,3,4,2,5,2,3,QA Engineer,"Java, JUnit, Git"
+Network Engineering,4,1,2,4,3,1,Backend Developer,"Java, Git, Spring Boot"
+Computer Science,2,5,3,2,0,0,Network Engineer,"Cisco, TCP/IP, Networking"
+Cyber Security,4,1,5,2,2,2,Cyber Security Engineer,"Metasploit, Linux, Python"
+Computer Engineering,4,5,4,3,5,2,Full Stack Developer,"Spring Boot, SQL, Java"
+Data Science,4,1,3,4,2,1,QA Engineer,"Selenium, Java, Git"
+Computer Engineering,5,4,2,4,4,2,Network Engineer,"TCP/IP, Linux, Python"
+Computer Engineering,3,5,2,4,6,1,Full Stack Developer,"SQL, Spring Boot, Java"
+Software Engineering,3,3,4,4,0,2,Business Analyst,"Communication, Excel, SQL"
+Artificial Intelligence,2,4,3,1,1,1,Embedded Engineer,"STM32, Embedded C, C"
+Software Engineering,2,5,5,1,6,3,Cyber Security Engineer,"Networking, Wireshark, Metasploit"
+Computer Engineering,2,3,4,2,6,3,ML Engineer,"SQL, Docker, Python"
+Cyber Security,5,3,3,2,1,3,Full Stack Developer,"Java, SQL, Docker"
+Information Technology,4,3,4,4,3,0,ML Engineer,"Docker, scikit-learn, Python"
+Data Science,2,1,4,1,1,0,Frontend Developer,"Git, React, HTML"
+Software Engineering,3,4,2,3,4,0,Data Analyst,"Python, Power BI, SQL"
+Embedded Systems,3,3,2,3,1,2,DevOps Engineer,"Kubernetes, GitHub Actions, Linux"
+Internet of Things,4,2,4,4,4,2,Embedded Engineer,"STM32, C, FreeRTOS"
+Computer Science,4,1,3,1,1,1,Data Analyst,"Tableau, Power BI, SQL"
+Robotics,4,2,2,4,5,0,Embedded Engineer,"C++, C, STM32"
+Cyber Security,3,1,3,1,6,3,Network Engineer,"Linux, Networking, Cisco"
+Embedded Systems,4,1,3,4,1,1,Embedded Engineer,"FreeRTOS, Embedded C, C"
+Cyber Security,3,3,2,2,2,1,Full Stack Developer,"Docker, SQL, React"
+Software Engineering,2,2,5,1,1,3,Cyber Security Engineer,"Wireshark, Linux, Python"
+Robotics,2,1,4,3,0,0,Data Scientist,"NumPy, Python, SQL"
+Network Engineering,4,2,4,1,0,0,Cloud Engineer,"Azure, AWS, Docker"
+Data Science,2,3,5,2,6,3,QA Engineer,"JUnit, Selenium, Postman"
+Internet of Things,5,4,3,2,0,1,Embedded Engineer,"C++, FreeRTOS, C"
+Software Engineering,4,4,3,4,6,2,Cyber Security Engineer,"Wireshark, Python, Networking"
+Software Engineering,5,4,5,4,5,3,Cloud Engineer,"Terraform, Docker, Linux"
+Cyber Security,5,2,3,2,3,2,UI/UX Designer,"Figma, Adobe XD, Prototyping"
+Network Engineering,2,2,2,4,0,1,Cloud Engineer,"Linux, Azure, AWS"
+Software Engineering,3,1,2,2,2,0,QA Engineer,"Postman, Selenium, Java"
+Information Technology,5,3,3,4,4,0,Business Analyst,"Excel, UML, SQL"
+Computer Science,2,3,3,5,6,3,AI Engineer,"PyTorch, TensorFlow, scikit-learn"
+Internet of Things,2,1,5,3,1,2,QA Engineer,"JUnit, Git, Selenium"
+Computer Science,5,3,2,4,6,3,QA Engineer,"Java, JUnit, Postman"
+Internet of Things,3,3,2,2,5,3,Data Scientist,"Pandas, SQL, Machine Learning"
+Information Systems,4,4,5,2,0,1,Frontend Developer,"React, HTML, CSS"
+Data Science,4,5,2,3,3,3,Cloud Engineer,"AWS, Terraform, Docker"
+Artificial Intelligence,4,3,5,5,0,1,Business Analyst,"Communication, UML, Power BI"
+Computer Engineering,3,3,5,3,5,3,QA Engineer,"Selenium, Postman, Git"
+Software Engineering,2,3,2,5,2,0,Cloud Engineer,"AWS, Docker, Linux"
+Network Engineering,3,4,3,2,2,1,Full Stack Developer,"Spring Boot, Docker, React"
+Artificial Intelligence,2,5,4,5,5,0,Data Analyst,"SQL, Python, Excel"
+Computer Science,4,1,5,1,3,0,Data Scientist,"NumPy, SQL, Python"
+Robotics,3,3,3,5,6,2,UI/UX Designer,"Adobe XD, Figma, Prototyping"
+Network Engineering,5,5,2,4,6,0,Network Engineer,"TCP/IP, Networking, Linux"
+Artificial Intelligence,3,3,3,4,3,3,Business Analyst,"SQL, Communication, Excel"
+Computer Engineering,4,5,5,4,6,2,Network Engineer,"Networking, Cisco, TCP/IP"
+Network Engineering,3,1,3,4,3,1,Network Engineer,"Python, Networking, TCP/IP"
+Embedded Systems,2,3,2,5,6,2,ML Engineer,"scikit-learn, Python, SQL"
+Information Systems,2,1,5,4,0,1,Cyber Security Engineer,"Python, Wireshark, Networking"
+Information Technology,4,1,3,5,6,3,Embedded Engineer,"FreeRTOS, C, STM32"
+Information Technology,5,2,4,4,3,1,Business Analyst,"UML, SQL, Power BI"
+Information Technology,3,2,5,4,1,2,Data Analyst,"SQL, Power BI, Excel"
+Computer Engineering,2,2,2,1,1,2,Full Stack Developer,"Spring Boot, Java, SQL"
+Computer Science,4,4,2,1,2,2,Data Analyst,"Python, Tableau, Power BI"
+Cyber Security,2,1,2,3,0,1,Data Scientist,"Pandas, SQL, Python"
+Computer Engineering,4,5,4,4,1,2,Network Engineer,"Python, TCP/IP, Networking"
+Software Engineering,2,3,2,4,2,0,ML Engineer,"SQL, XGBoost, scikit-learn"
+Computer Engineering,3,4,5,5,6,3,Frontend Developer,"JavaScript, Git, CSS"
+Computer Engineering,4,5,5,3,3,3,Embedded Engineer,"STM32, FreeRTOS, C"
+Software Engineering,5,2,2,1,5,3,Embedded Engineer,"STM32, C++, Embedded C"
+Information Technology,5,4,4,2,3,0,AI Engineer,"Docker, Python, scikit-learn"
+Embedded Systems,2,4,3,1,5,1,Network Engineer,"Linux, Networking, Python"
+Software Engineering,2,5,2,5,3,2,Backend Developer,"Docker, SQL, Git"
+Information Technology,2,4,2,4,2,2,Business Analyst,"SQL, UML, Communication"
+Embedded Systems,3,5,2,3,3,1,Data Analyst,"SQL, Power BI, Excel"
+Computer Science,4,1,4,2,3,3,Data Analyst,"Tableau, Python, Excel"
+Robotics,2,2,2,5,2,0,ML Engineer,"Docker, Python, XGBoost"
+Cyber Security,2,5,4,5,2,0,Embedded Engineer,"Embedded C, C++, C"
+Embedded Systems,3,2,2,4,3,1,Data Analyst,"Power BI, Python, Tableau"
+Cyber Security,3,4,4,2,1,1,DevOps Engineer,"GitHub Actions, AWS, Docker"
+Network Engineering,3,3,5,5,0,1,UI/UX Designer,"UX Research, Adobe XD, Figma"
+Internet of Things,5,3,3,3,3,0,Full Stack Developer,"Java, React, SQL"
+Data Science,4,5,2,4,6,0,Cyber Security Engineer,"Wireshark, Python, Metasploit"
+Internet of Things,2,3,2,4,3,3,Embedded Engineer,"C, FreeRTOS, C++"
+Data Science,2,5,3,4,0,0,AI Engineer,"Docker, PyTorch, TensorFlow"
+Artificial Intelligence,3,2,4,3,3,1,DevOps Engineer,"Kubernetes, Docker, AWS"
+Network Engineering,2,2,4,3,5,1,Business Analyst,"SQL, Power BI, Communication"
+Information Systems,4,2,3,3,2,1,Data Scientist,"Machine Learning, Pandas, Python"
+Computer Science,3,5,4,5,1,1,Network Engineer,"Python, Linux, TCP/IP"
+Network Engineering,2,1,5,5,5,1,QA Engineer,"Java, JUnit, Postman"
+Computer Science,3,1,5,3,0,0,Frontend Developer,"React, CSS, JavaScript"
+Cyber Security,3,5,2,3,3,0,Cyber Security Engineer,"Networking, Metasploit, Wireshark"
+Information Technology,2,4,3,4,5,0,Embedded Engineer,"FreeRTOS, C++, Embedded C"
+Internet of Things,4,2,3,5,3,3,Data Scientist,"Machine Learning, Python, Pandas"
+Information Technology,3,1,4,5,2,1,Full Stack Developer,"Java, SQL, Spring Boot"
+Cyber Security,5,4,3,4,5,0,Backend Developer,"Java, Spring Boot, Docker"
+Data Science,4,4,5,5,6,2,Cloud Engineer,"Linux, AWS, Docker"
+Internet of Things,5,3,3,2,5,1,UI/UX Designer,"Prototyping, UX Research, Wireframing"
+Information Systems,3,1,3,5,4,2,DevOps Engineer,"Docker, Kubernetes, GitHub Actions"
+Robotics,5,5,4,5,0,3,QA Engineer,"Git, Java, Selenium"
+Information Technology,5,3,3,1,2,2,Data Analyst,"Tableau, Python, SQL"
+Information Technology,3,2,3,5,3,3,ML Engineer,"XGBoost, Docker, Python"
+Cyber Security,5,3,5,1,2,1,Frontend Developer,"HTML, JavaScript, Git"
+Cyber Security,3,5,5,5,2,3,Backend Developer,"Spring Boot, Git, Java"
+Embedded Systems,2,5,5,1,0,1,Cyber Security Engineer,"Linux, Python, Metasploit"
+Information Systems,3,2,2,4,3,1,Embedded Engineer,"FreeRTOS, Embedded C, STM32"
+Computer Science,2,2,4,5,2,0,Embedded Engineer,"FreeRTOS, C, Embedded C"
+Network Engineering,4,2,3,3,4,3,Frontend Developer,"CSS, Git, HTML"
+Internet of Things,2,4,3,4,0,0,Business Analyst,"UML, SQL, Excel"
+Cyber Security,3,2,4,2,5,3,Data Scientist,"Machine Learning, NumPy, SQL"
+Data Science,3,4,2,1,3,0,AI Engineer,"TensorFlow, Python, PyTorch"
+Computer Engineering,3,2,5,5,0,2,DevOps Engineer,"GitHub Actions, AWS, Kubernetes"
+Internet of Things,4,2,4,5,3,1,ML Engineer,"Python, SQL, XGBoost"
+Embedded Systems,4,2,4,4,6,3,Backend Developer,"Git, Java, Spring Boot"
+Software Engineering,3,4,3,3,3,0,Cyber Security Engineer,"Metasploit, Wireshark, Linux"
+Cyber Security,5,1,3,1,6,0,Full Stack Developer,"Java, SQL, React"
+Computer Engineering,4,1,3,5,6,1,Cyber Security Engineer,"Linux, Wireshark, Networking"
+Computer Engineering,5,1,2,5,6,3,Full Stack Developer,"Docker, SQL, React"
+Computer Science,2,1,5,3,3,3,Cyber Security Engineer,"Python, Networking, Metasploit"
+Network Engineering,4,5,2,1,1,2,Cloud Engineer,"AWS, Azure, Docker"
+Cyber Security,2,4,5,5,6,2,ML Engineer,"Docker, SQL, XGBoost"
+Artificial Intelligence,5,5,3,4,2,3,Network Engineer,"Python, Linux, TCP/IP"
+Network Engineering,4,3,3,4,6,3,Cyber Security Engineer,"Linux, Networking, Python"
+Embedded Systems,3,5,2,3,5,2,UI/UX Designer,"Adobe XD, Wireframing, UX Research"
+Robotics,3,4,2,1,1,1,UI/UX Designer,"Prototyping, UX Research, Adobe XD"
+Internet of Things,5,3,5,3,2,0,QA Engineer,"Git, Java, Selenium"
+Embedded Systems,4,4,3,2,5,2,Embedded Engineer,"FreeRTOS, STM32, C"
+Data Science,4,2,3,3,6,0,DevOps Engineer,"Linux, Kubernetes, GitHub Actions"
+Information Technology,3,1,3,1,2,1,Cloud Engineer,"Terraform, Linux, Azure"
+Artificial Intelligence,3,3,5,2,5,2,QA Engineer,"Git, Postman, JUnit"
+Software Engineering,2,4,2,2,2,1,QA Engineer,"Postman, Selenium, Git"
+Computer Science,2,2,3,5,2,1,Backend Developer,"Docker, Git, Java"
+Information Systems,2,2,5,2,1,2,Embedded Engineer,"C++, Embedded C, FreeRTOS"
+Information Technology,3,5,4,1,6,3,QA Engineer,"Selenium, JUnit, Java"
+Embedded Systems,4,5,2,5,1,1,Business Analyst,"UML, SQL, Power BI"
+Robotics,4,3,4,4,0,2,Backend Developer,"Spring Boot, SQL, Git"
+Software Engineering,2,2,3,4,2,1,Full Stack Developer,"Docker, Java, SQL"
+Cyber Security,2,4,2,5,6,3,AI Engineer,"Docker, scikit-learn, TensorFlow"
+Computer Engineering,4,4,2,4,5,1,ML Engineer,"SQL, scikit-learn, XGBoost"
+Software Engineering,4,1,2,5,2,1,ML Engineer,"XGBoost, Docker, SQL"
+Network Engineering,2,1,4,3,1,3,Full Stack Developer,"Docker, SQL, Spring Boot"
+Information Systems,2,4,3,3,2,3,Backend Developer,"SQL, Docker, Spring Boot"
+Software Engineering,5,5,3,4,5,0,Full Stack Developer,"Docker, React, Spring Boot"
+Information Systems,5,2,2,2,0,2,Data Scientist,"Machine Learning, Pandas, Python"
+Information Systems,3,2,2,3,0,3,Data Analyst,"Python, SQL, Power BI"
+Computer Science,5,4,4,3,1,3,DevOps Engineer,"Kubernetes, GitHub Actions, Docker"
+Computer Engineering,4,5,4,4,0,2,Cyber Security Engineer,"Python, Linux, Metasploit"
+Software Engineering,4,4,2,4,6,3,Network Engineer,"Cisco, Linux, TCP/IP"
+Information Systems,2,3,2,4,6,1,Embedded Engineer,"FreeRTOS, STM32, C"
+Embedded Systems,4,5,3,4,4,3,Network Engineer,"Python, Networking, Linux"
+Artificial Intelligence,2,3,4,1,0,0,Data Analyst,"Excel, Python, Power BI"
+Information Systems,2,3,5,4,5,0,Network Engineer,"Linux, Python, Cisco"
+Internet of Things,4,3,5,4,6,3,Business Analyst,"SQL, Excel, Power BI"
+Network Engineering,5,2,2,5,0,1,Network Engineer,"Python, TCP/IP, Linux"
+Network Engineering,3,3,5,1,6,1,Business Analyst,"Power BI, Communication, UML"
+Computer Engineering,4,5,5,1,2,0,Business Analyst,"Communication, Power BI, Excel"
+Computer Science,5,5,5,5,6,2,QA Engineer,"Git, Selenium, Postman"
+Information Technology,2,3,3,1,5,2,DevOps Engineer,"AWS, GitHub Actions, Linux"
+Embedded Systems,2,2,2,4,2,0,Cyber Security Engineer,"Wireshark, Networking, Metasploit"
+Computer Engineering,4,3,5,3,3,3,Cloud Engineer,"AWS, Linux, Terraform"
+Information Technology,3,1,5,2,4,3,Cyber Security Engineer,"Wireshark, Networking, Python"
+Information Systems,3,5,2,5,0,0,Business Analyst,"Excel, Communication, UML"
+Information Systems,5,1,2,4,2,0,Network Engineer,"Cisco, TCP/IP, Networking"
+Computer Science,5,2,5,1,4,2,Embedded Engineer,"Embedded C, FreeRTOS, C++"
+Internet of Things,4,5,4,4,4,1,UI/UX Designer,"Wireframing, Figma, Prototyping"
+Computer Science,3,3,4,4,3,1,DevOps Engineer,"Kubernetes, Linux, Docker"
+Information Technology,4,1,2,5,3,1,Cyber Security Engineer,"Wireshark, Metasploit, Linux"
+Information Systems,2,3,3,3,0,2,Cloud Engineer,"AWS, Terraform, Linux"
+Internet of Things,3,3,5,2,1,0,Embedded Engineer,"FreeRTOS, C++, STM32"
+Information Technology,4,4,3,3,1,3,Business Analyst,"Power BI, UML, Excel"
+Network Engineering,3,2,5,4,0,3,Backend Developer,"Docker, Java, Git"
+Computer Science,5,1,5,5,3,3,Embedded Engineer,"FreeRTOS, STM32, Embedded C"
+Information Technology,2,5,4,4,3,0,ML Engineer,"XGBoost, Python, SQL"
+Artificial Intelligence,4,1,5,2,6,2,UI/UX Designer,"Prototyping, UX Research, Figma"
+Embedded Systems,2,1,3,1,3,1,Cyber Security Engineer,"Linux, Networking, Python"
+Information Technology,5,2,2,4,3,2,Business Analyst,"Excel, UML, Communication"
+Computer Engineering,3,1,3,4,5,0,DevOps Engineer,"AWS, Linux, GitHub Actions"
+Information Systems,5,5,5,3,3,2,Full Stack Developer,"SQL, Docker, React"
+Information Systems,4,3,3,5,0,0,Data Analyst,"Excel, Power BI, Tableau"
+Computer Engineering,4,5,3,3,2,0,Data Analyst,"Tableau, Python, Excel"
+Artificial Intelligence,3,5,4,5,3,0,Embedded Engineer,"C++, STM32, C"
+Network Engineering,5,5,3,5,3,2,QA Engineer,"Git, Selenium, Postman"
+Embedded Systems,5,2,4,4,6,0,Embedded Engineer,"STM32, C, Embedded C"
+Software Engineering,4,1,3,2,1,2,Business Analyst,"Power BI, Communication, Excel"
+Computer Engineering,3,4,2,5,6,0,Full Stack Developer,"Docker, Java, React"
+Robotics,2,2,5,4,5,0,Network Engineer,"Networking, Cisco, Linux"
+Information Technology,3,4,3,4,6,1,Frontend Developer,"HTML, Git, JavaScript"
+Artificial Intelligence,5,5,4,1,6,1,AI Engineer,"Docker, Python, TensorFlow"
+Robotics,3,3,5,2,1,3,Network Engineer,"Python, Networking, Linux"
+Information Systems,5,4,5,5,5,0,Cloud Engineer,"AWS, Azure, Docker"
+Computer Science,3,1,4,2,4,1,Backend Developer,"Spring Boot, Java, Docker"
+Network Engineering,3,5,3,3,0,1,Data Analyst,"Power BI, Tableau, Excel"
+Cyber Security,4,4,5,4,0,1,Business Analyst,"Communication, SQL, Excel"
+Robotics,2,3,2,1,6,0,Data Analyst,"SQL, Python, Excel"
+Information Systems,3,4,2,3,1,2,Data Scientist,"Machine Learning, SQL, Python"
+Information Systems,5,2,3,3,4,0,Cloud Engineer,"AWS, Linux, Terraform"
+Information Systems,3,3,3,3,2,3,DevOps Engineer,"AWS, GitHub Actions, Kubernetes"
+Robotics,5,4,4,3,2,2,Cloud Engineer,"Linux, Azure, Terraform"
+Network Engineering,4,1,3,1,3,2,AI Engineer,"Python, PyTorch, TensorFlow"
+Artificial Intelligence,2,3,4,3,0,0,Network Engineer,"TCP/IP, Linux, Python"
+Network Engineering,4,4,5,4,1,0,Embedded Engineer,"C, FreeRTOS, STM32"
+Data Science,5,3,2,1,0,3,Cloud Engineer,"Azure, Linux, Docker"
+Software Engineering,3,3,4,4,4,2,Backend Developer,"Docker, Git, SQL"
+Software Engineering,2,5,5,5,2,2,AI Engineer,"TensorFlow, PyTorch, Python"
+Data Science,2,2,3,5,4,3,Cyber Security Engineer,"Python, Wireshark, Metasploit"
+Robotics,2,5,5,3,6,0,Data Scientist,"Pandas, NumPy, Machine Learning"
+Internet of Things,3,3,4,2,5,0,Network Engineer,"Linux, Cisco, TCP/IP"
+Embedded Systems,4,2,3,5,6,3,Business Analyst,"Power BI, Excel, UML"
+Embedded Systems,3,1,2,5,5,1,ML Engineer,"SQL, XGBoost, Docker"
+Data Science,4,3,3,1,5,1,Embedded Engineer,"FreeRTOS, Embedded C, STM32"
+Data Science,5,3,3,1,0,1,Data Analyst,"Excel, Power BI, Python"
+Data Science,5,2,4,1,0,2,Embedded Engineer,"FreeRTOS, C++, STM32"
+Software Engineering,4,2,4,3,4,3,UI/UX Designer,"Figma, Wireframing, Adobe XD"
+Computer Science,5,1,5,5,5,3,Network Engineer,"Python, Cisco, TCP/IP"
+Internet of Things,5,3,2,2,4,3,Data Analyst,"Tableau, Excel, SQL"
+Computer Engineering,3,4,5,4,2,0,AI Engineer,"TensorFlow, PyTorch, scikit-learn"
+Embedded Systems,4,3,3,1,4,2,UI/UX Designer,"Adobe XD, Wireframing, Prototyping"
+Data Science,5,1,3,1,2,0,Cyber Security Engineer,"Linux, Metasploit, Networking"
+Internet of Things,2,5,4,3,3,2,AI Engineer,"Python, PyTorch, TensorFlow"
+Software Engineering,2,3,2,3,4,0,Network Engineer,"TCP/IP, Networking, Cisco"
+Internet of Things,5,4,2,2,4,1,DevOps Engineer,"Docker, Linux, GitHub Actions"
+Information Technology,2,3,4,5,5,1,UI/UX Designer,"Adobe XD, UX Research, Prototyping"
+Computer Science,2,2,4,1,5,0,Network Engineer,"TCP/IP, Linux, Cisco"
+Artificial Intelligence,3,3,3,1,0,0,Data Analyst,"Power BI, SQL, Tableau"
+Software Engineering,3,1,3,3,0,2,Network Engineer,"Networking, Python, Linux"
+Artificial Intelligence,5,5,5,2,6,2,Full Stack Developer,"React, Spring Boot, Docker"
+Software Engineering,3,1,5,4,0,3,Data Scientist,"SQL, NumPy, Pandas"
+Embedded Systems,3,1,2,3,3,2,Embedded Engineer,"Embedded C, C, STM32"
+Internet of Things,5,3,2,3,5,2,DevOps Engineer,"Docker, Linux, Kubernetes"
+Artificial Intelligence,2,2,2,5,5,3,QA Engineer,"Git, JUnit, Java"
+Embedded Systems,4,3,2,3,2,1,Full Stack Developer,"Spring Boot, Docker, React"
+Internet of Things,2,5,4,1,2,0,Business Analyst,"Excel, Communication, UML"
+Internet of Things,2,5,5,4,0,3,Frontend Developer,"JavaScript, CSS, Git"
+Internet of Things,3,1,5,4,0,0,AI Engineer,"scikit-learn, TensorFlow, Python"
+Artificial Intelligence,4,3,5,2,4,1,Cyber Security Engineer,"Linux, Metasploit, Python"
+Robotics,4,4,2,1,1,0,Business Analyst,"Communication, UML, Power BI"
+Robotics,4,5,4,3,5,0,Data Analyst,"Python, Tableau, SQL"
+Computer Science,2,4,3,2,1,2,Full Stack Developer,"SQL, React, Spring Boot"
+Robotics,5,2,3,3,0,3,Business Analyst,"UML, Excel, Communication"
+Information Systems,5,1,2,4,3,3,UI/UX Designer,"Wireframing, Prototyping, UX Research"
+Artificial Intelligence,4,2,5,2,5,2,UI/UX Designer,"Adobe XD, UX Research, Wireframing"
+Computer Engineering,2,5,3,3,2,3,Full Stack Developer,"Spring Boot, Docker, SQL"
+Computer Science,5,5,3,1,0,2,Business Analyst,"Excel, SQL, UML"
+Robotics,2,5,3,3,4,3,Full Stack Developer,"SQL, Spring Boot, Docker"
+Network Engineering,5,4,2,4,3,3,Business Analyst,"Excel, UML, Power BI"
+Internet of Things,2,4,4,3,6,2,Cyber Security Engineer,"Networking, Wireshark, Metasploit"
+Software Engineering,2,4,3,3,1,1,QA Engineer,"JUnit, Git, Postman"
+Artificial Intelligence,3,5,5,2,4,0,Data Scientist,"NumPy, SQL, Python"
+Data Science,3,4,2,2,1,2,UI/UX Designer,"Figma, UX Research, Prototyping"
+Embedded Systems,2,2,5,4,5,1,Embedded Engineer,"C++, FreeRTOS, Embedded C"
+Data Science,3,4,2,3,0,3,QA Engineer,"JUnit, Git, Postman"
+Robotics,2,4,3,1,1,3,Backend Developer,"Git, Spring Boot, Docker"
+Cyber Security,3,2,2,5,6,0,Embedded Engineer,"C, STM32, Embedded C"
+Computer Engineering,3,3,5,5,1,1,DevOps Engineer,"AWS, Linux, Kubernetes"
+Information Technology,2,3,5,4,6,1,Cyber Security Engineer,"Wireshark, Metasploit, Linux"
+Cyber Security,2,3,3,4,4,0,Network Engineer,"Python, TCP/IP, Linux"
+Robotics,2,5,2,1,4,1,Data Scientist,"SQL, Pandas, NumPy"
+Internet of Things,2,1,2,4,6,0,AI Engineer,"TensorFlow, Docker, scikit-learn"
+Software Engineering,2,4,2,5,6,1,QA Engineer,"Java, Selenium, Postman"
+Cyber Security,4,4,4,5,1,1,DevOps Engineer,"GitHub Actions, Kubernetes, Docker"
+Robotics,4,4,2,5,1,1,Data Analyst,"Power BI, Excel, Python"
+Information Technology,4,5,2,2,1,0,Business Analyst,"Power BI, SQL, Excel"
+Internet of Things,4,4,2,2,2,3,Backend Developer,"Java, Docker, Git"
+Computer Science,4,2,2,2,6,2,Cloud Engineer,"Linux, Docker, Azure"
+Internet of Things,5,1,4,2,5,1,Embedded Engineer,"Embedded C, C, C++"
+Software Engineering,3,2,5,2,2,0,Backend Developer,"Spring Boot, Docker, Java"
+Cyber Security,4,2,3,2,5,0,ML Engineer,"scikit-learn, Docker, XGBoost"
+Computer Engineering,4,5,5,3,0,3,Frontend Developer,"React, CSS, JavaScript"
+Information Technology,3,4,4,2,5,1,UI/UX Designer,"Figma, Prototyping, Adobe XD"
+Internet of Things,4,2,2,2,4,1,AI Engineer,"Python, Docker, scikit-learn"
+Information Systems,4,3,2,4,3,0,Frontend Developer,"Git, React, JavaScript"
+Computer Engineering,2,2,2,5,3,1,Network Engineer,"TCP/IP, Networking, Cisco"
+Computer Engineering,5,5,2,5,1,3,AI Engineer,"PyTorch, scikit-learn, TensorFlow"
+Robotics,4,1,5,3,0,3,Business Analyst,"Power BI, SQL, UML"
+Computer Engineering,3,3,5,1,6,0,Embedded Engineer,"Embedded C, FreeRTOS, C++"
+Computer Engineering,2,4,3,1,5,0,Data Analyst,"Power BI, Excel, Tableau"
+Robotics,5,4,2,2,1,1,DevOps Engineer,"AWS, GitHub Actions, Linux"
+Information Systems,3,4,3,2,1,1,Network Engineer,"Cisco, TCP/IP, Linux"
+Artificial Intelligence,4,1,4,2,0,3,UI/UX Designer,"Prototyping, Wireframing, Figma"
+Internet of Things,3,1,4,1,2,3,Cloud Engineer,"Terraform, Linux, Azure"
+Information Technology,5,1,3,2,4,2,Data Analyst,"SQL, Excel, Python"
+Embedded Systems,4,1,2,3,2,0,DevOps Engineer,"GitHub Actions, Docker, Kubernetes"
+Robotics,5,3,4,3,1,1,Data Analyst,"Excel, Tableau, Python"
+Internet of Things,3,3,2,4,6,1,Data Analyst,"Tableau, Power BI, Excel"
+Artificial Intelligence,4,2,5,2,6,3,UI/UX Designer,"Prototyping, Wireframing, UX Research"
+Computer Science,3,3,3,1,4,2,Backend Developer,"Git, Spring Boot, Java"
+Information Systems,5,5,4,5,4,2,DevOps Engineer,"AWS, GitHub Actions, Kubernetes"
+Computer Engineering,3,4,5,2,2,3,Full Stack Developer,"Java, Spring Boot, React"
+Robotics,3,1,2,1,0,0,AI Engineer,"Python, PyTorch, scikit-learn"
+Information Technology,3,2,5,4,6,3,Frontend Developer,"CSS, JavaScript, HTML"
+Embedded Systems,2,2,5,3,1,2,Backend Developer,"SQL, Docker, Git"
+Data Science,2,1,3,3,1,2,ML Engineer,"scikit-learn, XGBoost, SQL"
+Computer Engineering,2,4,2,1,4,1,Backend Developer,"SQL, Spring Boot, Docker"
+Internet of Things,3,2,4,4,5,1,Business Analyst,"Excel, UML, Power BI"
+Cyber Security,5,3,2,1,4,2,Cloud Engineer,"Linux, Terraform, Azure"
+Data Science,5,5,4,4,3,3,AI Engineer,"Docker, PyTorch, TensorFlow"
+Robotics,5,4,3,1,5,0,AI Engineer,"Docker, scikit-learn, PyTorch"
+Cyber Security,3,1,3,4,1,3,Data Analyst,"Tableau, Excel, Power BI"
+Software Engineering,5,3,3,4,1,1,DevOps Engineer,"GitHub Actions, Docker, AWS"
+Robotics,5,4,4,2,5,0,UI/UX Designer,"Wireframing, Adobe XD, UX Research"
+Artificial Intelligence,5,5,2,4,6,2,DevOps Engineer,"Kubernetes, Docker, Linux"
+Data Science,4,4,5,3,3,1,QA Engineer,"Postman, Git, JUnit"
+Internet of Things,5,1,2,2,0,0,Data Analyst,"Excel, SQL, Python"
+Robotics,5,1,2,1,0,3,Embedded Engineer,"FreeRTOS, C, C++"
+Internet of Things,5,3,2,4,0,0,Backend Developer,"Docker, Spring Boot, Git"
+Computer Engineering,2,3,5,1,5,3,QA Engineer,"Postman, Selenium, JUnit"
+Computer Engineering,4,1,3,3,0,3,Frontend Developer,"Git, JavaScript, HTML"
+Embedded Systems,3,3,5,3,2,3,Cloud Engineer,"AWS, Azure, Terraform"
+Software Engineering,4,2,4,4,4,3,QA Engineer,"Selenium, Git, Java"
+Robotics,4,4,3,3,5,3,Embedded Engineer,"C++, C, STM32"
+Cyber Security,2,5,3,1,2,0,Data Analyst,"Excel, SQL, Power BI"
+Artificial Intelligence,3,2,4,4,3,2,Cloud Engineer,"Azure, Docker, Terraform"
+Internet of Things,3,1,4,5,6,1,Backend Developer,"Git, Spring Boot, Docker"
+Data Science,4,5,5,3,3,3,DevOps Engineer,"GitHub Actions, Docker, Kubernetes"
+Network Engineering,2,4,4,2,0,2,Cloud Engineer,"Azure, Terraform, Linux"
+Internet of Things,4,1,5,5,1,3,Frontend Developer,"HTML, CSS, JavaScript"
+Computer Science,4,5,4,4,4,3,Network Engineer,"Cisco, TCP/IP, Networking"
+Information Systems,2,4,4,1,1,3,AI Engineer,"PyTorch, scikit-learn, TensorFlow"
+Computer Science,3,2,5,2,5,2,Embedded Engineer,"STM32, C++, Embedded C"
+Information Technology,2,2,4,2,2,0,Backend Developer,"Java, SQL, Docker"
+Information Systems,3,1,4,2,6,0,UI/UX Designer,"Adobe XD, Wireframing, UX Research"
+Cyber Security,4,1,4,1,0,0,Data Analyst,"Excel, Power BI, SQL"
+Computer Science,3,4,4,5,1,1,AI Engineer,"PyTorch, scikit-learn, Docker"
+Information Technology,5,5,5,3,3,0,Business Analyst,"Power BI, UML, SQL"
+Computer Engineering,4,5,2,2,0,2,ML Engineer,"scikit-learn, Python, SQL"
+Software Engineering,4,2,2,1,0,0,ML Engineer,"XGBoost, scikit-learn, Python"
+Internet of Things,3,5,5,2,3,0,ML Engineer,"XGBoost, Python, scikit-learn"
+Artificial Intelligence,2,3,5,5,2,2,AI Engineer,"TensorFlow, Docker, PyTorch"
+Information Systems,4,1,4,5,0,2,UI/UX Designer,"UX Research, Figma, Prototyping"
+Robotics,5,3,5,4,1,1,Network Engineer,"Networking, Python, TCP/IP"
+Network Engineering,5,1,2,4,5,0,Business Analyst,"Power BI, Communication, Excel"
+Computer Science,3,1,4,1,2,2,Full Stack Developer,"Java, React, SQL"
+Information Technology,5,1,3,3,2,1,UI/UX Designer,"Prototyping, Figma, UX Research"
+Software Engineering,3,3,2,1,3,1,Frontend Developer,"React, JavaScript, HTML"
+Embedded Systems,2,4,2,1,2,2,Full Stack Developer,"React, Docker, SQL"
+Information Technology,2,1,2,1,2,3,Data Scientist,"NumPy, Machine Learning, Pandas"
+Internet of Things,2,3,3,3,1,0,DevOps Engineer,"GitHub Actions, Kubernetes, AWS"
+Network Engineering,4,3,2,2,6,0,Data Analyst,"SQL, Python, Excel"
+Information Technology,2,1,5,5,3,0,Embedded Engineer,"C, C++, Embedded C"
+Software Engineering,2,1,5,5,0,1,Data Analyst,"SQL, Python, Tableau"
+Software Engineering,4,1,2,3,1,0,UI/UX Designer,"Adobe XD, Prototyping, Figma"
+Information Systems,5,4,5,2,5,3,QA Engineer,"Java, Postman, Git"
+Computer Engineering,2,2,2,3,0,0,Backend Developer,"Spring Boot, Git, SQL"
+Network Engineering,4,1,2,1,0,3,AI Engineer,"PyTorch, Python, Docker"
+Robotics,5,1,5,5,5,3,Backend Developer,"SQL, Spring Boot, Java"
+Network Engineering,2,5,4,2,2,0,AI Engineer,"Python, TensorFlow, PyTorch"
+Information Systems,2,1,5,3,3,3,Frontend Developer,"HTML, Git, React"
+Network Engineering,5,3,3,4,2,0,Data Analyst,"Python, SQL, Power BI"
+Cyber Security,3,2,3,4,2,2,Cyber Security Engineer,"Wireshark, Metasploit, Linux"
+Data Science,5,3,2,5,5,2,ML Engineer,"Docker, scikit-learn, SQL"
+Internet of Things,4,4,5,1,2,0,Frontend Developer,"Git, HTML, JavaScript"
+Software Engineering,2,1,4,4,4,0,Full Stack Developer,"Spring Boot, Java, SQL"
+Information Technology,5,2,2,1,1,1,AI Engineer,"Docker, Python, scikit-learn"
+Cyber Security,3,1,5,3,2,3,ML Engineer,"scikit-learn, Python, XGBoost"
+Software Engineering,5,1,4,1,3,2,Data Scientist,"Python, NumPy, Pandas"
+Cyber Security,3,2,4,5,3,0,Backend Developer,"Docker, Git, Java"
+Computer Science,2,5,4,2,0,0,Full Stack Developer,"React, SQL, Docker"
+Robotics,2,3,3,4,2,1,Data Analyst,"SQL, Power BI, Excel"
+Artificial Intelligence,5,2,3,1,4,3,DevOps Engineer,"GitHub Actions, Kubernetes, Linux"
+Information Technology,5,1,3,3,3,3,ML Engineer,"scikit-learn, Docker, SQL"
+Software Engineering,2,2,2,3,5,3,QA Engineer,"Postman, Selenium, JUnit"
+Information Technology,4,2,4,2,5,1,UI/UX Designer,"Figma, Prototyping, UX Research"
+Network Engineering,4,2,2,1,5,2,Embedded Engineer,"C++, FreeRTOS, Embedded C"
+Robotics,5,1,4,4,4,1,Frontend Developer,"CSS, React, Git"
+Software Engineering,4,3,4,5,6,1,AI Engineer,"PyTorch, TensorFlow, scikit-learn"
+Computer Engineering,2,5,4,4,5,1,Frontend Developer,"Git, JavaScript, CSS"
+Network Engineering,5,4,4,2,0,0,Network Engineer,"TCP/IP, Python, Networking"
+Computer Science,5,3,2,5,3,1,UI/UX Designer,"Figma, Prototyping, Wireframing"
+Data Science,3,2,4,4,0,3,Frontend Developer,"Git, JavaScript, CSS"
+Cyber Security,5,3,4,1,1,2,Data Scientist,"Machine Learning, NumPy, Pandas"
+Computer Science,5,1,5,1,1,1,Embedded Engineer,"C, FreeRTOS, Embedded C"
+Computer Engineering,5,2,3,5,1,0,Embedded Engineer,"STM32, Embedded C, C++"
+Network Engineering,3,5,5,3,2,1,ML Engineer,"Python, scikit-learn, SQL"
+Embedded Systems,4,1,4,3,4,2,DevOps Engineer,"Kubernetes, Linux, AWS"
+Information Technology,4,5,3,1,2,1,AI Engineer,"TensorFlow, Docker, Python"
+Internet of Things,2,4,4,2,2,1,Business Analyst,"SQL, Excel, Communication"
+Software Engineering,3,3,2,3,6,0,Full Stack Developer,"Docker, Java, React"
+Internet of Things,2,2,4,1,1,1,Frontend Developer,"HTML, JavaScript, Git"
+Artificial Intelligence,4,4,5,3,1,2,Data Analyst,"Python, Excel, SQL"
+Artificial Intelligence,3,2,5,2,1,1,Backend Developer,"Git, Docker, Java"
+Embedded Systems,3,2,4,1,4,0,Cloud Engineer,"Linux, Docker, Terraform"
+Network Engineering,5,2,5,3,5,0,DevOps Engineer,"Docker, Kubernetes, AWS"
+Cyber Security,5,4,4,1,6,2,UI/UX Designer,"UX Research, Prototyping, Wireframing"
+Robotics,2,1,3,4,3,0,DevOps Engineer,"GitHub Actions, Docker, AWS"
+Embedded Systems,4,2,2,5,2,3,Network Engineer,"Python, Linux, TCP/IP"
+Computer Engineering,3,2,2,4,3,0,Data Analyst,"Python, SQL, Power BI"
+Network Engineering,3,3,2,1,5,3,Cyber Security Engineer,"Metasploit, Networking, Wireshark"
+Internet of Things,2,5,3,4,2,3,Embedded Engineer,"STM32, FreeRTOS, Embedded C"
+Artificial Intelligence,5,4,2,3,0,3,Business Analyst,"Communication, Power BI, UML"
+Internet of Things,5,3,2,4,5,1,Embedded Engineer,"Embedded C, STM32, C++"
+Artificial Intelligence,5,2,2,4,4,2,QA Engineer,"Git, Postman, Java"
+Network Engineering,5,5,4,5,2,1,Business Analyst,"Communication, UML, Power BI"
+Robotics,4,4,3,5,2,2,Network Engineer,"Python, Cisco, Linux"
+Information Technology,3,1,2,2,3,1,Business Analyst,"Power BI, UML, Communication"
+Embedded Systems,2,2,2,4,0,2,AI Engineer,"scikit-learn, Python, TensorFlow"
+Robotics,4,2,4,1,5,2,AI Engineer,"Python, PyTorch, TensorFlow"
+Robotics,3,2,2,1,3,1,Backend Developer,"Git, Java, Spring Boot"
+Internet of Things,3,2,5,3,0,2,DevOps Engineer,"GitHub Actions, Docker, AWS"
+Robotics,5,5,4,2,0,3,Data Scientist,"SQL, Python, Machine Learning"
+Artificial Intelligence,2,2,4,4,0,1,Data Analyst,"Tableau, SQL, Power BI"
+Computer Engineering,4,5,2,2,4,3,Data Scientist,"Pandas, SQL, NumPy"
+Computer Engineering,5,3,3,5,5,1,Data Scientist,"Python, SQL, NumPy"
+Information Technology,5,1,5,1,5,2,Cloud Engineer,"Docker, Terraform, AWS"
+Information Technology,4,3,3,3,4,3,UI/UX Designer,"Wireframing, Adobe XD, Figma"
+Network Engineering,3,2,3,5,2,3,QA Engineer,"Postman, Git, Java"
+Computer Engineering,3,5,2,1,4,3,Embedded Engineer,"STM32, C++, FreeRTOS"
+Embedded Systems,4,1,3,2,2,1,Business Analyst,"Communication, SQL, Excel"
+Internet of Things,2,2,5,5,6,1,Full Stack Developer,"Spring Boot, Java, Docker"
+Embedded Systems,2,3,3,4,3,3,Network Engineer,"TCP/IP, Networking, Cisco"
+Information Systems,2,1,4,3,4,0,Embedded Engineer,"FreeRTOS, Embedded C, C++"
+Computer Science,5,2,3,2,2,2,Business Analyst,"UML, Power BI, SQL"
+Network Engineering,3,2,5,2,6,2,Business Analyst,"Excel, SQL, Power BI"
