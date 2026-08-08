@@ -109,3 +109,9 @@ numpy==2.2.3
    - Explainability: đã có sẵn phần "Vì sao gợi ý" trong app, có thể mở rộng thêm
    - Social Impact: đánh giá định tính về tác động của việc gợi ý sai ngành nghề
 
+  Tin cậy (Reliability) – tính nhất quán, giảm hallucination
+  Thiên vị (Bias/Fairness) – giới tính, vùng miền, kinh tế–xã hội, ngôn ngữ
+  Robustness – chịu lỗi, chịu tấn công, chống prompt injection, dữ liệu nhiễu
+  Social Impact –Tác động xã hội lên nhóm yếu thế – trẻ em, người cao tuổi, người nghèo, dân tộc thiểu số…
+  Minh bạch (Explainability) – AI giải thích thế nào? Có thể kiểm chứng được không? Người yếu thế có hiểu được không?
+

@@ -166,7 +166,7 @@ def extract_json_text(raw_text: str) -> str:
 
     return text
 
-
+#Bias
 def call_gemini_extractor(
     user_text: str,
     list_of_all_careers: list[str],
@@ -412,6 +412,7 @@ PREFERRED_BOOST_MULTIPLIER = 1.5
 PREFERRED_BOOST_ADD = 0.2
 
 
+#Reliability
 def predict_top_careers(
     feature_vector: np.ndarray,
     model,
@@ -520,6 +521,7 @@ QUY TẮC BẮT BUỘC:
 """.strip()
 
 
+#Explainability
 def explain_top_careers_with_gemini(
     features: dict,
     top_careers: list[dict],
