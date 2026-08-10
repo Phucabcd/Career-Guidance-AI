@@ -32,7 +32,7 @@ def test_reliability_calll_gemini(n_runs: int = 5):
         )
         entry = {
             "Field": data.get("Field"),
-            "Coding Skills": data.get("Coding Skills"),
+            "Professional Skills": data.get("Professional Skills"),
             "Communication Skills": data.get("Communication Skills"),
             "Problem Solving Skills": data.get("Problem Solving Skills"),
             "Teamwork Skills": data.get("Teamwork Skills"),
@@ -102,7 +102,7 @@ def test_bias_of_gemini():
         entry = {
             "location": i["location"],
             "Field": data.get("Field"),
-            "Coding Skills": data.get("Coding Skills"),
+            "Professional Skills": data.get("Professional Skills"),
             "Communication Skills": data.get("Communication Skills"),
             "Problem Solving Skills": data.get("Problem Solving Skills"),
             "Teamwork Skills": data.get("Teamwork Skills"),

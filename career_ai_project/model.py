@@ -27,7 +27,7 @@ MODELS_DIR = BASE_DIR / "models"
 # Features số — phải khớp train_model.py
 FEATURE_COLUMNS = [
     "Field",
-    "Coding Skills",
+    "Professional Skills",
     "Communication Skills",
     "Problem Solving Skills",
     "Teamwork Skills",
@@ -38,17 +38,23 @@ FEATURE_COLUMNS = [
 NUMERIC_FEATURE_COLUMNS = FEATURE_COLUMNS
 
 SKILL_REASON_KEYS = {
-    "Coding Skills": "Coding_Reason",
+    "Professional Skills": "Professional_Reason",
     "Communication Skills": "Communication_Reason",
     "Problem Solving Skills": "Problem_Solving_Reason",
     "Teamwork Skills": "Teamwork_Reason",
 }
 
 SKILL_UI_LABELS = {
-    "Coding Skills": "💻 Kỹ năng Lập trình (Coding Skills)",
+    "Professional Skills": "🛠️ Kỹ năng chuyên môn (Professional Skills)",
     "Communication Skills": "🗣️ Kỹ năng Giao tiếp (Communication Skills)",
     "Problem Solving Skills": "🧩 Kỹ năng Giải quyết vấn đề (Problem Solving Skills)",
     "Teamwork Skills": "🤝 Kỹ năng Làm việc nhóm (Teamwork Skills)",
+}
+
+# Alias cũ → mới (tương thích JSON / CSV legacy)
+LEGACY_SKILL_KEY_ALIASES = {
+    "Coding Skills": "Professional Skills",
+    "Coding_Reason": "Professional_Reason",
 }
 
 MIN_TEXT_LENGTH = 40
@@ -87,8 +93,8 @@ QUY TẮC BẮT BUỘC:
    - "Field": string (phải thuộc danh sách Field hợp lệ; nếu không rõ hãy chọn gần nhất)
    - "Projects": integer (>= 0) — ước lượng số dự án đã làm
    - "Internships": integer (>= 0) — ước lượng số kỳ thực tập
-   - "Coding Skills": integer từ 0 đến 5
-   - "Coding_Reason": string (phân tích lý do điểm Coding Skills)
+   - "Professional Skills": integer từ 0 đến 5 — kỹ năng chuyên môn / nghiệp vụ theo ngành (KHÔNG chỉ lập trình)
+   - "Professional_Reason": string (phân tích lý do điểm Professional Skills)
    - "Communication Skills": integer từ 0 đến 5
    - "Communication_Reason": string (phân tích lý do điểm Communication Skills)
    - "Problem Solving Skills": integer từ 0 đến 5
@@ -105,6 +111,14 @@ QUY TẮC BẮT BUỘC:
    3 = trung bình
    4 = khá
    5 = thành thạo / nổi bật trong văn bản
+3b. "Professional Skills" = mức độ thành thạo chuyên môn nghiệp vụ phù hợp ngành của người dùng. Ví dụ:
+   - IT/Data: lập trình, công nghệ, công cụ kỹ thuật
+   - Y tế: kiến thức lâm sàng / chăm sóc bệnh nhân
+   - Luật: phân tích pháp lý, soạn thảo
+   - Kinh doanh/Marketing: phân tích thị trường, bán hàng
+   - Giáo dục: sư phạm, thiết kế bài giảng
+   - Thiết kế: design craft, công cụ thiết kế
+   Không chấm thấp chỉ vì họ không biết lập trình nếu ngành không yêu cầu coding.
 4. Đối với mỗi kỹ năng điểm số, hãy viết phần phân tích lý do (Reasoning) THẬT CHI TIẾT (khoảng 3-4 câu dài). Phải phân tích sâu sắc dựa trên câu chữ của ứng viên, trích dẫn lại ý của ứng viên để chứng minh, và đưa ra nhận xét ngắn về việc kỹ năng này ảnh hưởng thế nào đến thái độ làm việc của họ.
 5. Phân tích thái độ nghề nghiệp:
    - Đối chiếu các ý ưu tiên/chán ghét với danh sách nghề {careers_json}.
@@ -291,9 +305,15 @@ def validate_features(
     valid_skills: list[str] | None = None,
 ) -> dict:
     """Chuẩn hóa kiểu dữ liệu để dùng cho mô hình và UI."""
+    # Map alias cũ (Coding Skills) → Professional Skills
+    data = dict(data)
+    for old_key, new_key in LEGACY_SKILL_KEY_ALIASES.items():
+        if new_key not in data and old_key in data:
+            data[new_key] = data[old_key]
+
     required_score_keys = [
         "Field",
-        "Coding Skills",
+        "Professional Skills",
         "Communication Skills",
         "Problem Solving Skills",
         "Teamwork Skills",
@@ -305,7 +325,7 @@ def validate_features(
         raise KeyError(f"JSON thiếu keys: {missing}")
 
     score_keys = [
-        "Coding Skills",
+        "Professional Skills",
         "Communication Skills",
         "Problem Solving Skills",
         "Teamwork Skills",
@@ -386,13 +406,13 @@ def build_feature_vector(
 ) -> np.ndarray:
     """
     Tạo numpy array 1 hàng:
-    [Field, Coding, Comm, Problem, Team, Projects, Internships] + skill binary vector
+    [Field, Professional, Comm, Problem, Team, Projects, Internships] + skill binary vector
     """
     field_code = encode_field(features["Field"], field_encoder, warning_callback)
 
     numeric_row = [
         field_code,
-        features["Coding Skills"],
+        features["Professional Skills"],
         features["Communication Skills"],
         features["Problem Solving Skills"],
         features["Teamwork Skills"],
@@ -484,7 +504,7 @@ def _build_career_explain_prompt(features: dict, top_careers: list[dict]) -> str
     """Tạo prompt cho Gemini lần 2: giải thích vì sao hồ sơ khớp từng nghề Top 5."""
     skill_profile = {
         "Field": features["Field"],
-        "Coding Skills": features["Coding Skills"],
+        "Professional Skills": features["Professional Skills"],
         "Communication Skills": features["Communication Skills"],
         "Problem Solving Skills": features["Problem Solving Skills"],
         "Teamwork Skills": features["Teamwork Skills"],

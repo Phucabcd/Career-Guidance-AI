@@ -1,2 +1,10 @@
 .env
 *.env
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+
+# Model artifacts — train local bằng `python train_model.py` (file RF có thể rất lớn)
+models/*
+data/career_prediction_multi_industry.csv

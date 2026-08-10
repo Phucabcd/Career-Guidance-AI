@@ -14,7 +14,7 @@ career_ai_project/
 ├── model.py                # Logic xử lý: gọi Gemini, chuẩn hóa dữ liệu, dự đoán nghề nghiệp
 ├── train_model.py          # Huấn luyện mô hình Random Forest và lưu artifact
 ├── data/
-│   └── career_prediction_IT_900rows.csv   # Dataset train (có cột Skills)
+│   └── career_prediction_multi_industry.csv  # Dataset train đa ngành (có cột Skills)
 ├── models/
 │   ├── rf_model.pkl
 │   ├── field_encoder.pkl
@@ -38,12 +38,12 @@ career_ai_project/
   - Dự đoán top nghề nghiệp bằng Random Forest.
 
 - `train_model.py`
-  - Huấn luyện mô hình Random Forest từ dữ liệu trong `data/career_prediction.csv`.
+  - Huấn luyện mô hình Random Forest từ dữ liệu trong `data/career_prediction_multi_industry.csv`.
   - Lưu các file `.pkl` vào thư mục `models/` để dùng cho inference.
 
-- `data/career_prediction_IT_900rows.csv`
-  - Tập dữ liệu train (~900 dòng, ~30 nghề IT-oriented).
-  - Có cột `Skills` (công nghệ cụ thể, dùng MultiLabelBinarizer).
+- `data/career_prediction_multi_industry.csv`
+  - Tập dữ liệu train (~9000 dòng, ~240 nghề, ~66 lĩnh vực — CNTT và nhiều ngành khác).
+  - Có cột `Skills` (kỹ năng/công nghệ cụ thể, dùng MultiLabelBinarizer).
 
 - `models/`
   - Artifact đã train: `rf_model`, `field_encoder`, `career_encoder`, `skills_encoder`.
@@ -54,7 +54,7 @@ career_ai_project/
 2. `app.py` gửi nội dung này sang `model.py`.
 3. `model.py` dùng Gemini để suy ra các feature như:
    - Field
-   - Coding Skills
+   - Professional Skills (kỹ năng chuyên môn)
    - Communication Skills
    - Problem Solving Skills
    - Teamwork Skills

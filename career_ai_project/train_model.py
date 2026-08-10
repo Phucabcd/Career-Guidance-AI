@@ -1,6 +1,6 @@
 """
 train_model.py
-Huấn luyện Random Forest offline từ career_prediction_IT_900rows.csv.
+Huấn luyện Random Forest offline từ career_prediction_multi_industry.csv.
 
 Chạy:
     python train_model.py
@@ -25,13 +25,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, MultiLabelBinarizer
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_PATH = BASE_DIR / "data" / "career_prediction_IT_900rows.csv"
+DATA_PATH = BASE_DIR / "data" / "career_prediction_multi_industry.csv"
 MODELS_DIR = BASE_DIR / "models"
 
 # Features số — phải khớp model.py khi inference
 NUMERIC_FEATURE_COLUMNS = [
     "Field",
-    "Coding Skills",
+    "Professional Skills",
     "Communication Skills",
     "Problem Solving Skills",
     "Teamwork Skills",

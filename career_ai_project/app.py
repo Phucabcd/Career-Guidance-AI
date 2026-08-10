@@ -111,11 +111,11 @@ st.set_page_config(
 st.title("🧭 Career Guidance AI")
 st.markdown(
     """
-Hệ thống gợi ý hướng nghiệp kết hợp **Gemini LLM** (trích xuất kỹ năng + Skills công nghệ)
-và **Random Forest** (dự đoán ngành nghề phù hợp từ dataset IT mở rộng).
+Hệ thống gợi ý hướng nghiệp kết hợp **Gemini LLM** (trích xuất kỹ năng chuyên môn + kỹ năng mềm)
+và **Random Forest** (dự đoán ngành nghề phù hợp từ dataset đa ngành).
 
-Hãy kể về bản thân: ngành học, sở thích, công nghệ (Python, Java, Docker,...),
-dự án, thực tập. Có thể nêu rõ ngành **thích** / **không thích**.
+Hãy kể về bản thân: ngành học, sở thích, kỹ năng chuyên môn, dự án, thực tập.
+Có thể nêu rõ ngành **thích** / **không thích**.
 """
 )
 
@@ -123,8 +123,8 @@ user_bio = st.text_area(
     "Đoạn văn tự giới thiệu",
     height=220,
     placeholder=(
-        "Ví dụ: Em đang học CNTT, thích làm backend với Python và Docker, "
-        "đã làm 3 dự án web và 1 kỳ thực tập. Không thích làm marketing hay kế toán..."
+        "Ví dụ: Em đang học Điều dưỡng, thích chăm sóc bệnh nhân, "
+        "đã thực tập 2 kỳ tại bệnh viện. Không thích làm việc văn phòng thuần túy..."
     ),
 )
 
