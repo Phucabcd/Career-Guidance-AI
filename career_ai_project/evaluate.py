@@ -1,14 +1,20 @@
 import numpy as np
 import pandas as pd
 
-from model import call_gemini_extractor, load_ml_artifacts, build_extractor_prompt, predict_top_careers
+from model import (
+    call_gemini_extractor,
+    get_field_classes,
+    load_ml_artifacts,
+    build_extractor_prompt,
+    predict_top_careers,
+)
 
 #test Reliability call gemini 
 def test_reliability_calll_gemini(n_runs: int = 5):
     # Load the ML artifacts
-    model, fields, careers, skills = load_ml_artifacts()
+    model, fields, careers, skills, _extras = load_ml_artifacts()
     
-    list_of_all_fields = list(fields.classes_)
+    list_of_all_fields = get_field_classes(fields)
     list_of_all_careers = list(careers.classes_)
     list_of_all_skills = list(skills.classes_)
 
@@ -47,9 +53,9 @@ def test_reliability_calll_gemini(n_runs: int = 5):
     
 #test Bias of gemini
 def test_bias_of_gemini():
-    model, fields, careers, skills = load_ml_artifacts()
+    model, fields, careers, skills, _extras = load_ml_artifacts()
     
-    list_of_all_fields = list(fields.classes_)
+    list_of_all_fields = get_field_classes(fields)
     list_of_all_careers = list(careers.classes_)
     list_of_all_skills = list(skills.classes_)
     

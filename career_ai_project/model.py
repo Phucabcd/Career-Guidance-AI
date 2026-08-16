@@ -24,7 +24,8 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent
 MODELS_DIR = BASE_DIR / "models"
 
-# Features số — phải khớp train_model.py
+# Features — phải khớp train_model.py
+# Field được OneHot riêng; các cột còn lại là numeric.
 FEATURE_COLUMNS = [
     "Field",
     "Professional Skills",
@@ -34,8 +35,14 @@ FEATURE_COLUMNS = [
     "Projects",
     "Internships",
 ]
-# Alias tương thích
-NUMERIC_FEATURE_COLUMNS = FEATURE_COLUMNS
+NUMERIC_FEATURE_COLUMNS = [
+    "Professional Skills",
+    "Communication Skills",
+    "Problem Solving Skills",
+    "Teamwork Skills",
+    "Projects",
+    "Internships",
+]
 
 SKILL_REASON_KEYS = {
     "Professional Skills": "Professional_Reason",
@@ -123,9 +130,17 @@ QUY TẮC BẮT BUỘC:
 5. Phân tích thái độ nghề nghiệp:
    - Đối chiếu các ý ưu tiên/chán ghét với danh sách nghề {careers_json}.
    - Phân loại vào "Preferred_Careers" và "Excluded_Careers". Chỉ dùng đúng tên hợp lệ. Nếu không có, trả về [].
-6. "Skills": chỉ lấy từ danh sách Skills hợp lệ; nếu người dùng nhắc công nghệ gần nghĩa (vd: "học máy" → "Machine Learning"), hãy map sang tên trong danh sách. Nếu không có skill nào rõ → [].
+6. "Skills": chỉ lấy từ danh sách Skills hợp lệ; nếu người dùng nhắc công nghệ/nghiệp vụ gần nghĩa
+   (vd: "học máy" → "Machine Learning"; "chăm sóc bệnh nhân" → "Patient Care";
+   "lập trình web" → "JavaScript"/"React"; "kê đơn thuốc" → "Pharmacology";
+   "hàn xì" → "Welding Techniques"; "soạn thảo hợp đồng" → "Contract Drafting"),
+   hãy map sang tên trong danh sách.
+   Ưu tiên skill nghiệp vụ theo ngành của bio (3–8 mục nếu có bằng chứng) — ví dụ Healthcare, Luật, Giáo dục, Trades…
+   KHÔNG mặc định chọn Excel / Python / SQL / Communication trừ khi bio thật sự đề cập hoặc ngành đòi hỏi rõ.
+   Nếu không có skill nào rõ → [].
 7. Mỗi trường *_Reason phải dựa trên bằng chứng trong đoạn văn (trích ý, không bịa số liệu).
 8. Nếu thông tin thiếu, suy luận hợp lý từ ngữ cảnh; không để null; điểm và lý do phải nhất quán.
+9. Khi chọn Field, ưu tiên ngành khớp nội dung bio (y tế, giáo dục, luật…) — không mặc định IT chỉ vì có từ chung.
 
 Đoạn văn tự giới thiệu: "{user_input}"
 """.strip()
@@ -140,17 +155,14 @@ if API_KEY and API_KEY != "your_api_key_here":
 
 @lru_cache(maxsize=1)
 def load_ml_artifacts() -> tuple:
-    """Load Random Forest + field/career/skills encoders đã train offline."""
-    model_path = MODELS_DIR / "rf_model.pkl"
-    field_path = MODELS_DIR / "field_encoder.pkl"
-    career_path = MODELS_DIR / "career_encoder.pkl"
-    skills_path = MODELS_DIR / "skills_encoder.pkl"
-
-    missing = [
-        p.name
-        for p in (model_path, field_path, career_path, skills_path)
-        if not p.exists()
+    """Load RF + encoders (+ meta tùy chọn). Pipeline: Skills CSV thật, RF thuần."""
+    required = [
+        MODELS_DIR / "rf_model.pkl",
+        MODELS_DIR / "field_encoder.pkl",
+        MODELS_DIR / "career_encoder.pkl",
+        MODELS_DIR / "skills_encoder.pkl",
     ]
+    missing = [path.name for path in required if not path.exists()]
     if missing:
         raise FileNotFoundError(
             "Thiếu file model: "
@@ -158,11 +170,16 @@ def load_ml_artifacts() -> tuple:
             + ". Hãy chạy `python train_model.py` trước."
         )
 
-    model = joblib.load(model_path)
-    field_encoder = joblib.load(field_path)
-    career_encoder = joblib.load(career_path)
-    skills_encoder = joblib.load(skills_path)
-    return model, field_encoder, career_encoder, skills_encoder
+    model = joblib.load(MODELS_DIR / "rf_model.pkl")
+    field_encoder = joblib.load(MODELS_DIR / "field_encoder.pkl")
+    career_encoder = joblib.load(MODELS_DIR / "career_encoder.pkl")
+    skills_encoder = joblib.load(MODELS_DIR / "skills_encoder.pkl")
+
+    extras: dict = {}
+    meta_path = MODELS_DIR / "model_meta.pkl"
+    extras["meta"] = joblib.load(meta_path) if meta_path.exists() else None
+
+    return model, field_encoder, career_encoder, skills_encoder, extras
 
 
 def extract_json_text(raw_text: str) -> str:
@@ -367,27 +384,33 @@ def validate_features(
     return normalized
 
 
-def encode_field(
+def get_field_classes(field_encoder) -> list[str]:
+    """Lấy danh sách Field từ OneHotEncoder (hoặc LabelEncoder legacy)."""
+    if hasattr(field_encoder, "categories_"):
+        return [str(c) for c in field_encoder.categories_[0]]
+    return [str(c) for c in field_encoder.classes_]
+
+
+def resolve_field_name(
     field_value: str,
     field_encoder,
     warning_callback: Callable[[str], None] | None = None,
-) -> int:
-    """Encode Field bằng LabelEncoder đã lưu (kèm khớp gần)."""
-    classes = list(field_encoder.classes_)
+) -> str:
+    """Map Field người dùng về tên Field hợp lệ (kèm khớp gần)."""
+    classes = get_field_classes(field_encoder)
     value = str(field_value).strip()
 
     if value in classes:
-        return int(field_encoder.transform([value])[0])
+        return value
 
     lower_map = {c.lower(): c for c in classes}
     if value.lower() in lower_map:
-        matched = lower_map[value.lower()]
-        return int(field_encoder.transform([matched])[0])
+        return lower_map[value.lower()]
 
     # Khớp gần: "Computer Science" chứa "science", v.v.
     for c in classes:
         if value.lower() in c.lower() or c.lower() in value.lower():
-            return int(field_encoder.transform([c])[0])
+            return c
 
     default_field = classes[0]
     if warning_callback:
@@ -395,7 +418,21 @@ def encode_field(
             f"Field '{field_value}' không có trong dữ liệu train. "
             f"Tạm dùng mặc định: '{default_field}'."
         )
-    return int(field_encoder.transform([default_field])[0])
+    return default_field
+
+
+def encode_field(
+    field_value: str,
+    field_encoder,
+    warning_callback: Callable[[str], None] | None = None,
+) -> np.ndarray:
+    """Encode Field thành vector OneHot (hoặc 1 số nếu vẫn là LabelEncoder legacy)."""
+    matched = resolve_field_name(field_value, field_encoder, warning_callback)
+
+    if hasattr(field_encoder, "categories_"):
+        return field_encoder.transform([[matched]]).astype(float)[0]
+
+    return np.array([field_encoder.transform([matched])[0]], dtype=float)
 
 
 def build_feature_vector(
@@ -403,28 +440,36 @@ def build_feature_vector(
     field_encoder,
     skills_encoder,
     warning_callback: Callable[[str], None] | None = None,
-) -> np.ndarray:
+    scaler=None,
+) -> tuple[np.ndarray, np.ndarray, list[str]]:
     """
-    Tạo numpy array 1 hàng:
-    [Field, Professional, Comm, Problem, Team, Projects, Internships] + skill binary vector
+    Trả về (X_global, x_local, skill_list) khớp train_model.py (RF thuần):
+      X_global = [Field OH] + numeric + skills (chỉ skill Gemini/CSV trong vocab)
+      x_local  = numeric + skills (giữ shape tương thích; không dùng refine)
     """
-    field_code = encode_field(features["Field"], field_encoder, warning_callback)
+    del scaler  # Pipeline A+1 không dùng scaler / centroid
 
-    numeric_row = [
-        field_code,
-        features["Professional Skills"],
-        features["Communication Skills"],
-        features["Problem Solving Skills"],
-        features["Teamwork Skills"],
-        features["Projects"],
-        features["Internships"],
-    ]
+    field_vec = encode_field(features["Field"], field_encoder, warning_callback)
+    numeric_row = np.array(
+        [
+            features["Professional Skills"],
+            features["Communication Skills"],
+            features["Problem Solving Skills"],
+            features["Teamwork Skills"],
+            features["Projects"],
+            features["Internships"],
+        ],
+        dtype=float,
+    )
 
-    skill_list = features.get("Skills", []) or []
-    # MultiLabelBinarizer.transform cần list-of-lists
-    skill_vector = skills_encoder.transform([skill_list]).astype(float)[0]
+    raw_skills = features.get("Skills", []) or []
+    vocab = set(map(str, skills_encoder.classes_))
+    model_skills = [skill for skill in raw_skills if skill in vocab]
+    skill_vector = skills_encoder.transform([model_skills]).astype(float)[0]
 
-    return np.hstack([np.array(numeric_row, dtype=float), skill_vector]).reshape(1, -1)
+    x_global = np.hstack([field_vec, numeric_row, skill_vector]).reshape(1, -1)
+    x_local = np.hstack([numeric_row, skill_vector])
+    return x_global, x_local, model_skills
 
 
 # Hệ số tăng trọng số cho ngành được ưu tiên (Preferred_Careers)
@@ -440,18 +485,20 @@ def predict_top_careers(
     excluded_careers: list[str] | None = None,
     preferred_careers: list[str] | None = None,
     top_k: int = 5,
+    x_local: np.ndarray | None = None,
+    field_name: str | None = None,
+    user_skills: list[str] | None = None,
+    extras: dict | None = None,
 ) -> list[dict]:
     """
-    Dự đoán Top-K bằng predict_proba, sau đó:
-    - Excluded_Careers → prob = 0.0
-    - Preferred_Careers → boost (nhân + cộng, clamp tối đa 1.0)
-    - Sort giảm dần, lấy Top-K (bỏ qua prob = 0)
-    - Chuẩn hóa lại % trên Top-K về tổng ~100% để hiển thị
+    Dự đoán Top-K: RF thuần → Preferred/Excluded → chuẩn hóa %.
+    (Không centroid / field-mask / jaccard.)
     """
+    del x_local, field_name, user_skills, extras
+
     probabilities = model.predict_proba(feature_vector)[0].astype(float).copy()
     career_names = list(career_encoder.classes_)
 
-    # results = [{"career": class_name, "prob": prob}, ...]
     results = [
         {"career": str(name), "prob": float(prob)}
         for name, prob in zip(career_names, probabilities)
@@ -462,41 +509,31 @@ def predict_top_careers(
 
     for item in results:
         career_key = item["career"].strip().lower()
-
-        # 1) Loại trừ trước (ưu tiên hơn boost)
         if career_key in excluded_lower:
             item["prob"] = 0.0
             continue
-
-        # 2) Tăng trọng số ngành được ưu tiên
         if career_key in preferred_lower:
             boosted = item["prob"] * PREFERRED_BOOST_MULTIPLIER + PREFERRED_BOOST_ADD
             item["prob"] = min(1.0, boosted)
 
-    # Sort theo prob giảm dần
     results.sort(key=lambda x: x["prob"], reverse=True)
-
-    # Lấy Top-K, bỏ ngành prob = 0
     top_raw = [r for r in results if r["prob"] > 0.0][:top_k]
-
     if not top_raw:
         return []
 
-    # Chuẩn hóa % hiển thị về tổng 100% trong Top-K
     total_prob = sum(r["prob"] for r in top_raw)
     top_results: list[dict] = []
-    for item in top_raw:
-        if total_prob > 0:
-            match_percent = round((item["prob"] / total_prob) * 100, 1)
-        else:
-            match_percent = 0.0
+    for rank, item in enumerate(top_raw, start=1):
+        match_percent = (
+            round((item["prob"] / total_prob) * 100, 1) if total_prob > 0 else 0.0
+        )
         top_results.append(
             {
                 "career": item["career"],
                 "match_percent": match_percent,
+                "rank": rank,
             }
         )
-
     return top_results
 
 

@@ -8,3 +8,4 @@ __pycache__/
 # Model artifacts — train local bằng `python train_model.py` (file RF có thể rất lớn)
 models/*
 data/career_prediction_multi_industry.csv
+data/career_prediction_multi_industry.backup.csv
