@@ -1,0 +1,4 @@
+data/career_prediction_multi_industry.csv
+
+.env
+models/*

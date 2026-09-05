@@ -22,6 +22,7 @@ from model import (
     build_feature_vector,
     call_gemini_extractor,
     explain_top_careers_with_gemini,
+    get_field_categories,
     load_ml_artifacts,
     predict_top_careers,
     validate_features,
@@ -154,7 +155,9 @@ if analyze_clicked:
         st.stop()
 
     list_of_all_careers = list(career_encoder.classes_)
-    list_of_all_fields = list(field_encoder.classes_)
+    # field_encoder giờ là OneHotEncoder -> dùng get_field_categories() thay vì
+    # .classes_ (chỉ LabelEncoder mới có thuộc tính đó)
+    list_of_all_fields = get_field_categories(field_encoder)
     list_of_all_skills = list(skills_encoder.classes_)
 
     with st.spinner("Đang phân tích hồ sơ..."):

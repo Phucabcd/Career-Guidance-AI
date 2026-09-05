@@ -24,10 +24,13 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent
 MODELS_DIR = BASE_DIR / "models"
 
-# Features số — phải khớp train_model.py
+# Features số — phải khớp train_model.py (NUMERIC_FEATURE_COLUMNS).
+# LƯU Ý: "Field" ở đây chỉ để liệt kê logic input, KHÔNG còn là 1 cột số duy
+# nhất trong vector thật — Field giờ được OneHotEncoder tách thành N cột, do
+# encode_field_vector() xử lý riêng trong build_feature_vector().
 FEATURE_COLUMNS = [
     "Field",
-    "Coding Skills",
+    "Professional Skills",
     "Communication Skills",
     "Problem Solving Skills",
     "Teamwork Skills",
@@ -38,14 +41,14 @@ FEATURE_COLUMNS = [
 NUMERIC_FEATURE_COLUMNS = FEATURE_COLUMNS
 
 SKILL_REASON_KEYS = {
-    "Coding Skills": "Coding_Reason",
+    "Professional Skills": "Professional_Reason",
     "Communication Skills": "Communication_Reason",
     "Problem Solving Skills": "Problem_Solving_Reason",
     "Teamwork Skills": "Teamwork_Reason",
 }
 
 SKILL_UI_LABELS = {
-    "Coding Skills": "💻 Kỹ năng Lập trình (Coding Skills)",
+    "Professional Skills": "💻 Kỹ năng Chuyên môn (Professional Skills)",
     "Communication Skills": "🗣️ Kỹ năng Giao tiếp (Communication Skills)",
     "Problem Solving Skills": "🧩 Kỹ năng Giải quyết vấn đề (Problem Solving Skills)",
     "Teamwork Skills": "🤝 Kỹ năng Làm việc nhóm (Teamwork Skills)",
@@ -87,8 +90,8 @@ QUY TẮC BẮT BUỘC:
    - "Field": string (phải thuộc danh sách Field hợp lệ; nếu không rõ hãy chọn gần nhất)
    - "Projects": integer (>= 0) — ước lượng số dự án đã làm
    - "Internships": integer (>= 0) — ước lượng số kỳ thực tập
-   - "Coding Skills": integer từ 0 đến 5
-   - "Coding_Reason": string (phân tích lý do điểm Coding Skills)
+   - "Professional Skills": integer từ 0 đến 5
+   - "Professional_Reason": string (phân tích lý do điểm Professional Skills)
    - "Communication Skills": integer từ 0 đến 5
    - "Communication_Reason": string (phân tích lý do điểm Communication Skills)
    - "Problem Solving Skills": integer từ 0 đến 5
@@ -126,7 +129,10 @@ if API_KEY and API_KEY != "your_api_key_here":
 
 @lru_cache(maxsize=1)
 def load_ml_artifacts() -> tuple:
-    """Load Random Forest + field/career/skills encoders đã train offline."""
+    """
+    Load Random Forest + field/career/skills encoders đã train offline.
+    LƯU Ý: field_encoder giờ là OneHotEncoder (không còn LabelEncoder).
+    """
     model_path = MODELS_DIR / "rf_model.pkl"
     field_path = MODELS_DIR / "field_encoder.pkl"
     career_path = MODELS_DIR / "career_encoder.pkl"
@@ -293,7 +299,7 @@ def validate_features(
     """Chuẩn hóa kiểu dữ liệu để dùng cho mô hình và UI."""
     required_score_keys = [
         "Field",
-        "Coding Skills",
+        "Professional Skills",
         "Communication Skills",
         "Problem Solving Skills",
         "Teamwork Skills",
@@ -305,7 +311,7 @@ def validate_features(
         raise KeyError(f"JSON thiếu keys: {missing}")
 
     score_keys = [
-        "Coding Skills",
+        "Professional Skills",
         "Communication Skills",
         "Problem Solving Skills",
         "Teamwork Skills",
@@ -347,35 +353,59 @@ def validate_features(
     return normalized
 
 
-def encode_field(
+def get_field_categories(field_encoder) -> list[str]:
+    """
+    Lấy danh sách toàn bộ giá trị Field mà encoder đã học được lúc train.
+    Tách thành hàm riêng để app.py không cần biết field_encoder là loại
+    encoder nào (OneHotEncoder dùng .categories_[0], LabelEncoder cũ dùng
+    .classes_) — tránh lặp lại lỗi AttributeError khi đổi loại encoder.
+    """
+    return list(field_encoder.categories_[0])
+
+
+def encode_field_vector(
     field_value: str,
     field_encoder,
     warning_callback: Callable[[str], None] | None = None,
-) -> int:
-    """Encode Field bằng LabelEncoder đã lưu (kèm khớp gần)."""
-    classes = list(field_encoder.classes_)
+) -> np.ndarray:
+    """
+    Encode Field bằng OneHotEncoder đã lưu (kèm khớp gần trước khi one-hot).
+
+    KHÁC với encode_field() cũ (LabelEncoder trả về 1 số nguyên): hàm này trả
+    về CẢ MỘT VECTOR (nhiều phần tử 0/1), vì lúc train Field đã được one-hot
+    thành nhiều cột riêng.
+
+    Field lạ hoàn toàn (không khớp gần được với category nào đã train) sẽ để
+    OneHotEncoder tự xử lý (đã fit với handle_unknown="ignore") → trả về
+    vector toàn số 0, tức model dự đoán mà KHÔNG có thông tin Field cho hồ sơ
+    này, thay vì ép về 1 field mặc định như cách làm cũ (an toàn hơn, tránh
+    suy diễn sai lệch).
+    """
+    categories = list(field_encoder.categories_[0])
     value = str(field_value).strip()
 
-    if value in classes:
-        return int(field_encoder.transform([value])[0])
+    matched = value if value in categories else None
 
-    lower_map = {c.lower(): c for c in classes}
-    if value.lower() in lower_map:
-        matched = lower_map[value.lower()]
-        return int(field_encoder.transform([matched])[0])
+    if matched is None:
+        lower_map = {c.lower(): c for c in categories}
+        matched = lower_map.get(value.lower())
 
-    # Khớp gần: "Computer Science" chứa "science", v.v.
-    for c in classes:
-        if value.lower() in c.lower() or c.lower() in value.lower():
-            return int(field_encoder.transform([c])[0])
+    if matched is None:
+        for c in categories:
+            if value.lower() in c.lower() or c.lower() in value.lower():
+                matched = c
+                break
 
-    default_field = classes[0]
-    if warning_callback:
-        warning_callback(
-            f"Field '{field_value}' không có trong dữ liệu train. "
-            f"Tạm dùng mặc định: '{default_field}'."
-        )
-    return int(field_encoder.transform([default_field])[0])
+    if matched is None:
+        if warning_callback:
+            warning_callback(
+                f"Field '{field_value}' không có trong dữ liệu train. "
+                "Model sẽ dự đoán mà không dùng thông tin Field cho hồ sơ này."
+            )
+        matched = value  # OneHotEncoder tự xử lý (handle_unknown="ignore" -> vector 0)
+
+    vector = field_encoder.transform([[matched]])[0]
+    return np.asarray(vector, dtype=float)
 
 
 def build_feature_vector(
@@ -385,26 +415,29 @@ def build_feature_vector(
     warning_callback: Callable[[str], None] | None = None,
 ) -> np.ndarray:
     """
-    Tạo numpy array 1 hàng:
-    [Field, Coding, Comm, Problem, Team, Projects, Internships] + skill binary vector
+    Tạo numpy array 1 hàng, ĐÚNG thứ tự đã dùng khi train (train_model.py):
+    [Field one-hot | Professional, Communication, Problem Solving, Teamwork,
+     Projects, Internships | skill binary vector]
     """
-    field_code = encode_field(features["Field"], field_encoder, warning_callback)
+    field_vector = encode_field_vector(features["Field"], field_encoder, warning_callback)
 
-    numeric_row = [
-        field_code,
-        features["Coding Skills"],
-        features["Communication Skills"],
-        features["Problem Solving Skills"],
-        features["Teamwork Skills"],
-        features["Projects"],
-        features["Internships"],
-    ]
+    numeric_row = np.array(
+        [
+            features["Professional Skills"],
+            features["Communication Skills"],
+            features["Problem Solving Skills"],
+            features["Teamwork Skills"],
+            features["Projects"],
+            features["Internships"],
+        ],
+        dtype=float,
+    )
 
     skill_list = features.get("Skills", []) or []
     # MultiLabelBinarizer.transform cần list-of-lists
     skill_vector = skills_encoder.transform([skill_list]).astype(float)[0]
 
-    return np.hstack([np.array(numeric_row, dtype=float), skill_vector]).reshape(1, -1)
+    return np.hstack([field_vector, numeric_row, skill_vector]).reshape(1, -1)
 
 
 # Hệ số tăng trọng số cho ngành được ưu tiên (Preferred_Careers)
@@ -483,7 +516,7 @@ def _build_career_explain_prompt(features: dict, top_careers: list[dict]) -> str
     """Tạo prompt cho Gemini lần 2: giải thích vì sao hồ sơ khớp từng nghề Top 5."""
     skill_profile = {
         "Field": features["Field"],
-        "Coding Skills": features["Coding Skills"],
+        "Professional Skills": features["Professional Skills"],
         "Communication Skills": features["Communication Skills"],
         "Problem Solving Skills": features["Problem Solving Skills"],
         "Teamwork Skills": features["Teamwork Skills"],
