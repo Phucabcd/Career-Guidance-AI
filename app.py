@@ -27,6 +27,12 @@ DRIVE_FILES = {
 MODELS_DIR = Path(__file__).resolve().parent / "models"
 MODELS_DIR.mkdir(exist_ok=True)
 
+st.set_page_config(
+    page_title="Career Guidance AI",
+    page_icon="🧭",
+    layout="centered",
+)
+
 @st.cache_resource
 def download_models():
     for file_name, file_id in DRIVE_FILES.items():
