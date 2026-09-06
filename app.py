@@ -9,11 +9,15 @@ Chạy:
 
 from __future__ import annotations
 
+from pathlib import Path
 import json
 import os
 import time
 import gdown
 import streamlit as st
+
+BASE_DIR = Path(__file__).resolve().parent
+MODELS_DIR = BASE_DIR / "models"
 
 DRIVE_FILES = {
     'rf_model.pkl': '1hAQtY2XCos9E_Qt_ulao2tKu5vzu_1BQ',
@@ -25,21 +29,24 @@ DRIVE_FILES = {
 
 @st.cache_resource
 def download_models(force_download=False):
+    MODELS_DIR.mkdir(parents=True, exist_ok=True)
     for file_name, file_id in DRIVE_FILES.items():
-        # Nếu truyền force_download=True hoặc file chưa tồn tại -> Xóa file cũ và tải lại
-        if force_download and os.path.exists(file_name):
-            os.remove(file_name)
+        file_path = MODELS_DIR / file_name
+        if force_download and file_path.exists():
+            file_path.unlink()
             
-        if not os.path.exists(file_name):
-            gdown.download(id=file_id, output=file_name, quiet=False)
+        if not file_path.exists():
+            gdown.download(id=file_id, output=str(file_path), quiet=False)
 
-# Đặt force_download=True một lần để xóa file 3GB cũ và tải file nén mới
-download_models(force_download=True)
+# Tải các file pkl vào thư mục models/ nếu chưa có
+download_models(force_download=False)
 
-# Tạo vòng lặp đợi cho đến khi tất cả các file pkl thực sự xuất hiện trên đĩa
+# Kiểm tra tất cả file pkl thực sự xuất hiện trong thư mục models/
 required_files = ['rf_model.pkl', 'field_encoder.pkl', 'career_encoder.pkl', 'skills_encoder.pkl']
-while not all(os.path.exists(f) for f in required_files):
-    time.sleep(1)  # Đợi 1 giây rồi kiểm tra lại
+missing_files = [f for f in required_files if not (MODELS_DIR / f).exists()]
+if missing_files:
+    st.error(f"Thiếu file model trong `{MODELS_DIR}`: {', '.join(missing_files)}. Vui lòng kiểm tra quá trình tải file.")
+    st.stop()
 
 from model import (
     FALLBACK_CAREER_EXPLAIN,

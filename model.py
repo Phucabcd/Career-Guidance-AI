@@ -121,10 +121,38 @@ QUY TẮC BẮT BUỘC:
 
 
 load_dotenv(BASE_DIR / ".env")
-API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite").strip()
-if API_KEY and API_KEY != "your_api_key_here":
-    genai.configure(api_key=API_KEY)
+
+
+def get_gemini_api_key() -> str:
+    key = os.getenv("GEMINI_API_KEY", "").strip()
+    if not key or key == "your_api_key_here":
+        try:
+            import streamlit as st
+            if hasattr(st, "secrets") and "GEMINI_API_KEY" in st.secrets:
+                key = str(st.secrets["GEMINI_API_KEY"]).strip()
+        except Exception:
+            pass
+    return key
+
+
+def get_gemini_model_name() -> str:
+    model_name = os.getenv("GEMINI_MODEL", "").strip()
+    if not model_name:
+        try:
+            import streamlit as st
+            if hasattr(st, "secrets") and "GEMINI_MODEL" in st.secrets:
+                model_name = str(st.secrets["GEMINI_MODEL"]).strip()
+        except Exception:
+            pass
+    return model_name or "gemini-3.5-flash-lite"
+
+
+def ensure_gemini_configured() -> tuple[str, str]:
+    api_key = get_gemini_api_key()
+    model_name = get_gemini_model_name()
+    if api_key and api_key != "your_api_key_here":
+        genai.configure(api_key=api_key)
+    return api_key, model_name
 
 
 @lru_cache(maxsize=1)
@@ -180,10 +208,11 @@ def call_gemini_extractor(
     list_of_all_skills: list[str],
 ) -> dict:
     """Gọi Gemini lần 1: điểm số + Skills + Preferred/Excluded."""
-    if not API_KEY or API_KEY == "your_api_key_here":
+    api_key, gemini_model = ensure_gemini_configured()
+    if not api_key or api_key == "your_api_key_here":
         raise RuntimeError(
             "Chưa cấu hình GEMINI_API_KEY. "
-            "Hãy mở file .env và điền API key hợp lệ."
+            "Hãy cài đặt GEMINI_API_KEY trong file .env hoặc Streamlit Cloud Secrets."
         )
 
     prompt = build_extractor_prompt(
@@ -192,7 +221,7 @@ def call_gemini_extractor(
         list_of_all_fields,
         list_of_all_skills,
     )
-    llm = genai.GenerativeModel(GEMINI_MODEL)
+    llm = genai.GenerativeModel(gemini_model)
 
     generation_config = {
         "temperature": 0.3,
@@ -215,15 +244,15 @@ def call_gemini_extractor(
         message = str(exc)
         if "404" in message or "no longer available" in message.lower():
             raise RuntimeError(
-                f"Model `{GEMINI_MODEL}` không khả dụng với API key hiện tại.\n"
-                "- Đổi GEMINI_MODEL trong .env sang: gemini-3.5-flash-lite, "
+                f"Model `{gemini_model}` không khả dụng với API key hiện tại.\n"
+                "- Đổi GEMINI_MODEL sang: gemini-3.5-flash-lite, "
                 "gemini-3.1-flash-lite hoặc gemini-3.5-flash.\n"
                 f"Chi tiết: {message}"
             ) from exc
         if "429" in message or "quota" in message.lower():
             raise RuntimeError(
-                f"Hết quota Gemini cho model `{GEMINI_MODEL}`.\n"
-                "- Đổi GEMINI_MODEL trong .env hoặc kiểm tra quota/billing trên Google AI Studio.\n"
+                f"Hết quota Gemini cho model `{gemini_model}`.\n"
+                "- Đổi GEMINI_MODEL hoặc kiểm tra quota/billing trên Google AI Studio.\n"
                 f"Chi tiết: {message}"
             ) from exc
         raise
@@ -560,11 +589,12 @@ def explain_top_careers_with_gemini(
     """Gemini lần 2: giải thích độ phù hợp của hồ sơ với từng ngành Top 5."""
     explanations = {item["career"]: FALLBACK_CAREER_EXPLAIN for item in top_careers}
 
-    if not API_KEY or API_KEY == "your_api_key_here":
+    api_key, gemini_model = ensure_gemini_configured()
+    if not api_key or api_key == "your_api_key_here":
         return explanations
 
     prompt = _build_career_explain_prompt(features, top_careers)
-    llm = genai.GenerativeModel(GEMINI_MODEL)
+    llm = genai.GenerativeModel(gemini_model)
     generation_config = {
         "temperature": 0.4,
         "max_output_tokens": 2048,
