@@ -61,20 +61,86 @@ FALLBACK_CAREER_EXPLAIN = "Không thể tải phần giải thích lúc này."
 MAX_SKILL_SCORE = 5
 
 
+def validate_user_input(user_input: str) -> tuple[bool, str]:
+    """
+    Kiểm tra tính hợp lệ của bài tự giới thiệu, ngăn chặn nhập lung tung / spam.
+    Trả về (is_valid: bool, error_message: str).
+    """
+    text = (user_input or "").strip()
+
+    # 1. Kiểm tra độ dài tối thiểu
+    if len(text) < MIN_TEXT_LENGTH:
+        return False, f"Văn bản quá ngắn (tối thiểu {MIN_TEXT_LENGTH} ký tự). Hãy mô tả chi tiết hơn về bản thân."
+
+    # 2. Kiểm tra chuỗi ký tự đặc biệt lặp liên tiếp (vd: ::::, """", <<<<, >>>>, ****, ----)
+    if re.search(r'[:<>{}\[\]"\'`!@#$%^&*~+=_\/|\-]{3,}', text) or re.search(r'(""|::|<<|>>)', text):
+        return False, "Văn bản chứa các ký tự đặc biệt lặp lại (ví dụ: ::::, \"\"\"\", <<<<, >>>>). Vui lòng nhập nội dung hợp lệ."
+
+    # 3. Ký tự bất kỳ lặp lại liên tiếp >= 5 lần (vd: aaaaaa, ......, 111111)
+    if re.search(r'(.)\1{4,}', text):
+        return False, "Văn bản chứa các ký tự lặp lại quá nhiều lần (ví dụ: aaaaa, ......). Vui lòng nhập nội dung có ý nghĩa."
+
+    # 4. Chuỗi 2+ ký tự lặp lại liên tiếp >= 3 lần (vd: asdfasdfasdf, 123123123)
+    if re.search(r'(.{2,})\1{2,}', text):
+        return False, "Văn bản chứa chuỗi lặp đi lặp lại vô nghĩa. Vui lòng nhập thông tin mô tả chi tiết."
+
+    # 5. Kiểm tra chữ cái (Unicode alphabet)
+    letters_only = [c for c in text if c.isalpha()]
+    if len(letters_only) < 20:
+        return False, "Văn bản chứa quá ít chữ cái. Vui lòng nhập đầy đủ câu chữ mô tả bản thân."
+
+    letter_ratio = len(letters_only) / len(text)
+    if letter_ratio < 0.40:
+        return False, "Văn bản chứa quá nhiều ký tự đặc biệt, biểu tượng hoặc chữ số. Vui lòng nhập nội dung mô tả bằng lời."
+
+    # 6. Kiểm tra số lượng từ và sự đa dạng từ ngữ
+    words = [w.lower() for w in re.findall(r'[\w\u00C0-\u024F\u1EA0-\u1EF9]+', text) if len(w) > 1]
+    if len(words) < 3:
+        return False, "Văn bản chưa thành câu hoàn chỉnh. Vui lòng nhập câu mô tả có nghĩa."
+
+    if len(words) >= 5:
+        unique_words = set(words)
+        unique_ratio = len(unique_words) / len(words)
+        if unique_ratio < 0.30:
+            return False, "Văn bản bị lặp đi lặp lại một từ quá nhiều lần. Vui lòng mô tả chi tiết và đa dạng hơn."
+
+    return True, ""
+
+
 def build_extractor_prompt(
     user_input: str,
     list_of_all_careers: list[str],
     list_of_all_fields: list[str],
     list_of_all_skills: list[str],
+    extra_info: dict | None = None,
 ) -> str:
     """Tạo prompt Gemini lần 1: điểm số + Skills + Preferred/Excluded."""
     careers_json = json.dumps(list_of_all_careers, ensure_ascii=False)
     fields_json = json.dumps(list_of_all_fields, ensure_ascii=False)
     skills_json = json.dumps(list_of_all_skills, ensure_ascii=False)
 
+    extra_note = ""
+    if extra_info:
+        provided = []
+        if extra_info.get("Field"):
+            provided.append(f"- Chuyên ngành học chọn sẵn: {extra_info['Field']}")
+        if extra_info.get("Projects") is not None and extra_info["Projects"] >= 0:
+            provided.append(f"- Số dự án: {extra_info['Projects']}")
+        if extra_info.get("Internships") is not None and extra_info["Internships"] >= 0:
+            provided.append(f"- Số kỳ thực tập: {extra_info['Internships']}")
+        if extra_info.get("Skills"):
+            provided.append(f"- Kỹ năng đã chọn: {', '.join(extra_info['Skills'])}")
+        if extra_info.get("Preferred_Careers"):
+            provided.append(f"- Ngành ưa thích đã chọn: {', '.join(extra_info['Preferred_Careers'])}")
+        if extra_info.get("Excluded_Careers"):
+            provided.append(f"- Ngành loại trừ đã chọn: {', '.join(extra_info['Excluded_Careers'])}")
+
+        if provided:
+            extra_note = "\n\nTHÔNG TIN BỔ SUNG DO NGƯỜI DÙNG CHỦ ĐỘNG CUNG CẤP TRỰC TIẾP:\n" + "\n".join(provided) + "\nHãy tham khảo các thông tin này để làm căn cứ trích xuất và phân tích lý do (*_Reason) thật phù hợp."
+
     return f"""Bạn là bộ trích xuất đặc trưng hướng nghiệp (NLP Feature Extractor) kèm phân tích sâu (Deep Reasoning).
 Nhiệm vụ: Đọc đoạn văn tự giới thiệu của người dùng, chấm điểm kỹ năng, trích xuất công nghệ/kỹ năng cụ thể (Skills),
-phân tích lý do thật chi tiết, VÀ phát hiện các ngành nghề được ƯU TIÊN/YÊU THÍCH cũng như các ngành nghề bị HẠN CHẾ/KHÔNG THÍCH/TỪ CHỐI.
+phân tích lý do thật chi tiết, VÀ phát hiện các ngành nghề được ƯU TIÊN/YÊU THÍCH cũng như các ngành nghề bị HẠN CHẾ/KHÔNG THÍCH/TỪ CHỐI.{extra_note}
 
 Danh sách ngành nghề hợp lệ (Preferred_Careers / Excluded_Careers phải dùng ĐÚNG tên này):
 {careers_json}
@@ -208,6 +274,7 @@ def call_gemini_extractor(
     list_of_all_careers: list[str],
     list_of_all_fields: list[str],
     list_of_all_skills: list[str],
+    extra_info: dict | None = None,
 ) -> dict:
     """Gọi Gemini lần 1: điểm số + Skills + Preferred/Excluded."""
     api_key, gemini_model = ensure_gemini_configured()
@@ -222,6 +289,7 @@ def call_gemini_extractor(
         list_of_all_careers,
         list_of_all_fields,
         list_of_all_skills,
+        extra_info=extra_info,
     )
     llm = genai.GenerativeModel(gemini_model)
 
@@ -382,6 +450,58 @@ def validate_features(
     normalized["Excluded_Careers"] = excluded
 
     return normalized
+
+
+def apply_extra_user_info(features: dict, extra_info: dict | None = None) -> dict:
+    """
+    Ghi đè hoặc kết hợp các thông tin người dùng nhập thủ công vào dict features
+    đã chuẩn hóa trước khi đưa vào mô hình Random Forest.
+    """
+    if not extra_info:
+        return features
+
+    # Ghi đè Field nếu chọn trực tiếp
+    if extra_info.get("Field"):
+        features["Field"] = extra_info["Field"]
+
+    # Ghi đè Projects / Internships nếu người dùng chỉ định (>= 0)
+    if extra_info.get("Projects") is not None and extra_info["Projects"] >= 0:
+        features["Projects"] = int(extra_info["Projects"])
+    if extra_info.get("Internships") is not None and extra_info["Internships"] >= 0:
+        features["Internships"] = int(extra_info["Internships"])
+
+    # Hợp nhất Skills
+    if extra_info.get("Skills"):
+        skills_set = set(features.get("Skills", []))
+        for s in extra_info["Skills"]:
+            skills_set.add(s)
+        features["Skills"] = list(skills_set)
+
+    # Hợp nhất Ngành nghề ưu tiên (Preferred)
+    if extra_info.get("Preferred_Careers"):
+        pref_set = set(features.get("Preferred_Careers", []))
+        for c in extra_info["Preferred_Careers"]:
+            pref_set.add(c)
+        features["Preferred_Careers"] = list(pref_set)
+
+    # Hợp nhất Ngành nghề loại trừ (Excluded)
+    if extra_info.get("Excluded_Careers"):
+        exc_set = set(features.get("Excluded_Careers", []))
+        for c in extra_info["Excluded_Careers"]:
+            exc_set.add(c)
+        features["Excluded_Careers"] = list(exc_set)
+
+    # Loại trừ ưu tiên hơn Ưu tiên nếu trùng
+    exc_lower = {c.lower() for c in features["Excluded_Careers"]}
+    features["Preferred_Careers"] = [c for c in features["Preferred_Careers"] if c.lower() not in exc_lower]
+
+    # Ghi đè điểm kỹ năng tự chấm
+    if extra_info.get("Manual_Scores"):
+        for score_key, score_val in extra_info["Manual_Scores"].items():
+            if score_key in features and score_val is not None:
+                features[score_key] = min(MAX_SKILL_SCORE, max(0, int(score_val)))
+
+    return features
 
 
 def get_field_categories(field_encoder) -> list[str]:

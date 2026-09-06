@@ -43,6 +43,7 @@ from model import (
     MIN_TEXT_LENGTH,
     SKILL_REASON_KEYS,
     SKILL_UI_LABELS,
+    apply_extra_user_info,
     build_feature_vector,
     call_gemini_extractor,
     explain_top_careers_with_gemini,
@@ -50,6 +51,7 @@ from model import (
     load_ml_artifacts,
     predict_top_careers,
     validate_features,
+    validate_user_input,
 )
 
 
@@ -87,17 +89,6 @@ def render_top_careers(
     """Hiển thị Top 5 ngành nghề với progress bar và giải thích."""
     st.subheader("🎯 Top 5 Ngành Nghề Phù Hợp Nhất")
 
-    # if preferred_careers:
-    #     st.success(
-    #         "🌟 Đã tăng cường độ ưu tiên cho các ngành theo sở thích của bạn: "
-    #         f"{', '.join(preferred_careers)}"
-    #     )
-    # if excluded_careers:
-    #     st.warning(
-    #         "🚫 Hệ thống đã loại trừ các ngành nghề bạn không hứng thú: "
-    #         f"{', '.join(excluded_careers)}"
-    #     )
-
     st.caption(
         "Tỷ lệ % từ Random Forest sau khi lọc (Excluded) và tăng trọng số (Preferred), "
         "đã chuẩn hóa trong Top 5. Đoạn giải thích do Gemini phân tích."
@@ -127,6 +118,21 @@ def render_top_careers(
         st.info(explanation)
 
 
+# Nạp ML Artifacts để lấy vocab dữ liệu cho UI
+try:
+    model, field_encoder, career_encoder, skills_encoder = load_ml_artifacts()
+    list_of_all_careers = list(career_encoder.classes_)
+    list_of_all_fields = get_field_categories(field_encoder)
+    list_of_all_skills = list(skills_encoder.classes_)
+except FileNotFoundError as exc:
+    st.error(str(exc))
+    st.stop()
+except Exception as exc:  # noqa: BLE001
+    st.error(f"Không thể nạp hoặc đọc model/encoder: {exc}")
+    st.exception(exc)
+    st.stop()
+
+
 st.title("🧭 Career Student AI")
 st.markdown(
     """
@@ -139,12 +145,62 @@ Hãy chia sẻ về ngành học, công nghệ bạn từng dùng, dự án, th�
 
 user_bio = st.text_area(
     "Đoạn văn tự giới thiệu",
-    height=220,
+    height=200,
     placeholder=(
         "Ví dụ: Em đang học CNTT, thích làm backend với Python và Docker, "
         "đã làm 3 dự án web và 1 kỳ thực tập. Không thích làm marketing hay kế toán..."
     ),
 )
+
+# Form thông tin bổ sung tùy chọn giúp tăng độ chính xác
+with st.expander("🛠️ Cung cấp thêm thông tin chi tiết (Tùy chọn - Giúp tăng độ chính xác dự đoán)", expanded=False):
+    st.caption("Nếu bài viết chưa nêu rõ, bạn có thể chọn thủ công các thông tin dưới đây để hệ thống nhận diện chính xác hơn.")
+    col1, col2 = st.columns(2)
+    with col1:
+        field_options = ["-- Tự động nhận diện qua bài viết --"] + list_of_all_fields
+        selected_field_option = st.selectbox("Chuyên ngành học (Field)", field_options)
+        user_field = selected_field_option if selected_field_option != field_options[0] else None
+
+        user_projects = st.number_input(
+            "Số lượng dự án đã làm",
+            min_value=-1,
+            max_value=50,
+            value=-1,
+            help="-1 nghĩa là tự động nhận diện từ bài viết",
+        )
+    with col2:
+        user_skills = st.multiselect("Kỹ năng / Công nghệ đã sử dụng", options=list_of_all_skills)
+        user_internships = st.number_input(
+            "Số kỳ thực tập",
+            min_value=-1,
+            max_value=20,
+            value=-1,
+            help="-1 nghĩa là tự động nhận diện từ bài viết",
+        )
+
+    col3, col4 = st.columns(2)
+    with col3:
+        user_preferred = st.multiselect("Ngành nghề mong muốn / Ưu tiên", options=list_of_all_careers)
+    with col4:
+        user_excluded = st.multiselect("Ngành nghề muốn loại trừ / Không thích", options=list_of_all_careers)
+
+    enable_manual_scores = st.checkbox("Tự đánh giá thang điểm 4 kỹ năng (0–5)")
+    user_manual_scores = None
+    if enable_manual_scores:
+        s_col1, s_col2 = st.columns(2)
+        with s_col1:
+            prof_score = st.slider("💻 Kỹ năng Chuyên môn (Professional)", 0, 5, 3)
+            comm_score = st.slider("🗣️ Kỹ năng Giao tiếp (Communication)", 0, 5, 3)
+        with s_col2:
+            prob_score = st.slider("🧩 Kỹ năng Giải quyết vấn đề (Problem Solving)", 0, 5, 3)
+            team_score = st.slider("🤝 Kỹ năng Làm việc nhóm (Teamwork)", 0, 5, 3)
+
+        user_manual_scores = {
+            "Professional Skills": prof_score,
+            "Communication Skills": comm_score,
+            "Problem Solving Skills": prob_score,
+            "Teamwork Skills": team_score,
+        }
 
 analyze_clicked = st.button(
     "Phân tích và Gợi ý nghề nghiệp",
@@ -155,27 +211,21 @@ analyze_clicked = st.button(
 if analyze_clicked:
     cleaned_bio = (user_bio or "").strip()
 
-    if len(cleaned_bio) < MIN_TEXT_LENGTH:
-        st.error(
-            f"Văn bản quá ngắn (tối thiểu {MIN_TEXT_LENGTH} ký tự). "
-            "Hãy mô tả rõ hơn về sở thích, kỹ năng và kinh nghiệm của bạn."
-        )
+    # 1. Kiểm tra Anti-Spam & Ký tự đặc biệt
+    is_valid, err_msg = validate_user_input(cleaned_bio)
+    if not is_valid:
+        st.error(f"⚠️ **Không thể phân tích**: {err_msg}")
         st.stop()
 
-    try:
-        model, field_encoder, career_encoder, skills_encoder = load_ml_artifacts()
-        # Các thuộc tính này sẽ báo lỗi nếu file .pkl trên Drive được train theo
-        # schema/loại encoder cũ, nên phải nằm trong cùng khối chẩn đoán.
-        list_of_all_careers = list(career_encoder.classes_)
-        list_of_all_fields = get_field_categories(field_encoder)
-        list_of_all_skills = list(skills_encoder.classes_)
-    except FileNotFoundError as exc:
-        st.error(str(exc))
-        st.stop()
-    except Exception as exc:  # noqa: BLE001
-        st.error(f"Không thể nạp hoặc đọc model/encoder: {exc}")
-        st.exception(exc)
-        st.stop()
+    extra_info = {
+        "Field": user_field,
+        "Projects": user_projects if user_projects >= 0 else None,
+        "Internships": user_internships if user_internships >= 0 else None,
+        "Skills": user_skills,
+        "Preferred_Careers": user_preferred,
+        "Excluded_Careers": user_excluded,
+        "Manual_Scores": user_manual_scores,
+    }
 
     with st.spinner(
         "Đang phân tích chuyên sâu hồ sơ bằng AI. Quá trình có thể mất khoảng một phút, vui lòng chờ..."
@@ -186,6 +236,7 @@ if analyze_clicked:
                 list_of_all_careers,
                 list_of_all_fields,
                 list_of_all_skills,
+                extra_info=extra_info,
             )
         except json.JSONDecodeError:
             st.error(
@@ -205,6 +256,8 @@ if analyze_clicked:
             list_of_all_careers,
             valid_skills=list_of_all_skills,
         )
+        # Ghi đè / hợp nhất thông tin bổ sung người dùng cung cấp
+        features = apply_extra_user_info(features, extra_info)
     except (KeyError, TypeError, ValueError) as exc:
         st.error(f"JSON trích xuất không hợp lệ: {exc}")
         st.exception(exc)
