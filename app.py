@@ -23,13 +23,17 @@ DRIVE_FILES = {
 }
 
 @st.cache_resource
-def download_models():
+def download_models(force_download=False):
     for file_name, file_id in DRIVE_FILES.items():
+        # Nếu truyền force_download=True hoặc file chưa tồn tại -> Xóa file cũ và tải lại
+        if force_download and os.path.exists(file_name):
+            os.remove(file_name)
+            
         if not os.path.exists(file_name):
             gdown.download(id=file_id, output=file_name, quiet=False)
 
-# Tải file về nếu chưa có
-download_models()
+# Đặt force_download=True một lần để xóa file 3GB cũ và tải file nén mới
+download_models(force_download=True)
 
 from model import (
     FALLBACK_CAREER_EXPLAIN,
