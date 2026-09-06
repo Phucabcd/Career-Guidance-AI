@@ -22,6 +22,17 @@ st.set_page_config(
     layout="centered",
 )
 
+st.title("🧭 Career Guidance AI")
+st.markdown(
+    """
+Hệ thống gợi ý hướng nghiệp kết hợp **Gemini LLM** (trích xuất kỹ năng + Skills công nghệ)
+và **Random Forest** (dự đoán ngành nghề phù hợp từ dataset IT mở rộng).
+
+Hãy kể về bản thân: ngành học, sở thích, công nghệ (Python, Java, Docker,...),
+dự án, thực tập. Có thể nêu rõ ngành **thích** / **không thích**.
+"""
+)
+
 BASE_DIR = Path(__file__).resolve().parent
 MODELS_DIR = BASE_DIR / "models"
 
@@ -46,17 +57,18 @@ def download_models(force_download=False):
             
         if not file_path.exists() or file_path.stat().st_size == 0:
             try:
-                gdown.download(id=file_id, output=str(file_path), quiet=False)
+                gdown.download(id=file_id, output=str(file_path), quiet=True)
             except Exception as exc:
                 print(f"Lỗi khi tải file {file_name} từ Drive (by id): {exc}")
                 try:
                     url = f"https://drive.google.com/uc?id={file_id}"
-                    gdown.download(url=url, output=str(file_path), quiet=False)
+                    gdown.download(url=url, output=str(file_path), quiet=True)
                 except Exception as exc2:
                     print(f"Lỗi khi tải file {file_name} từ Drive (by url): {exc2}")
 
 # Tải các file pkl vào thư mục models/ nếu chưa có
-download_models(force_download=False)
+with st.spinner("Đang tải dữ liệu mô hình từ Google Drive (lần đầu tiên có thể mất 30-60 giây)..."):
+    download_models(force_download=False)
 
 # Kiểm tra tất cả file pkl thực sự xuất hiện trong thư mục models/
 required_files = ['rf_model.pkl', 'field_encoder.pkl', 'career_encoder.pkl', 'skills_encoder.pkl']
@@ -151,19 +163,9 @@ def render_top_careers(
         progress_value = min(1.0, max(0.0, percent / 100.0))
         explanation = career_explanations.get(career, FALLBACK_CAREER_EXPLAIN)
 
-        st.markdown(f"**#{rank} — {career}** · `{percent}%`")
         st.progress(progress_value)
+        st.info(explanation)
 
-st.title("🧭 Career Guidance AI")
-st.markdown(
-    """
-Hệ thống gợi ý hướng nghiệp kết hợp **Gemini LLM** (trích xuất kỹ năng + Skills công nghệ)
-và **Random Forest** (dự đoán ngành nghề phù hợp từ dataset IT mở rộng).
-
-Hãy kể về bản thân: ngành học, sở thích, công nghệ (Python, Java, Docker,...),
-dự án, thực tập. Có thể nêu rõ ngành **thích** / **không thích**.
-"""
-)
 
 user_bio = st.text_area(
     "Đoạn văn tự giới thiệu",
