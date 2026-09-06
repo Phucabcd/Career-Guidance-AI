@@ -16,6 +16,12 @@ import time
 import gdown
 import streamlit as st
 
+st.set_page_config(
+    page_title="Career Guidance AI",
+    page_icon="🧭",
+    layout="centered",
+)
+
 BASE_DIR = Path(__file__).resolve().parent
 MODELS_DIR = BASE_DIR / "models"
 
@@ -33,19 +39,25 @@ def download_models(force_download=False):
     for file_name, file_id in DRIVE_FILES.items():
         file_path = MODELS_DIR / file_name
         if force_download and file_path.exists():
-            file_path.unlink()
+            try:
+                file_path.unlink()
+            except Exception:
+                pass
             
-        if not file_path.exists():
-            gdown.download(id=file_id, output=str(file_path), quiet=False)
+        if not file_path.exists() or file_path.stat().st_size == 0:
+            try:
+                gdown.download(id=file_id, output=str(file_path), quiet=False, fuzzy=True)
+            except Exception as exc:
+                print(f"Lỗi khi tải file {file_name} từ Drive: {exc}")
 
 # Tải các file pkl vào thư mục models/ nếu chưa có
 download_models(force_download=False)
 
 # Kiểm tra tất cả file pkl thực sự xuất hiện trong thư mục models/
 required_files = ['rf_model.pkl', 'field_encoder.pkl', 'career_encoder.pkl', 'skills_encoder.pkl']
-missing_files = [f for f in required_files if not (MODELS_DIR / f).exists()]
+missing_files = [f for f in required_files if not (MODELS_DIR / f).exists() or (MODELS_DIR / f).stat().st_size == 0]
 if missing_files:
-    st.error(f"Thiếu file model trong `{MODELS_DIR}`: {', '.join(missing_files)}. Vui lòng kiểm tra quá trình tải file.")
+    st.error(f"Thiếu hoặc lỗi file model trong `{MODELS_DIR}`: {', '.join(missing_files)}. Vui lòng kiểm tra lại quá trình tải file.")
     st.stop()
 
 from model import (
@@ -135,14 +147,6 @@ def render_top_careers(
 
         st.markdown(f"**#{rank} — {career}** · `{percent}%`")
         st.progress(progress_value)
-        st.info(explanation)
-
-
-st.set_page_config(
-    page_title="Career Guidance AI",
-    page_icon="🧭",
-    layout="centered",
-)
 
 st.title("🧭 Career Guidance AI")
 st.markdown(
