@@ -9,33 +9,10 @@ Chạy:
 
 from __future__ import annotations
 
-from pathlib import Path
 import json
 import os
-import time
-import urllib.request
 import gdown
 import streamlit as st
-
-st.set_page_config(
-    page_title="Career Guidance AI",
-    page_icon="🧭",
-    layout="centered",
-)
-
-st.title("🧭 Career Guidance AI")
-st.markdown(
-    """
-Hệ thống gợi ý hướng nghiệp kết hợp **Gemini LLM** (trích xuất kỹ năng + Skills công nghệ)
-và **Random Forest** (dự đoán ngành nghề phù hợp từ dataset IT mở rộng).
-
-Hãy kể về bản thân: ngành học, sở thích, công nghệ (Python, Java, Docker,...),
-dự án, thực tập. Có thể nêu rõ ngành **thích** / **không thích**.
-"""
-)
-
-BASE_DIR = Path(__file__).resolve().parent
-MODELS_DIR = BASE_DIR / "models"
 
 DRIVE_FILES = {
     'rf_model.pkl': '1hAQtY2XCos9E_Qt_ulao2tKu5vzu_1BQ',
@@ -45,88 +22,18 @@ DRIVE_FILES = {
     'model_meta.pkl': '1DhSaxA9plg5DJIC_P3XkrHdQSmtmPEY0',
 }
 
-MIN_FILE_SIZES = {
-    'rf_model.pkl': 5_000_000,       # ~41MB
-    'field_encoder.pkl': 500,        # ~1.8KB
-    'career_encoder.pkl': 1_000,     # ~5.1KB
-    'skills_encoder.pkl': 5_000,     # ~29KB
-    'model_meta.pkl': 50,            # ~160B
-}
-
-
-def is_file_valid(file_path: Path, min_size: int) -> bool:
-    return file_path.exists() and file_path.stat().st_size >= min_size
-
-
-def download_single_file(file_name: str, file_id: str, file_path: Path, min_size: int) -> str | None:
-    urls_to_try = [
-        f"https://drive.usercontent.google.com/download?id={file_id}&confirm=t",
-        f"https://drive.google.com/uc?export=download&confirm=t&id={file_id}",
-        f"https://drive.google.com/uc?id={file_id}",
-    ]
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
-
-    for attempt_idx, url in enumerate(urls_to_try, start=1):
-        try:
-            req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=120) as resp, open(str(file_path), "wb") as out_file:
-                out_file.write(resp.read())
-            
-            if is_file_valid(file_path, min_size):
-                return None
-        except Exception as exc:
-            print(f"[Thử lần {attempt_idx}] Lỗi tải {file_name} từ {url}: {exc}")
-            time.sleep(1)
-
-    try:
-        gdown.download(id=file_id, output=str(file_path), quiet=True)
-        if is_file_valid(file_path, min_size):
-            return None
-    except Exception as exc:
-        print(f"Lỗi gdown {file_name}: {exc}")
-
-    size_now = file_path.stat().st_size if file_path.exists() else 0
-    return f"Tải {file_name} thất bại (Dung lượng: {size_now} B / Cần tối thiểu {min_size} B)"
-
-
 @st.cache_resource
-def download_models(force_download=False) -> list[str]:
-    MODELS_DIR.mkdir(parents=True, exist_ok=True)
-    errors: list[str] = []
+def download_models(force_download=False):
     for file_name, file_id in DRIVE_FILES.items():
-        file_path = MODELS_DIR / file_name
-        min_size = MIN_FILE_SIZES.get(file_name, 50)
-        
-        if force_download and file_path.exists():
-            try:
-                file_path.unlink()
-            except Exception:
-                pass
+        # Nếu truyền force_download=True hoặc file chưa tồn tại -> Xóa file cũ và tải lại
+        if force_download and os.path.exists(file_name):
+            os.remove(file_name)
             
-        if not is_file_valid(file_path, min_size):
-            err = download_single_file(file_name, file_id, file_path, min_size)
-            if err:
-                errors.append(err)
+        if not os.path.exists(file_name):
+            gdown.download(id=file_id, output=file_name, quiet=False)
 
-    return errors
-
-# Tải các file pkl vào thư mục models/ nếu chưa có
-required_files = ['rf_model.pkl', 'field_encoder.pkl', 'career_encoder.pkl', 'skills_encoder.pkl']
-missing_files = [f for f in required_files if not is_file_valid(MODELS_DIR / f, MIN_FILE_SIZES.get(f, 50))]
-download_errors: list[str] = []
-
-if missing_files:
-    with st.spinner("Đang tải dữ liệu mô hình từ Google Drive (lần đầu tiên có thể mất 30-60 giây)..."):
-        download_errors = download_models(force_download=False)
-        missing_files = [f for f in required_files if not is_file_valid(MODELS_DIR / f, MIN_FILE_SIZES.get(f, 50))]
-
-if missing_files:
-    st.cache_resource.clear()
-    st.error(f"❌ Thiếu hoặc lỗi file model trong `{MODELS_DIR}`: {', '.join(missing_files)}.")
-    if download_errors:
-        st.error("Chi tiết lỗi khi tải file:")
-        st.write(download_errors)
-    st.stop()
+# Đặt force_download=True một lần để xóa file 3GB cũ và tải file nén mới
+download_models(force_download=True)
 
 from model import (
     FALLBACK_CAREER_EXPLAIN,
@@ -213,9 +120,27 @@ def render_top_careers(
         progress_value = min(1.0, max(0.0, percent / 100.0))
         explanation = career_explanations.get(career, FALLBACK_CAREER_EXPLAIN)
 
+        st.markdown(f"**#{rank} — {career}** · `{percent}%`")
         st.progress(progress_value)
         st.info(explanation)
 
+
+st.set_page_config(
+    page_title="Career Guidance AI",
+    page_icon="🧭",
+    layout="centered",
+)
+
+st.title("🧭 Career Guidance AI")
+st.markdown(
+    """
+Hệ thống gợi ý hướng nghiệp kết hợp **Gemini LLM** (trích xuất kỹ năng + Skills công nghệ)
+và **Random Forest** (dự đoán ngành nghề phù hợp từ dataset IT mở rộng).
+
+Hãy kể về bản thân: ngành học, sở thích, công nghệ (Python, Java, Docker,...),
+dự án, thực tập. Có thể nêu rõ ngành **thích** / **không thích**.
+"""
+)
 
 user_bio = st.text_area(
     "Đoạn văn tự giới thiệu",
