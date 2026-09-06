@@ -178,10 +178,19 @@ def load_ml_artifacts() -> tuple:
             + ". Hãy chạy `python train_model.py` trước."
         )
 
-    model = joblib.load(model_path)
-    field_encoder = joblib.load(field_path)
-    career_encoder = joblib.load(career_path)
-    skills_encoder = joblib.load(skills_path)
+    try:
+        model = joblib.load(model_path)
+        field_encoder = joblib.load(field_path)
+        career_encoder = joblib.load(career_path)
+        skills_encoder = joblib.load(skills_path)
+    except Exception as exc:
+        for p in (model_path, field_path, career_path, skills_path):
+            if p.exists() and (p.stat().st_size < 1_000_000 and p.name == "rf_model.pkl"):
+                try:
+                    p.unlink()
+                except Exception:
+                    pass
+        raise RuntimeError(f"Lỗi khi đọc file model (file tải về có thể bị lỗi): {exc}") from exc
     return model, field_encoder, career_encoder, skills_encoder
 
 

@@ -13,6 +13,7 @@ from pathlib import Path
 import json
 import os
 import time
+import urllib.request
 import gdown
 import streamlit as st
 
@@ -44,35 +45,56 @@ DRIVE_FILES = {
     'model_meta.pkl': '1DhSaxA9plg5DJIC_P3XkrHdQSmtmPEY0',
 }
 
+MIN_FILE_SIZES = {
+    'rf_model.pkl': 5_000_000,       # ~41MB
+    'field_encoder.pkl': 500,        # ~1.8KB
+    'career_encoder.pkl': 1_000,     # ~5.1KB
+    'skills_encoder.pkl': 5_000,     # ~29KB
+    'model_meta.pkl': 50,            # ~160B
+}
+
+
+def is_file_valid(file_path: Path, min_size: int) -> bool:
+    return file_path.exists() and file_path.stat().st_size >= min_size
+
+
 @st.cache_resource
 def download_models(force_download=False):
     MODELS_DIR.mkdir(parents=True, exist_ok=True)
     for file_name, file_id in DRIVE_FILES.items():
         file_path = MODELS_DIR / file_name
+        min_size = MIN_FILE_SIZES.get(file_name, 50)
+        
         if force_download and file_path.exists():
             try:
                 file_path.unlink()
             except Exception:
                 pass
             
-        if not file_path.exists() or file_path.stat().st_size == 0:
+        if not is_file_valid(file_path, min_size):
+            # Cách 1: Tải bằng urllib với query confirm=t (tránh trang cảnh báo virus cho file lớn)
             try:
-                gdown.download(id=file_id, output=str(file_path), quiet=True)
+                url = f"https://drive.google.com/uc?export=download&confirm=t&id={file_id}"
+                urllib.request.urlretrieve(url, str(file_path))
             except Exception as exc:
-                print(f"Lỗi khi tải file {file_name} từ Drive (by id): {exc}")
+                print(f"Lỗi urllib khi tải {file_name}: {exc}")
+
+            # Cách 2: Nếu chưa đạt dung lượng tối thiểu, thử lại bằng gdown
+            if not is_file_valid(file_path, min_size):
                 try:
-                    url = f"https://drive.google.com/uc?id={file_id}"
-                    gdown.download(url=url, output=str(file_path), quiet=True)
+                    gdown.download(id=file_id, output=str(file_path), quiet=True)
                 except Exception as exc2:
-                    print(f"Lỗi khi tải file {file_name} từ Drive (by url): {exc2}")
+                    print(f"Lỗi gdown khi tải {file_name}: {exc2}")
 
 # Tải các file pkl vào thư mục models/ nếu chưa có
-with st.spinner("Đang tải dữ liệu mô hình từ Google Drive (lần đầu tiên có thể mất 30-60 giây)..."):
-    download_models(force_download=False)
-
-# Kiểm tra tất cả file pkl thực sự xuất hiện trong thư mục models/
 required_files = ['rf_model.pkl', 'field_encoder.pkl', 'career_encoder.pkl', 'skills_encoder.pkl']
-missing_files = [f for f in required_files if not (MODELS_DIR / f).exists() or (MODELS_DIR / f).stat().st_size == 0]
+missing_files = [f for f in required_files if not is_file_valid(MODELS_DIR / f, MIN_FILE_SIZES.get(f, 50))]
+
+if missing_files:
+    with st.spinner("Đang tải dữ liệu mô hình từ Google Drive (lần đầu tiên có thể mất 30-60 giây)..."):
+        download_models(force_download=False)
+        missing_files = [f for f in required_files if not is_file_valid(MODELS_DIR / f, MIN_FILE_SIZES.get(f, 50))]
+
 if missing_files:
     st.cache_resource.clear()
     st.error(f"Thiếu hoặc lỗi file model trong `{MODELS_DIR}`: {', '.join(missing_files)}. Vui lòng kiểm tra lại quá trình tải file.")
