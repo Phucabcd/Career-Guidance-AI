@@ -58,6 +58,37 @@ def is_file_valid(file_path: Path, min_size: int) -> bool:
     return file_path.exists() and file_path.stat().st_size >= min_size
 
 
+def download_single_file(file_name: str, file_id: str, file_path: Path, min_size: int) -> str | None:
+    urls_to_try = [
+        f"https://drive.usercontent.google.com/download?id={file_id}&confirm=t",
+        f"https://drive.google.com/uc?export=download&confirm=t&id={file_id}",
+        f"https://drive.google.com/uc?id={file_id}",
+    ]
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+
+    for attempt_idx, url in enumerate(urls_to_try, start=1):
+        try:
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=120) as resp, open(str(file_path), "wb") as out_file:
+                out_file.write(resp.read())
+            
+            if is_file_valid(file_path, min_size):
+                return None
+        except Exception as exc:
+            print(f"[Thử lần {attempt_idx}] Lỗi tải {file_name} từ {url}: {exc}")
+            time.sleep(1)
+
+    try:
+        gdown.download(id=file_id, output=str(file_path), quiet=True)
+        if is_file_valid(file_path, min_size):
+            return None
+    except Exception as exc:
+        print(f"Lỗi gdown {file_name}: {exc}")
+
+    size_now = file_path.stat().st_size if file_path.exists() else 0
+    return f"Tải {file_name} thất bại (Dung lượng: {size_now} B / Cần tối thiểu {min_size} B)"
+
+
 @st.cache_resource
 def download_models(force_download=False) -> list[str]:
     MODELS_DIR.mkdir(parents=True, exist_ok=True)
@@ -73,24 +104,9 @@ def download_models(force_download=False) -> list[str]:
                 pass
             
         if not is_file_valid(file_path, min_size):
-            # Cách 1: Tải bằng urllib kèm User-Agent & confirm=t
-            try:
-                url = f"https://drive.google.com/uc?export=download&confirm=t&id={file_id}"
-                req = urllib.request.Request(
-                    url,
-                    headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
-                )
-                with urllib.request.urlopen(req, timeout=120) as resp, open(str(file_path), "wb") as out_file:
-                    out_file.write(resp.read())
-            except Exception as exc:
-                errors.append(f"Lỗi urllib ({file_name}): {exc}")
-
-            # Cách 2: Nếu urllib lỗi, thử lại bằng gdown
-            if not is_file_valid(file_path, min_size):
-                try:
-                    gdown.download(id=file_id, output=str(file_path), quiet=True)
-                except Exception as exc2:
-                    errors.append(f"Lỗi gdown ({file_name}): {exc2}")
+            err = download_single_file(file_name, file_id, file_path, min_size)
+            if err:
+                errors.append(err)
 
     return errors
 
