@@ -46,9 +46,14 @@ def download_models(force_download=False):
             
         if not file_path.exists() or file_path.stat().st_size == 0:
             try:
-                gdown.download(id=file_id, output=str(file_path), quiet=False, fuzzy=True)
+                gdown.download(id=file_id, output=str(file_path), quiet=False)
             except Exception as exc:
-                print(f"Lỗi khi tải file {file_name} từ Drive: {exc}")
+                print(f"Lỗi khi tải file {file_name} từ Drive (by id): {exc}")
+                try:
+                    url = f"https://drive.google.com/uc?id={file_id}"
+                    gdown.download(url=url, output=str(file_path), quiet=False)
+                except Exception as exc2:
+                    print(f"Lỗi khi tải file {file_name} từ Drive (by url): {exc2}")
 
 # Tải các file pkl vào thư mục models/ nếu chưa có
 download_models(force_download=False)
@@ -57,6 +62,7 @@ download_models(force_download=False)
 required_files = ['rf_model.pkl', 'field_encoder.pkl', 'career_encoder.pkl', 'skills_encoder.pkl']
 missing_files = [f for f in required_files if not (MODELS_DIR / f).exists() or (MODELS_DIR / f).stat().st_size == 0]
 if missing_files:
+    st.cache_resource.clear()
     st.error(f"Thiếu hoặc lỗi file model trong `{MODELS_DIR}`: {', '.join(missing_files)}. Vui lòng kiểm tra lại quá trình tải file.")
     st.stop()
 
