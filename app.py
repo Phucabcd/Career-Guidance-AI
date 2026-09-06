@@ -11,24 +11,21 @@ from __future__ import annotations
 
 import json
 import os
-# pyrefly: ignore [missing-import]
 import gdown
 import streamlit as st
 
 DRIVE_FILES = {
-    'rf_model.pkl': 'https://drive.google.com/file/d/1_bfY0kvDteWEJMmOFdI-9Opb_VTQggWi/view?usp=sharing',
-    'field_encoder.pkl': 'https://drive.google.com/file/d/15Wltgk6UqAHwpITrQwpJsgcs3S1fK_Z9/view?usp=sharing',
-    'career_encoder.pkl': 'https://drive.google.com/file/d/1YtvmsdK6Zp_zsb6gxow5vT3hT11gz99H/view?usp=sharing',
-    'skills_encoder.pkl': 'https://drive.google.com/file/d/1RH62HihwFUXpHSA6lobB4DBiQsqCHuVb/view?usp=sharing',
+    'rf_model.pkl': '1_bfY0kvDteWEJMmOFdI-9Opb_VTQggWi',
+    'field_encoder.pkl': '15Wltgk6UqAHwpITrQwpJsgcs3S1fK_Z9',
+    'career_encoder.pkl': '1YtvmsdK6Zp_zsb6gxow5vT3hT11gz99H',
+    'skills_encoder.pkl': '1RH62HihwFUXpHSA6lobB4DBiQsqCHuVb',
 }
 
 @st.cache_resource
 def download_models():
     for file_name, file_id in DRIVE_FILES.items():
         if not os.path.exists(file_name):
-            url = f'https://drive.google.com/uc?id={file_id}'
-            st.info(f"Đang tải {file_name} từ Google Drive...")
-            gdown.download(url, file_name, quiet=False)
+            gdown.download(id=file_id, output=file_name, quiet=False)
 
 # Tải file về nếu chưa có
 download_models()
