@@ -133,12 +133,6 @@ def render_top_careers(
         st.info(explanation)
 
 
-st.set_page_config(
-    page_title="Career Guidance AI",
-    page_icon="🧭",
-    layout="centered",
-)
-
 st.title("🧭 Career Guidance AI")
 st.markdown(
     """
