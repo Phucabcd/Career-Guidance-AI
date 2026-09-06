@@ -171,18 +171,18 @@ if analyze_clicked:
 
     try:
         model, field_encoder, career_encoder, skills_encoder = load_ml_artifacts()
+        # Các thuộc tính này sẽ báo lỗi nếu file .pkl trên Drive được train theo
+        # schema/loại encoder cũ, nên phải nằm trong cùng khối chẩn đoán.
+        list_of_all_careers = list(career_encoder.classes_)
+        list_of_all_fields = get_field_categories(field_encoder)
+        list_of_all_skills = list(skills_encoder.classes_)
     except FileNotFoundError as exc:
         st.error(str(exc))
         st.stop()
     except Exception as exc:  # noqa: BLE001
-        st.error(f"Không load được model/encoder: {exc}")
+        st.error(f"Không thể nạp hoặc đọc model/encoder: {exc}")
+        st.exception(exc)
         st.stop()
-
-    list_of_all_careers = list(career_encoder.classes_)
-    # field_encoder giờ là OneHotEncoder -> dùng get_field_categories() thay vì
-    # .classes_ (chỉ LabelEncoder mới có thuộc tính đó)
-    list_of_all_fields = get_field_categories(field_encoder)
-    list_of_all_skills = list(skills_encoder.classes_)
 
     with st.spinner("Đang phân tích hồ sơ..."):
         try:
@@ -201,6 +201,7 @@ if analyze_clicked:
             st.stop()
         except Exception as exc:  # noqa: BLE001
             st.error(f"Lỗi khi gọi Gemini API: {exc}")
+            st.exception(exc)
             st.stop()
 
     try:
@@ -211,6 +212,7 @@ if analyze_clicked:
         )
     except (KeyError, TypeError, ValueError) as exc:
         st.error(f"JSON trích xuất không hợp lệ: {exc}")
+        st.exception(exc)
         st.json(raw_features)
         st.stop()
 
@@ -234,6 +236,7 @@ if analyze_clicked:
         )
     except Exception as exc:  # noqa: BLE001
         st.error(f"Lỗi khi dự đoán nghề nghiệp: {exc}")
+        st.exception(exc)
         st.stop()
 
     with st.spinner("AI đang phân tích độ phù hợp của bạn với từng ngành nghề..."):
