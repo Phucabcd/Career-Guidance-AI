@@ -9,6 +9,7 @@ Chạy:
 
 from __future__ import annotations
 
+from pathlib import Path
 import json
 import os
 import gdown
@@ -22,18 +23,19 @@ DRIVE_FILES = {
     'model_meta.pkl': '1DhSaxA9plg5DJIC_P3XkrHdQSmtmPEY0',
 }
 
-@st.cache_resource
-def download_models(force_download=False):
-    for file_name, file_id in DRIVE_FILES.items():
-        # Nếu truyền force_download=True hoặc file chưa tồn tại -> Xóa file cũ và tải lại
-        if force_download and os.path.exists(file_name):
-            os.remove(file_name)
-            
-        if not os.path.exists(file_name):
-            gdown.download(id=file_id, output=file_name, quiet=False)
 
-# Đặt force_download=True một lần để xóa file 3GB cũ và tải file nén mới
-download_models(force_download=True)
+MODELS_DIR = Path(__file__).resolve().parent / "models"
+MODELS_DIR.mkdir(exist_ok=True)
+
+@st.cache_resource
+def download_models():
+    for file_name, file_id in DRIVE_FILES.items():
+        output_path = MODELS_DIR / file_name
+        if not output_path.exists():
+            gdown.download(id=file_id, output=str(output_path), quiet=False)
+
+download_models()
+
 
 from model import (
     FALLBACK_CAREER_EXPLAIN,
