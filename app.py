@@ -127,14 +127,13 @@ def render_top_careers(
         st.info(explanation)
 
 
-st.title("🧭 Career Guidance AI")
+st.title("🧭 Career Student AI")
 st.markdown(
     """
-Hệ thống gợi ý hướng nghiệp kết hợp **Gemini LLM** (trích xuất kỹ năng + Skills công nghệ)
-và **Random Forest** (dự đoán ngành nghề phù hợp từ dataset IT mở rộng).
+Khám phá hướng nghề nghiệp phù hợp với bạn  
+Hệ thống sử dụng AI Gemini để phân tích kỹ năng, sở thích và trải nghiệm của bạn, sau đó kết hợp mô hình Random Forest để đề xuất những lĩnh vực nghề nghiệp phù hợp nhất.
 
-Hãy kể về bản thân: ngành học, sở thích, công nghệ (Python, Java, Docker,...),
-dự án, thực tập. Có thể nêu rõ ngành **thích** / **không thích**.
+Hãy chia sẻ về ngành học, công nghệ bạn từng dùng, dự án, thực tập, điểm mạnh, sở thích và cả những công việc bạn không muốn theo đuổi. Càng cụ thể, gợi ý càng sát với bạn.
 """
 )
 
@@ -178,7 +177,9 @@ if analyze_clicked:
         st.exception(exc)
         st.stop()
 
-    with st.spinner("Đang phân tích hồ sơ..."):
+    with st.spinner(
+        "Đang phân tích chuyên sâu hồ sơ bằng AI. Quá trình có thể mất khoảng một phút, vui lòng chờ..."
+    ):
         try:
             raw_features = call_gemini_extractor(
                 cleaned_bio,
@@ -233,7 +234,9 @@ if analyze_clicked:
         st.exception(exc)
         st.stop()
 
-    with st.spinner("AI đang phân tích độ phù hợp của bạn với từng ngành nghề..."):
+    with st.spinner(
+        "Đang tạo phần giải thích cho các nghề phù hợp nhất. Sắp hoàn tất, vui lòng chờ..."
+    ):
         career_explanations = explain_top_careers_with_gemini(features, top_careers)
 
     render_profile_dashboard(features)
