@@ -183,6 +183,7 @@ def load_ml_artifacts() -> tuple:
     field_encoder = joblib.load(field_path)
     career_encoder = joblib.load(career_path)
     skills_encoder = joblib.load(skills_path)
+    model.n_jobs = 1
     return model, field_encoder, career_encoder, skills_encoder
 
 
