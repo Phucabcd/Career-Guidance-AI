@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import os
+import time
 import gdown
 import streamlit as st
 
@@ -34,6 +35,11 @@ def download_models(force_download=False):
 
 # Đặt force_download=True một lần để xóa file 3GB cũ và tải file nén mới
 download_models(force_download=True)
+
+# Tạo vòng lặp đợi cho đến khi tất cả các file pkl thực sự xuất hiện trên đĩa
+required_files = ['rf_model.pkl', 'field_encoder.pkl', 'career_encoder.pkl', 'skills_encoder.pkl']
+while not all(os.path.exists(f) for f in required_files):
+    time.sleep(1)  # Đợi 1 giây rồi kiểm tra lại
 
 from model import (
     FALLBACK_CAREER_EXPLAIN,
