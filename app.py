@@ -15,10 +15,11 @@ import gdown
 import streamlit as st
 
 DRIVE_FILES = {
-    'rf_model.pkl': '1_bfY0kvDteWEJMmOFdI-9Opb_VTQggWi',
-    'field_encoder.pkl': '15Wltgk6UqAHwpITrQwpJsgcs3S1fK_Z9',
-    'career_encoder.pkl': '1YtvmsdK6Zp_zsb6gxow5vT3hT11gz99H',
-    'skills_encoder.pkl': '1RH62HihwFUXpHSA6lobB4DBiQsqCHuVb',
+    'rf_model.pkl': '1hAQtY2XCos9E_Qt_ulao2tKu5vzu_1BQ',
+    'field_encoder.pkl': '1zw4tL7hnGxx0P0ODIZobBGjfRveBn_tQ',
+    'career_encoder.pkl': '1ky6G0V6I5PvcCFsNfxEfZ9XcC7Ar2wsc',
+    'skills_encoder.pkl': '1jtgaV8gYQXpm5VnmWEZ_y5aUwXA5Z2RE',
+    'model_meta.pkl': '1DhSaxA9plg5DJIC_P3XkrHdQSmtmPEY0',
 }
 
 @st.cache_resource

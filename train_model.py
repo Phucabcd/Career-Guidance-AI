@@ -263,7 +263,7 @@ def save_artifacts(
     models_dir: Path,
 ) -> None:
     models_dir.mkdir(parents=True, exist_ok=True)
-    joblib.dump(model, models_dir / "rf_model.pkl")
+    joblib.dump(model, models_dir / "rf_model.pkl", compress=5)
     joblib.dump(field_encoder, models_dir / "field_encoder.pkl")
     joblib.dump(career_encoder, models_dir / "career_encoder.pkl")
     joblib.dump(skills_encoder, models_dir / "skills_encoder.pkl")
