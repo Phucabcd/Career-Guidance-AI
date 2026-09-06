@@ -11,21 +11,15 @@ from __future__ import annotations
 
 from pathlib import Path
 import json
-import os
-import gdown
 import streamlit as st
 
-DRIVE_FILES = {
-    'rf_model.pkl': '1hAQtY2XCos9E_Qt_ulao2tKu5vzu_1BQ',
-    'field_encoder.pkl': '1zw4tL7hnGxx0P0ODIZobBGjfRveBn_tQ',
-    'career_encoder.pkl': '1ky6G0V6I5PvcCFsNfxEfZ9XcC7Ar2wsc',
-    'skills_encoder.pkl': '1jtgaV8gYQXpm5VnmWEZ_y5aUwXA5Z2RE',
-    'model_meta.pkl': '1DhSaxA9plg5DJIC_P3XkrHdQSmtmPEY0',
-}
-
-
 MODELS_DIR = Path(__file__).resolve().parent / "models"
-MODELS_DIR.mkdir(exist_ok=True)
+REQUIRED_MODEL_FILES = (
+    "rf_model.pkl",
+    "field_encoder.pkl",
+    "career_encoder.pkl",
+    "skills_encoder.pkl",
+)
 
 st.set_page_config(
     page_title="Career Guidance AI",
@@ -33,14 +27,14 @@ st.set_page_config(
     layout="centered",
 )
 
-@st.cache_resource
-def download_models():
-    for file_name, file_id in DRIVE_FILES.items():
-        output_path = MODELS_DIR / file_name
-        if not output_path.exists():
-            gdown.download(id=file_id, output=str(output_path), quiet=False)
-
-download_models()
+missing_model_files = [
+    file_name for file_name in REQUIRED_MODEL_FILES if not (MODELS_DIR / file_name).is_file()
+]
+if missing_model_files:
+    st.error(
+        "Thiếu model artifacts trong repository: " + ", ".join(missing_model_files)
+    )
+    st.stop()
 
 
 from model import (
