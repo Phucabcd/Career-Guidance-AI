@@ -159,8 +159,7 @@ def render_profile_dashboard(features: dict) -> None:
 
     st.markdown("---")
     st.caption(
-        f"Điểm kỹ năng (0–{MAX_SKILL_SCORE}) + Skills binary được đưa vào Random Forest. "
-        "Phần lý do chỉ để giải thích, không tham gia dự đoán."
+        f"Điểm kỹ năng mềm tham khảo."
     )
 
     for skill_key, reason_key in SKILL_REASON_KEYS.items():
@@ -180,8 +179,8 @@ def render_top_careers(
     st.subheader("🎯 Top 5 Ngành Nghề Phù Hợp Nhất")
 
     st.caption(
-        "Tỷ lệ % từ Random Forest sau khi lọc (Excluded) và tăng trọng số (Preferred), "
-        "đã chuẩn hóa trong Top 5. Đoạn giải thích do Gemini phân tích."
+        "Lưu ý: kết quả của AI trả về có thể chưa chính xác tuyệt đối, "
+        "vui lòng tham khảo ý kiến có chọn lọc."
     )
 
     if not top_careers:
