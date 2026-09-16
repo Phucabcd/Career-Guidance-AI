@@ -184,7 +184,7 @@ def render_top_careers(
     excluded_careers: list[str] | None = None,
 ) -> None:
     """Hiển thị Top 5 ngành nghề với progress bar và giải thích."""
-    st.subheader("🎯 Top 5 Ngành Nghề Phù Hợp Nhất")
+    st.subheader(" Top 5 Ngành Nghề Phù Hợp Nhất")
 
     st.caption(
         "Lưu ý: kết quả của AI trả về có thể chưa chính xác tuyệt đối, "
@@ -230,7 +230,7 @@ except Exception as exc:  # noqa: BLE001
     st.stop()
 
 
-st.title("🧭 Career Student AI")
+st.title("Career Student AI")
 st.caption("Khám phá hướng nghề nghiệp phù hợp với bạn")
 st.markdown(
     """
@@ -252,23 +252,23 @@ st.markdown("#### Đoạn văn tự giới thiệu")
 col_bar1, col_bar2, col_bar3 = st.columns([3, 6, 1])
 
 with col_bar1:
-    if st.button("📝 Nạp dàn ý điền nhanh", use_container_width=True, help="Điền khung mẫu gợi ý 6 mục dành cho người chưa định hướng được ngành nghề"):
+    if st.button("Nạp dàn ý điền nhanh", use_container_width=True, help="Điền khung mẫu gợi ý 6 mục dành cho người chưa định hướng được ngành nghề"):
         st.session_state["user_bio_text"] = GENERAL_TEMPLATE
         st.toast("Đã nạp dàn ý điền nhanh! Hãy thay đổi nội dung trong ngoặc [...]", icon="✨")
         st.rerun()
 
 with col_bar2:
-    with st.popover("💡 Bài viết mẫu hoàn chỉnh", use_container_width=True):
+    with st.popover("Bài viết mẫu hoàn chỉnh", use_container_width=True):
         st.markdown("**Chọn bài viết mẫu hoàn chỉnh theo ngành:**")
         selected_sample_title = st.selectbox(
-            "Danh sách bài mẫu (từ prompt_test.txt):",
+            "Danh sách bài mẫu:",
             options=list(sample_prompts.keys()),
             key="popover_sample_select",
         )
         if selected_sample_title in sample_prompts:
             preview_text = sample_prompts[selected_sample_title]
             st.info(preview_text[:200] + ("..." if len(preview_text) > 200 else ""))
-            if st.button("📋 Áp dụng bài mẫu này", use_container_width=True):
+            if st.button("Áp dụng bài mẫu này", use_container_width=True):
                 st.session_state["user_bio_text"] = sample_prompts[selected_sample_title]
                 st.toast(f"Đã nạp mẫu: {selected_sample_title}", icon="✅")
                 st.rerun()
@@ -284,18 +284,18 @@ user_bio = st.text_area(
     height=220,
     key="user_bio_text",
     placeholder=(
-        "Nhấn nút '📝 Nạp dàn ý điền nhanh' ở trên để tự động chèn dàn ý gợi ý (dành cho người chưa rõ ngành nghề), "
+        "Nhấn nút ' Nạp dàn ý điền nhanh' ở trên để tự động chèn dàn ý gợi ý (dành cho người chưa rõ ngành nghề), "
         "hoặc tự do viết bài tự giới thiệu bản thân..."
     ),
 )
 
 # Form thông tin bổ sung tùy chọn giúp tăng độ chính xác
-with st.expander("🛠️ Cung cấp thêm thông tin chi tiết (Tùy chọn - Giúp tăng độ chính xác dự đoán)", expanded=False):
+with st.expander(" Cung cấp thêm thông tin chi tiết (Tùy chọn - Giúp tăng độ chính xác dự đoán)", expanded=False):
     st.caption("Nếu bài viết chưa nêu rõ, bạn có thể chọn thủ công các thông tin dưới đây để hệ thống nhận diện chính xác hơn.")
     col1, col2 = st.columns(2)
     with col1:
         field_options = ["-- Tự động nhận diện qua bài viết --"] + list_of_all_fields
-        selected_field_option = st.selectbox("Chuyên ngành học (Field)", field_options)
+        selected_field_option = st.selectbox("Chuyên ngành học", field_options)
         user_field = selected_field_option if selected_field_option != field_options[0] else None
 
         user_projects = st.number_input(
@@ -326,11 +326,11 @@ with st.expander("🛠️ Cung cấp thêm thông tin chi tiết (Tùy chọn - 
     if enable_manual_scores:
         s_col1, s_col2 = st.columns(2)
         with s_col1:
-            prof_score = st.slider("💻 Kỹ năng Chuyên môn (Professional)", 0, 5, 3)
-            comm_score = st.slider("🗣️ Kỹ năng Giao tiếp (Communication)", 0, 5, 3)
+            prof_score = st.slider("Kỹ năng Chuyên môn (Professional)", 0, 5, 3)
+            comm_score = st.slider("Kỹ năng Giao tiếp (Communication)", 0, 5, 3)
         with s_col2:
-            prob_score = st.slider("🧩 Kỹ năng Giải quyết vấn đề (Problem Solving)", 0, 5, 3)
-            team_score = st.slider("🤝 Kỹ năng Làm việc nhóm (Teamwork)", 0, 5, 3)
+            prob_score = st.slider("Kỹ năng Giải quyết vấn đề (Problem Solving)", 0, 5, 3)
+            team_score = st.slider("Kỹ năng Làm việc nhóm (Teamwork)", 0, 5, 3)
 
         user_manual_scores = {
             "Professional Skills": prof_score,

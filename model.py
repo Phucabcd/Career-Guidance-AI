@@ -49,10 +49,10 @@ SKILL_REASON_KEYS = {
 }
 
 SKILL_UI_LABELS = {
-    "Professional Skills": "💻 Kỹ năng Chuyên môn (Professional Skills)",
-    "Communication Skills": "🗣️ Kỹ năng Giao tiếp (Communication Skills)",
-    "Problem Solving Skills": "🧩 Kỹ năng Giải quyết vấn đề (Problem Solving Skills)",
-    "Teamwork Skills": "🤝 Kỹ năng Làm việc nhóm (Teamwork Skills)",
+    "Professional Skills": " Kỹ năng Chuyên môn (Professional Skills)",
+    "Communication Skills": " Kỹ năng Giao tiếp (Communication Skills)",
+    "Problem Solving Skills": " Kỹ năng Giải quyết vấn đề (Problem Solving Skills)",
+    "Teamwork Skills": " Kỹ năng Làm việc nhóm (Teamwork Skills)",
 }
 
 MIN_TEXT_LENGTH = 40
