@@ -117,6 +117,14 @@ st.set_page_config(
     layout="centered",
 )
 
+def load_css(file_path: Path):
+    with open(file_path, "r", encoding="utf-8") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+css_path = Path(__file__).resolve().parent / "style.css"
+if css_path.is_file():
+    load_css(css_path)
+
 missing_model_files = [
     file_name for file_name in REQUIRED_MODEL_FILES if not (MODELS_DIR / file_name).is_file()
 ]

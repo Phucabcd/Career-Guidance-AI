@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Mọi văn bản thông thường đều sử dụng Inter */
+h1, h2, h3, h4, h5, h6, p, label, .stMarkdown, .stMetricLabel, .stMetricValue, .stSelectbox, .stMultiSelect {
+    font-family: 'Inter', sans-serif !important;
+}
+
+/* Các trường nhập liệu và nút bấm sử dụng Inter */
+button, input, textarea {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Base App Background */
+.stApp {
+    background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+    color: #102a43;
+}
+
+/* Sidebar Styling (if used in the future) */
+.css-1d391kg {
+    background-color: #f8fbfd;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    color: #003e6b !important;
+    font-weight: 700 !important;
+}
+
+h1 {
+    font-size: 2.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* Primary Button Styling */
+button[kind="primary"] {
+    background: linear-gradient(135deg, #0052cc 0%, #003e6b 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 12px 24px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 6px rgba(0, 82, 204, 0.2) !important;
+    transition: all 0.3s ease !important;
+}
+
+button[kind="primary"]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 12px rgba(0, 82, 204, 0.3) !important;
+    background: linear-gradient(135deg, #0066ff 0%, #0052cc 100%) !important;
+}
+
+/* Secondary Button Styling */
+button[kind="secondary"] {
+    background: white !important;
+    color: #0052cc !important;
+    border: 1px solid #b3d4ff !important;
+    border-radius: 12px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02) !important;
+}
+
+button[kind="secondary"]:hover {
+    border-color: #0052cc !important;
+    background: #f0f7ff !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Text Area and Input Fields */
+.stTextArea > div > div > textarea, 
+.stTextInput > div > div > input,
+.stNumberInput > div > div > input {
+    border-radius: 12px !important;
+    border: 1px solid #d9e2ec !important;
+    padding: 12px !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease !important;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02) !important;
+    color: #102a43 !important;
+}
+
+.stTextArea > div > div > textarea:focus,
+.stTextInput > div > div > input:focus,
+.stNumberInput > div > div > input:focus {
+    border-color: #0052cc !important;
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.2) !important;
+    background: white !important;
+}
+
+/* Expanders (Collapsible sections) */
+.streamlit-expanderHeader {
+    background-color: white !important;
+    border-radius: 12px !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 16px !important;
+    font-weight: 600 !important;
+    color: #0052cc !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02) !important;
+    transition: all 0.3s ease;
+}
+
+.streamlit-expanderHeader:hover {
+    background-color: #f0f7ff !important;
+}
+
+/* Expander Content Area */
+.streamlit-expanderContent {
+    border: 1px solid #e2e8f0 !important;
+    border-top: none !important;
+    border-bottom-left-radius: 12px !important;
+    border-bottom-right-radius: 12px !important;
+    padding: 16px !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Metrics (Cards) */
+[data-testid="stMetric"] {
+    background-color: white !important;
+    border-radius: 16px !important;
+    padding: 20px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    text-align: center !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+[data-testid="stMetric"]:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 8px 25px rgba(0, 82, 204, 0.1) !important;
+}
+
+[data-testid="stMetricLabel"] {
+    color: #486581 !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+}
+
+[data-testid="stMetricValue"] {
+    color: #0052cc !important;
+    font-size: 2.2rem !important;
+    font-weight: 700 !important;
+}
+
+/* Success, Info, Warning Banners */
+.stAlert {
+    border-radius: 12px !important;
+    border: none !important;
+    padding: 16px !important;
+}
+
+[data-testid="stAlert"] {
+    backdrop-filter: blur(8px);
+}
+
+/* Custom Success (Greenish Blue) */
+.st-emotion-cache-1qrvfrg { /* Adjusting default success color to fit theme slightly */
+    background-color: #e3f8ec !important;
+    color: #0f5c35 !important;
+}
+
+/* Custom Info (Blue) */
+.st-emotion-cache-12w0qpk { 
+    background-color: #e0f2fe !important;
+    color: #0369a1 !important;
+    border-left: 4px solid #0284c7 !important;
+}
+
+/* Progress Bars */
+.stProgress > div > div > div {
+    background: linear-gradient(90deg, #0052cc 0%, #3385ff 100%) !important;
+    border-radius: 10px !important;
+}
+
+.stProgress > div > div {
+    background-color: #d9e2ec !important;
+    border-radius: 10px !important;
+    height: 12px !important;
+}
+
+/* Selectbox & Multiselect */
+.stSelectbox > div > div > div, 
+.stMultiSelect > div > div > div {
+    border-radius: 12px !important;
+    border: 1px solid #d9e2ec !important;
+    background: white !important;
+}
+
+.stMultiSelect span[data-baseweb="tag"] {
+    background-color: #e0f2fe !important;
+    color: #0052cc !important;
+    border-radius: 8px !important;
+}
+
+/* Container spacing for main layout */
+.block-container {
+    padding-top: 2rem !important;
+    padding-bottom: 4rem !important;
+    max-width: 800px !important; /* Keep it centered and readable */
+}
+
+/* General Link styling */
+a {
+    color: #0052cc !important;
+    text-decoration: none !important;
+}
+a:hover {
+    text-decoration: underline !important;
+}
