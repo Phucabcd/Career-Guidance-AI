@@ -65,3 +65,339 @@ Em tốt nghiệp ngành Kế toán - Kiểm toán.
 Em nắm vững các chuẩn mực kế toán Việt Nam (VAS) và hiểu biết về IFRS.
 Em sử dụng thành thạo phần mềm kế toán MISA và Excel chuyên sâu.
 Em có kinh nghiệm trong việc hạch toán nghiệp vụ, lập báo cáo tài chính và báo cáo thuế.
+ 
+Prompt: Front-end Developer
+Em là sinh viên năm cuối ngành Công nghệ Thông tin / Kỹ thuật Phần mềm với GPA 3.5.
+Em thành thạo HTML5, CSS3/SASS, JavaScript (ES6+) và sử dụng tốt các framework như React.js hoặc Vue.js.
+Em có kinh nghiệm xây dựng giao diện web Responsive, tối ưu hiệu năng tải trang và kết nối RESTful API.
+Em quen thuộc với TailwindCSS, Redux Toolkit, Webpack/Vite và các công cụ quản lý mã nguồn Git.
+Em chú trọng đến trải nghiệm người dùng, thiết kế giao diện chuẩn Pixel-perfect và có tư duy sáng tạo.
+
+Prompt: Back-end Developer
+Em tốt nghiệp chuyên ngành Khoa học Máy tính / Kỹ thuật Phần mềm.
+Em thành thạo xây dựng Server-side với Node.js (Express/NestJS), Python (Django/FastAPI) hoặc Java (Spring Boot).
+Em có kinh nghiệm thiết kế cơ sở dữ liệu SQL (PostgreSQL, MySQL) và NoSQL (Redis, MongoDB), tối ưu hóa câu truy vấn.
+Em am hiểu về kiến trúc Microservices, authentication/authorization (JWT, OAuth2) và lập trình bất đồng bộ.
+Em có tư duy logic tốt, chú trọng tính bảo mật và khả năng mở rộng của hệ thống backend.
+
+Prompt: Mobile App Developer
+Em là sinh viên chuyên ngành Công nghệ Thông tin đam mê phát triển ứng dụng di động.
+Em sử dụng tốt Flutter / React Native để phát triển ứng dụng cross-platform, hoặc Swift/Kotlin cho native app.
+Em có kinh nghiệm tích hợp RESTful API, Firebase Push Notification, Payment Gateway và lưu trữ dữ liệu cục bộ (SQLite, Realm).
+Em nắm vững quy trình đóng gói và phát hành ứng dụng lên Google Play Store và Apple App Store.
+Em cẩn thận trong việc tối ưu bộ nhớ, mượt mà chuyển cảnh và cải thiện hiệu năng ứng dụng di động.
+
+Prompt: Cyber Security Analyst
+Em tốt nghiệp ngành An toàn Thông tin / Mạng máy tính với GPA 3.4.
+Em có kiến thức vững chắc về lỗ hổng bảo mật (OWASP Top 10), giao thức mạng TCP/IP và hệ điều hành Linux/Windows Server.
+Em có kinh nghiệm sử dụng các công cụ kiểm thử xâm nhập (Penetration Testing) như Burp Suite, Nmap, Wireshark, Metasploit.
+Em hiểu biết về phân tích mã độc cơ bản, quản lý chứng chỉ SSL/TLS và vận hành hệ thống SIEM (Splunk, ELK).
+Em có tinh thần trách nhiệm cao, tuân thủ đạo đức nghề nghiệp và tư duy phòng thủ chủ động.
+
+Prompt: Cloud Architect
+Em là sinh viên năm cuối chuyên ngành Điện toán Đám mây / Mạng máy tính.
+Em am hiểu sâu sắc về kiến trúc Cloud trên nền tảng AWS (EC2, S3, RDS, Lambda) và Google Cloud Platform.
+Em có kinh nghiệm sử dụng Terraform/CloudFormation để triển khai hạ tầng dưới dạng mã (Infrastructure as Code - IaC).
+Em nắm vững các nguyên tắc High Availability, Fault Tolerance, Disaster Recovery và tối ưu chi phí hạ tầng Cloud.
+Em có mục tiêu trở thành Kiến trúc sư Giải pháp Đám mây (Solution Architect) chuyên nghiệp.
+
+Prompt: System Administrator
+Em tốt nghiệp chuyên ngành Mạng máy tính & Truyền thông dữ liệu.
+Em có kinh nghiệm quản trị, cấu hình và giám sát các hệ thống Linux (Ubuntu, CentOS, RedHat) và Windows Server.
+Em thành thạo viết script tự động hóa công việc bằng Bash Shell và Python.
+Em am hiểu về các dịch vụ mạng (DNS, DHCP, VPN, Firewalls, Load Balancer) và giải pháp sao lưu khôi phục dữ liệu.
+Em có khả năng xử lý sự cố tốt, bình tĩnh trước áp lực và sẵn sàng hỗ trợ kỹ thuật 24/7.
+
+Prompt: QA/QC Engineer
+Em là sinh viên chuyên ngành Công nghệ Thông tin / Kiểm thử Phần mềm.
+Em có khả năng phân tích yêu cầu phần mềm, lập Test Plan, viết Test Cases và báo cáo lỗi chi tiết trên Jira.
+Em sử dụng thành thạo các công cụ kiểm thử tự động (Automation Testing) như Selenium, Cypress hoặc Playwright với Java/Python.
+Em có kinh nghiệm kiểm thử API bằng Postman/JMeter và kiểm thử hiệu năng (Performance Testing).
+Em là người cẩn thận, chú trọng chi tiết, có tư duy phản biện và mong muốn đảm bảo chất lượng sản phẩm tốt nhất.
+
+Prompt: Embedded Systems Engineer
+Em là sinh viên năm cuối ngành Kỹ thuật Điện tử / Kỹ thuật Máy tính / Điện tử Viễn thông.
+Em sử dụng thành thạo ngôn ngữ C/C++ cho lập trình vi điều khiển (ARM Cortex-M, ESP32, STM32, Arduino).
+Em có kinh nghiệm giao tiếp phần cứng qua các giao thức SPI, I2C, UART, CAN bus và làm việc với RTOS (FreeRTOS).
+Em am hiểu về đọc sơ đồ nguyên lý mạch điện (Schematic), sử dụng Oscilloscope và thiết kế PCB cơ bản trên Altium.
+Em đam mê các sản phẩm IoT, hệ thống nhúng thông minh và giải pháp tự động hóa.
+
+Prompt: Game Developer
+Em tốt nghiệp chuyên ngành Công nghệ Đa phương tiện / Khoa học Máy tính.
+Em có kinh nghiệm phát triển Game 2D/3D bằng Unity Engine hoặc Unreal Engine sử dụng C# / C++.
+Em hiểu rõ về Vòng đời Game (Game Loop), Xử lý va chạm (Physics), Animation Controller và tối ưu Shader.
+Em đã từng xây dựng các dự án game indie, tích hợp Ads SDK, In-App Purchase và làm việc với Game Physics.
+Em có niềm đam mê mãnh liệt với trò chơi điện tử, tư duy sáng tạo gameplay và khả năng toán học/vật lý tốt.
+
+Prompt: Data Architect
+Em là sinh viên chuyên ngành Khoa học Dữ liệu / Hệ thống Thông tin Dữ liệu.
+Em có kiến thức vững chắc về thiết kế mô hình dữ liệu (Conceptual, Logical, Physical Data Model) và Data Vault/Dimensional Modeling.
+Em hiểu biết về kiến trúc Data Lake, Data Warehouse, Data Mesh và phân vùng lưu trữ tối ưu truy vấn.
+Em thành thạo các công cụ như ERwin, dbdiagram.io, Apache Spark và các công nghệ Cloud Data Lakehouse.
+Em có tư duy tầm nhìn hệ thống, định hướng quản trị dữ liệu (Data Governance) và chuẩn hóa dữ liệu doanh nghiệp.
+
+Prompt: Financial Analyst
+Em tốt nghiệp chuyên ngành Tài chính - Ngân hàng / Tài chính Doanh nghiệp với GPA 3.6.
+Em thành thạo xây dựng mô hình tài chính (Financial Modeling), định giá doanh nghiệp (DCF, Multiples) trên Excel.
+Em có khả năng phân tích báo cáo tài chính, đánh giá sức khỏe tài chính và dự phóng dòng tiền doanh nghiệp.
+Em hiểu biết về thị trường vốn, kinh tế vĩ mô và sở hữu chứng chỉ CFA Level 1 (hoặc đang ôn luyện).
+Em có tư duy phân tích nhạy bén, trung thực và khả năng trình bày báo cáo thẩm định chuyên nghiệp.
+
+Prompt: Investment Banker
+Em là sinh viên tốt nghiệp loại Giỏi ngành Tài chính Quốc tế / Ngân hàng Đầu tư.
+Em có kiến thức sâu rộng về các giao dịch M&A (Thâu tóm & Sáp nhập), huy động vốn cổ phần (IPO) và trái phiếu.
+Em thành thạo lập bản giới thiệu đầu tư (Pitchbook), thẩm định chi tiết (Due Diligence) và định giá tài sản.
+Em chịu được áp lực công việc cường độ cao, có kỹ năng đàm phán và giao tiếp tiếng Anh thương mại lưu khoát.
+Em định hướng phát triển sự nghiệp lâu dài trong lĩnh vực Tư vấn Đầu tư và Tài chính Doanh nghiệp.
+
+Prompt: Risk Management Specialist
+Em là sinh viên năm cuối ngành Quản trị Rủi ro / Toán Tài chính / Thống kê.
+Em am hiểu về khung quản trị rủi ro (COSO, ISO 31000) và các quy định an toàn vốn Ngân hàng (Basel II/III).
+Em sử dụng Python/R/SQL để xây dựng các mô hình đo lường rủi ro tín dụng, rủi ro thị trường và rủi ro vận hành.
+Em có khả năng thực hiện Stress Testing, phân tích kịch bản và đề xuất biện pháp giảm thiểu rủi ro.
+Em cẩn trọng, tuân thủ nguyên tắc và có tư duy đánh giá vấn đề đa chiều.
+
+Prompt: Credit Rating Analyst
+Em tốt nghiệp ngành Ngân hàng / Tài chính / Kiểm toán.
+Em có kinh nghiệm thu thập dữ liệu tài chính, phân tích hồ sơ tín dụng và chấm điểm tín dụng khách hàng doanh nghiệp/cá nhân.
+Em nắm vững quy trình thẩm định tài sản bảo đảm, đánh giá năng lực trả nợ và phân tích rủi ro ngành.
+Em sử dụng thành thạo Excel, phần mềm quản trị tín dụng và hiểu rõ quy định pháp luật về cho vay.
+Em có tinh thần khách quan, tính bảo mật cao và kỹ năng đưa ra quyết định dựa trên dữ liệu.
+
+Prompt: Auditor
+Em là sinh viên tốt nghiệp chuyên ngành Kiểm toán / Kế toán với GPA 3.5.
+Em nắm vững các chuẩn mực kiểm toán Việt Nam (VSA) và quốc tế (ISA), hiểu rõ quy trình kiểm toán độc lập.
+Em có kinh nghiệm tham gia thực địa, kiểm tra chứng từ, đối chiếu số liệu và đánh giá hệ thống kiểm soát nội bộ.
+Em thành thạo Excel kiểm toán, có chứng chỉ ACCA/CPA (đã đỗ một số môn F) là một lợi thế.
+Em có tính hoài nghi nghề nghiệp, cẩn thận, nguyên tắc và khả năng làm việc nhóm hiệu quả.
+
+Prompt: Stock Broker / Equity Research Analyst
+Em tốt nghiệp ngành Chứng khoán / Tài chính Doanh nghiệp / Kinh tế Đầu tư.
+Em thành thạo phân tích kỹ thuật (Technical Analysis) và phân tích cơ bản (Fundamental Analysis) cổ phiếu.
+Em có khả năng viết báo cáo phân tích ngành, cập nhật tin tức vĩ mô và khuyến nghị danh mục đầu tư cho khách hàng.
+Em theo dõi sát sao diễn biến thị trường chứng khoán, có kỹ năng quản lý danh mục và quản trị rủi ro tài khoản.
+Em giao tiếp tốt, năng động, có khả năng xây dựng mối quan hệ và chăm sóc khách hàng cá nhân/chủ đầu tư.
+
+Prompt: Tax Consultant
+Em là sinh viên tốt nghiệp ngành Thuế / Luật Kinh tế / Kế toán.
+Em am hiểu sâu sắc về Luật Thuế Việt Nam (Thuế TNDN, TNCN, GTGT, Thuế Nhà thầu nước ngoài - FCT).
+Em có kinh nghiệm tư vấn lập kế hoạch thuế, rà soát hồ sơ quyết toán thuế và hỗ trợ giải trình với cơ quan Thuế.
+Em cẩn thận trong việc cập nhật các văn bản pháp luật, thông tư, nghị định mới nhất về chính sách thuế.
+Em trung thực, tỉ mỉ và mong muốn hỗ trợ doanh nghiệp tuân thủ đúng pháp luật và tối ưu chi phí thuế.
+
+Prompt: Product Manager
+Em tốt nghiệp ngành Hệ thống Thông tin Quản lý / Công nghệ Thông tin / Quản trị Kinh doanh.
+Em có kinh nghiệm quản lý vòng đời sản phẩm (Product Lifecycle), xây dựng Product Roadmap và PRD/User Stories.
+Em thành thạo ứng dụng các phương pháp Agile/Scrum, sử dụng Jira, Confluence, Figma và Mixpanel/Amplitude.
+Em có khả năng cân bằng giữa bài toán kinh doanh, trải nghiệm người dùng (UX) và tính khả thi về kỹ thuật.
+Em sở hữu tư duy hướng sản phẩm (Product Thinking), kỹ năng giao tiếp xuất sắc và năng lực lãnh đạo đội ngũ cross-functional.
+
+Prompt: Content Creator / Copywriter
+Em là sinh viên tốt nghiệp ngành Báo chí / Truyền thông / Ngôn ngữ Anh.
+Em có khả năng viết lách đa dạng phong cách: bài viết chuẩn SEO, bài PR báo chí, kịch bản Video TikTok/Reels, Social Post.
+Em bắt trend nhanh nhạy, có tư duy sáng tạo nội dung độc đáo và am hiểu tâm lý hành vi độc giả.
+Em biết sử dụng cơ bản các công cụ Canva, Photoshop và CapCut để tự sản xuất hình ảnh/video đi kèm bài viết.
+Em có tinh thần học hỏi cao, cởi mở với góp ý và luôn đảm bảo tiến độ công việc (Deadline).
+
+Prompt: Brand Manager
+Em là sinh viên năm cuối ngành Quản trị Thương hiệu / Marketing.
+Em có kiến thức về định vị thương hiệu (Brand Positioning), kiến trúc thương hiệu và chiến lược truyền thông tích hợp (IMC).
+Em có kinh nghiệm theo dõi sức khỏe thương hiệu (Brand Health), nghiên cứu thị trường và quản lý ngân sách Marketing.
+Em có khả năng phối hợp chặt chẽ với các Creative Agency, PR Agency để triển khai các chiến dịch ra mắt sản phẩm.
+Em có tư duy chiến lược dài hạn, gu thẩm mỹ cao và niềm đam mê xây dựng thương hiệu mạnh.
+
+Prompt: Public Relations Specialist
+Em tốt nghiệp ngành Quan hệ Công chúng / Truyền thông Doanh nghiệp với GPA 3.5.
+Em có kỹ năng soạn thảo báo chí (Press Release), thông điệp truyền thông và quản trị khủng hoảng truyền thông.
+Em có mối quan hệ tốt với các nhà báo, cơ quan truyền thông, KOLs/IOCs và cộng đồng.
+Em từng tham gia tổ chức các buổi họp báo, hội thảo khách hàng và các chương trình trách nhiệm xã hội doanh nghiệp (CSR).
+Em khéo léo trong giao tiếp, ứng biến linh hoạt và giữ vững hình ảnh uy tín cho doanh nghiệp.
+
+Prompt: Event Organizer
+Em là sinh viên ngành Quản trị Sự kiện / Truyền thông Đa phương tiện.
+Em có kinh nghiệm lên ý tưởng concept, lập kế hoạch chi tiết, dự toán chi phí và điều phối nhân sự sự kiện.
+Em làm việc tốt với các nhà cung cấp (âm thanh, ánh sáng, sân khấu, in ấn) và giám sát thi công thực địa.
+Em có khả năng quản lý rủi ro sự kiện, giải quyết sự cố phát sinh tại chỗ nhanh chóng và chuyên nghiệp.
+Em năng động, giàu năng lượng, chịu được áp lực làm việc đêm muộn và di chuyển nhiều.
+
+Prompt: SEO Specialist
+Em tốt nghiệp ngành Thương mại Điện tử / Marketing Số.
+Em am hiểu về thuật toán Google Search, quy trình SEO Tổng thể (Keyword Research, Technical SEO, On-page, Off-page).
+Em sử dụng thành thạo các công cụ SEO hàng đầu như Ahrefs, SEMrush, Google Search Console, Screaming Frog.
+Em có kỹ năng tối ưu hóa tốc độ trang, kiến trúc website, xây dựng bộ Backlink chất lượng và Entity.
+Em có tư duy phân tích số liệu, kiên trì và luôn cập nhật các biến động thuật toán tìm kiếm.
+
+Prompt: Social Media Executive
+Em là sinh viên tốt nghiệp ngành Truyền thông / Marketing.
+Em có kinh nghiệm lập kế hoạch nội dung hàng tháng (Content Calendar) cho các kênh Fanpage, Instagram, TikTok, LinkedIn.
+Em hiểu rõ thuật toán phân phối nội dung của từng nền tảng, cách tăng Tương tác tự nhiên (Organic Reach/Engagement).
+Em thành thạo đọc báo cáo hiệu quả kênh thông qua Meta Business Suite, TikTok Analytics.
+Em nhạy bén với xu hướng mạng xã hội, hài hước, sáng tạo và có khả năng tương tác duyên dáng với cộng đồng.
+
+Prompt: Video Editor / Motion Graphic
+Em là sinh viên chuyên ngành Thiết kế Đồ họa / Công nghệ Đa phương tiện.
+Em thành thạo các phần mềm Adobe Premiere Pro, After Effects, DaVinci Resolve, Photoshop.
+Em có tư duy dựng phim tốt, nhịp điệu (Pacing), âm thanh, chỉnh màu (Color Grading) và hiệu ứng hình ảnh (VFX/Motion).
+Em đã sản xuất nhiều sản phẩm như Video giới thiệu doanh nghiệp, TVC quảng cáo, Short-form Video TikTok/Reels.
+Em có tinh thần sáng tạo cao, gu thẩm mỹ hiện đại và cẩn thận trong từng khung hình.
+
+Prompt: HR Recruiter
+Em tốt nghiệp chuyên ngành Quản trị Nhân lực / Tâm lý học Doanh nghiệp.
+Em có kinh nghiệm tìm kiếm ứng viên (Sourcing), đăng tin tuyển dụng và phỏng vấn đánh giá năng lực ứng viên.
+Em thành thạo sử dụng các kênh tuyển dụng LinkedIn, VietnamWorks, TopCV và các cộng đồng nhân sự.
+Em có khả năng xây dựng thương hiệu nhà tuyển dụng (Employer Branding) và quản lý trải nghiệm ứng viên (Candidate Experience).
+Em giao tiếp tinh tế, thấu hiểu tâm lý con người và có tư duy kết nối đúng người đúng việc.
+
+Prompt: HR C&B Specialist
+Em là sinh viên năm cuối ngành Quản trị Nhân sự / Luật Lao động.
+Em nắm vững Bộ luật Lao động Việt Nam, chính sách Bảo hiểm xã hội (BHXH, BHYT, BHTN) và Thuế TNCN.
+Em có kinh nghiệm chấm công, tính lương (Payroll), quản lý hợp đồng lao động và hồ sơ nhân sự trên Excel/HRM.
+Em cẩn thận tuyệt đối với số liệu, có tính bảo mật cao và kỹ năng giải quyết tranh chấp lao động cơ bản.
+Em có tư duy quy trình minh bạch, xây dựng thang bảng lương và hệ thống đãi ngộ cạnh tranh.
+
+Prompt: Talent Development Specialist
+Em tốt nghiệp ngành Quản trị Nhân sự / Giáo dục / Phát triển Tổ chức.
+Em có kinh nghiệm khảo sát nhu cầu đào tạo (TNA), thiết kế chương trình đào tạo nội bộ và đánh giá hiệu quả sau đào tạo.
+Em am hiểu về khung năng lực (Competency Framework), lộ trình phát triển sự nghiệp và đánh giá nhân sự (KPI/OKR).
+Em có kỹ năng đứng lớp giảng dạy/đào tạo nhập môn (Onboarding) và điều phối các khóa học tổ chức.
+Em yêu thích công việc truyền cảm hứng, kết nối con người và thúc đẩy văn hóa học tập liên tục.
+
+Prompt: Supply Chain Analyst
+Em là sinh viên tốt nghiệp ngành Quản lý Chuỗi Cung ứng / Logistics với GPA 3.5.
+Em có khả năng phân tích chuỗi cung ứng, dự báo nhu cầu (Demand Forecasting) và tối ưu hóa mức tồn kho (Inventory Control).
+Em sử dụng thành thạo SQL, Python và Power BI để xây dựng Dashboard theo dõi chỉ số OTIF, Lead Time, Turnover Rate.
+Em hiểu biết về hệ thống ERP (SAP, Oracle) và các phương pháp quản trị tinh gọn (Lean, Six Sigma).
+Em có tư duy hệ thống, phân tích định lượng tốt và mong muốn tối ưu hóa chi phí vận hành.
+
+Prompt: Logistics Executive
+Em tốt nghiệp chuyên ngành Logistics & Quản lý Chuỗi Cung ứng / Kinh tế Đối ngoại.
+Em am hiểu quy trình xuất nhập khẩu, điều vận hàng hóa (Freight Forwarding), thủ tục Hải quan và chứng từ vận tải (Bill of Lading, Invoice, Packing List).
+Em sử dụng tốt các thuật ngữ thương mại quốc tế Incoterms 2020 và các quy định vận tải đa phương thức.
+Em có kinh nghiệm làm việc với các hãng tàu, đại lý hải quan và kho bãi (WMS).
+Em nhanh nhạy, chịu khó, có kỹ năng đàm phán cước phí và xử lý sự cố giao nhận tốt.
+
+Prompt: Procurement Specialist
+Em là sinh viên ngành Quản trị Kinh doanh / Thương mại Quốc tế.
+Em có kinh nghiệm tìm kiếm nhà cung cấp, gửi yêu cầu báo giá (RFQ), đàm phán giá cả và điều khoản hợp đồng mua bán.
+Em am hiểu quy trình đánh giá nhà cung cấp, quản lý rủi ro nguồn cung và kiểm soát chi phí mua hàng.
+Em thành thạo phần mềm quản lý mua hàng SAP/Oracle và các công cụ bảng tính phân tích chi phí.
+Em trung thực, có bản lĩnh đàm phán, giao tiếp tốt và tinh thần trách nhiệm cao.
+
+Prompt: Mechanical Engineer
+Em tốt nghiệp chuyên ngành Kỹ thuật Cơ khí / Chế tạo máy với GPA 3.4.
+Em thành thạo thiết kế 3D/2D bằng phần mềm SolidWorks, AutoCAD, CATIA và mô phỏng lực ANSYS.
+Em am hiểu về dung sai lắp ghép, vật liệu cơ khí, công nghệ gia công (CNC, Phay, Tiện) và quy trình sản xuất.
+Em đã từng tham gia thiết kế máy tự động hóa, đồ gá (Jig) và cải tiến dây chuyền sản xuất.
+Em cẩn thận, yêu thích sáng tạo kỹ thuật và có khả năng làm việc tại xưởng/nhà máy.
+
+Prompt: Electrical Engineer
+Em là sinh viên năm cuối ngành Kỹ thuật Điện - Điện tử / Điện công nghiệp.
+Em thành thạo thiết kế sơ đồ nguyên lý và bản vẽ thi công điện bằng AutoCAD Electrical, EPLAN.
+Em am hiểu về hệ thống cung cấp điện, tủ điện hạ thế/trung thế, bảo vệ rơ-le và các thiết bị đóng cắt.
+Em có kinh nghiệm tính toán phụ tải, chọn lựa cáp điện, máy biến áp và tham gia giám sát thi công công trình.
+Em cẩn trọng với an toàn điện, có tinh thần trách nhiệm cao và khả năng làm việc ngoài công trường.
+
+Prompt: Automation Engineer
+Em tốt nghiệp chuyên ngành Kỹ thuật Tự động hóa / Điều khiển & Tự động hóa.
+Em có kinh nghiệm lập trình PLC (Siemens S7-1200/1500, Mitsubishi, Allen-Bradley) và thiết kế giao diện SCADA/HMI.
+Em am hiểu về cảm biến công nghiệp, biến tần (VFD), động cơ Servo, Robot công nghiệp và mạng truyền thông (Modbus, Profinet).
+Em có khả năng lắp đặt, chạy thử (Commissioning) và khắc phục sự cố hệ thống tự động hóa nhà máy.
+Em có tư duy logic thuật toán mạnh mẽ, chịu khó và sẵn sàng đi công tác dự án.
+
+Prompt: Civil Engineer
+Em là sinh viên tốt nghiệp ngành Kỹ thuật Xây dựng Dân dụng & Công nghiệp.
+Em sử dụng thành thạo phần mềm tính toán kết cấu Etabs, SAP2000, AutoCAD và phần mềm BIM Revit Structure.
+Em nắm vững các TCVN về thiết kế kết cấu bê tông cốt thép, kết cấu thép và trắc địa công trình.
+Em có kinh nghiệm bóc tách khối lượng, lập dự toán công trình và lập kế hoạch tiến độ thi công (MS Project).
+Em chịu được nắng mưa công trường, có tinh thần trung thực, cẩn thận và tính cam kết cao.
+
+Prompt: Industrial Engineer
+Em là sinh viên ngành Kỹ thuật Hệ thống Công nghiệp / Quản lý Công nghiệp.
+Em có khả năng nghiên cứu thời gian (Time Study), cân bằng dây chuyền (Line Balancing) và bố trí mặt bằng nhà máy (Layout Design).
+Em áp dụng thành thạo các công cụ Lean Manufacturing, 5S, Kaizen, TPM và Value Stream Mapping (VSM).
+Em sử dụng các phần mềm mô phỏng hệ thống sản xuất như Arena, FlexSim và công cụ thống kê Minitab.
+Em có tư duy cải tiến liên tục, hướng tới giảm thiểu hao phí và tối ưu hóa năng suất lao động.
+
+Prompt: Chemical Engineer
+Em tốt nghiệp chuyên ngành Công nghệ Hóa học / Hóa Kỹ thuật.
+Em nắm vững các quá trình và thiết bị công nghệ hóa học, kỹ thuật phản ứng và tách chất.
+Em có kinh nghiệm làm việc trong phòng thí nghiệm, kiểm tra chỉ tiêu chất lượng nguyên liệu/thành phẩm (QC/QA).
+Em am hiểu các quy định an toàn hóa chất, bảo hộ lao động và xử lý chất thải công nghiệp.
+Em tỉ mỉ, tuân thủ nghiêm ngặt quy trình thí nghiệm và có tư duy nghiên cứu phát triển sản phẩm (R&D).
+
+Prompt: Pharmacist
+Em tốt nghiệp đại học chuyên ngành Dược học (Dược sĩ Đại học).
+Em nắm vững kiến thức về Dược lý học, Dược lâm sàng, Bào chế thuốc và Kiểm nghiệm dược phẩm.
+Em hiểu biết về quy chuẩn GPP (Thực hành tốt nhà thuốc), GMP (Thực hành tốt sản xuất thuốc) và Luật Dược.
+Em có kinh nghiệm tư vấn sử dụng thuốc an toàn, hợp lý, tra cứu tương tác thuốc và quản lý kho dược.
+Em cẩn trọng tuyệt đối, có đạo đức nghề nghiệp cao và kỹ năng giao tiếp ân cần với bệnh nhân.
+
+Prompt: Biomedical Engineer
+Em là sinh viên chuyên ngành Kỹ thuật Y sinh / Thiết bị Y tế.
+Em có kiến thức về nguyên lý hoạt động, vận hành, bảo trì và sửa chữa các thiết bị y tế (X-quang, MRI, Monitor, Siêu âm).
+Em am hiểu về tiêu chuẩn an toàn bức xạ, an toàn thiết bị y tế và phần mềm quản lý hình ảnh PACS/DICOM.
+Em có khả năng phối hợp với các bác sĩ, kỹ thuật viên y tế để chuyển giao công nghệ và hướng dẫn sử dụng thiết bị.
+Em ham học hỏi, cẩn thận và mong muốn đóng góp cho ngành y tế thông qua công nghệ.
+
+Prompt: Clinical Research Associate
+Em tốt nghiệp ngành Dược / Y sinh / Biotec.
+Em am hiểu về quy trình nghiên cứu lâm sàng, tiêu chuẩn ICH-GCP và các quy định pháp lý thử nghiệm thuốc.
+Em có kinh nghiệm giám sát các trung tâm nghiên cứu, rà soát Hồ sơ nghiên cứu (Case Report Form - CRF) và báo cáo biến cố bất lợi (SAE).
+Em sử dụng tốt tiếng Anh chuyên ngành y dược và các hệ thống quản lý thử nghiệm lâm sàng (CTMS/EDC).
+Em cực kỳ trung thực, tỉ mỉ trong quản lý chứng từ và có tinh thần tuân thủ cao.
+
+Prompt: B2B Sales Executive
+Em tốt nghiệp ngành Quản trị Kinh doanh / Thương mại / Kinh tế.
+Em có kinh nghiệm tìm kiếm khách hàng doanh nghiệp, tiếp cận người quyết định (BDM) và tư vấn giải pháp B2B.
+Em thành thạo quy trình bán hàng: từ tiếp xúc ban đầu, trình bày giải pháp, gửi báo giá đến đàm phán hợp đồng.
+Em sử dụng thành thạo phần mềm quản lý quan hệ khách hàng CRM (Salesforce, HubSpot, Zoho).
+Em kiên trì, có kỹ năng lắng nghe tốt, làm việc hướng tới chỉ số doanh số (KPI/Quota) và đàm phán win-win.
+
+Prompt: Real Estate Consultant
+Em là sinh viên tốt nghiệp ngành Quản trị Bất động sản / Kinh doanh.
+Em am hiểu về thị trường bất động sản (Căn hộ, Đất nền, Bất động sản nghỉ dưỡng), pháp lý dự án và quy hoạch.
+Em có kỹ năng tư vấn giải pháp tài chính đầu tư bất động sản, tính toán dòng tiền và tỷ suất sinh lời cho khách hàng.
+Em thành thạo các kênh tìm kiếm khách hàng tiềm năng: Telesales, Chạy quảng cáo số, Tổ chức Event mở bán.
+Em có ngoại hình sáng, giao tiếp tự tin, tác phong chuyên nghiệp và kiên trì với mục tiêu.
+
+Prompt: E-commerce Specialist
+Em tốt nghiệp chuyên ngành Thương mại Điện tử / Kinh doanh Số.
+Em có kinh nghiệm vận hành gian hàng trên các sàn Shopee, Lazada, TikTok Shop và Tiki.
+Em sử dụng thành thạo các công cụ đăng sản phẩm, tối ưu SEO Gian hàng, tham gia Chiến dịch sàn (Campaign) và chạy Ads sàn.
+Em có khả năng đọc báo cáo phân tích chỉ số gian hàng (Conversion Rate, Traffic, GMV, AOV) để tối ưu vận hành.
+Em nhanh nhạy với xu hướng mua sắm trực tuyến, cẩn thận trong quản lý tồn kho và chăm sóc khách hàng.
+
+Prompt: Hotel Operations Management
+Em tốt nghiệp chuyên ngành Quản trị Khách sạn / Du lịch.
+Em nắm vững quy trình vận hành các bộ phận Front Office, Housekeeping, F&B theo tiêu chuẩn 4-5 sao.
+Em thành thạo phần mềm quản lý khách sạn PMS (Opera, Smile) và hệ thống đặt phòng trực tuyến (OTA).
+Em có kỹ năng xử lý phàn nàn của khách hàng (Guest Complaint Handling) khéo léo và chuyên nghiệp.
+Em giao tiếp tiếng Anh trôi chảy, thái độ phục vụ tận tâm (Hospitality Mindset) và hình ảnh chỉn chu.
+
+Prompt: Customer Experience Specialist
+Em là sinh viên ngành Quản trị Kinh doanh / Truyền thông / Dịch vụ.
+Em có khả năng bản đồ hóa hành trình khách hàng (Customer Journey Map) và xác định các điểm chạm (Touchpoints).
+Em có kinh nghiệm đo lường và phân tích các chỉ số CSAT, NPS, CES thông qua khảo sát và phỏng vấn khách hàng.
+Em phối hợp với các phòng ban (Vận hành, Sản phẩm, CS) để đề xuất giải pháp cải thiện chất lượng dịch vụ.
+Em giàu lòng trắc ẩn, lắng nghe tích cực và có tư duy khách hàng là trung tâm (Customer-Centric).
+
+Prompt: Corporate Lawyer
+Em tốt nghiệp Đại học Luật chuyên ngành Luật Kinh tế / Luật Thương mại Quốc tế.
+Em nắm vững Luật Doanh nghiệp, Luật Đầu tư, Luật Lao động và các quy định quản lý thương mại.
+Em có kinh nghiệm rà soát, soạn thảo các loại hợp đồng kinh tế và kiểm soát rủi ro pháp lý cho doanh nghiệp.
+Em có khả năng nghiên cứu tiền lệ pháp, tư vấn thủ tục pháp lý doanh nghiệp và làm việc với cơ quan nhà nước.
+Em có tư duy phản biện sắc bén, lập luận logic, cẩn ngôn và bảo mật thông tin tuyệt đối.
+
+Prompt: Instructional Designer
+Em tốt nghiệp ngành Công nghệ Giáo dục / Sư phạm / Ngôn ngữ.
+Em am hiểu về các lý thuyết học tập (Adult Learning Theory) và mô hình thiết kế giảng dạy (ADDIE, SAM).
+Em sử dụng thành thạo các công cụ soạn bài giảng E-learning như Articulate Storyline, Adobe Captivate, Canva.
+Em có khả năng chuyển hóa kiến thức chuyên môn phức tạp thành các bài học tương tác, bài kiểm tra sinh động.
+Em có tư duy sáng tạo phương pháp học, tỉ mỉ và luôn chú trọng trải nghiệm của người học.
+
+Prompt: Graphic Designer
+Em tốt nghiệp chuyên ngành Thiết kế Đồ họa / Mỹ thuật ứng dụng.
+Em thành thạo bộ công cụ Adobe Creative Cloud (Photoshop, Illustrator, InDesign).
+Em có khả năng thiết kế ấn phẩm nhận diện thương hiệu, Banner Key Visual, Standee, Brochure và Social Media Post.
+Em am hiểu về tư duy màu sắc, bố cục thị giác, Typography và quy trình in ấn thực tế.
+Em có gu thẩm mỹ độc đáo, khả năng sáng tạo dồi dào, tiếp thu feedback tốt và quản lý thời gian hiệu quả.
